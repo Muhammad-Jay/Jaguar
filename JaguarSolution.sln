@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaguar.Core", "Jaguar.Core\Jaguar.Core.csproj", "{83D59E88-D9B3-4067-B30C-5DB915AFE5C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaguar.Cli", "Jaguar.Cli\Jaguar.Cli.csproj", "{1D680557-4697-401B-B0A5-E2DCB926FB00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaguar.WebUi", "Jaguar.WebUi\Jaguar.WebUi.csproj", "{3CCE9FA2-1362-46BD-9D94-32629BFD7198}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaguar.Api", "Jaguar.Api\Jaguar.Api.csproj", "{2E03689B-97BF-4A9D-B285-D08E48AD6ECD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{83D59E88-D9B3-4067-B30C-5DB915AFE5C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83D59E88-D9B3-4067-B30C-5DB915AFE5C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83D59E88-D9B3-4067-B30C-5DB915AFE5C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83D59E88-D9B3-4067-B30C-5DB915AFE5C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D680557-4697-401B-B0A5-E2DCB926FB00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D680557-4697-401B-B0A5-E2DCB926FB00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D680557-4697-401B-B0A5-E2DCB926FB00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D680557-4697-401B-B0A5-E2DCB926FB00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CCE9FA2-1362-46BD-9D94-32629BFD7198}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CCE9FA2-1362-46BD-9D94-32629BFD7198}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CCE9FA2-1362-46BD-9D94-32629BFD7198}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CCE9FA2-1362-46BD-9D94-32629BFD7198}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E03689B-97BF-4A9D-B285-D08E48AD6ECD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E03689B-97BF-4A9D-B285-D08E48AD6ECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E03689B-97BF-4A9D-B285-D08E48AD6ECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E03689B-97BF-4A9D-B285-D08E48AD6ECD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
