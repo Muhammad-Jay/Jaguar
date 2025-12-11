@@ -1,7 +1,189 @@
 ﻿@page "/"
+@using System.Text.Json
+@using System.Globalization
+@using Jaguar.WebUi.Components.Shared
+@using Jaguar.WebUi.Components.Shared // Assuming StatusIndicator is placed in this namespace
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Jaguar OS // Main Terminal</PageTitle>
 
-<h1>Hello, world!</h1>
+<!-- Custom Pure CSS Styles for Neon Effects and Terminal Look -->
+<style>
+    /* Custom Scrollbar for the Log */
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 8px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: #0d6efd; /* Bootstrap Primary color */
+        border-radius: 10px;
+    }
+    .custom-scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: #0d6efd #343a40; /* Thumb color, Track color */
+    }
 
-Welcome to your new app.
+    /* Neon Glow for the Main Title */
+    .terminal-title {
+        text-shadow: 0 0 7px rgba(25, 135, 84, 0.7), 0 0 15px rgba(13, 110, 253, 0.4); /* Green/Blue glow */
+    }
+
+    /* Status Glow applied by StatusIndicator.razor */
+    .status-glow {
+        box-shadow: 0 0 5px rgba(25, 135, 84, 0.5), 0 0 10px rgba(25, 135, 84, 0.3);
+        transition: box-shadow 0.3s ease-in-out;
+    }
+
+    /* Blinking Cursor Effect */
+    .blinking-cursor::after {
+        content: '_';
+        animation: blink-caret .8s step-end infinite;
+    }
+    @@keyframes blink-caret {
+        from, to { opacity: 0; }
+        50% { opacity: 1; }
+    }
+</style>
+
+<!-- Main Dashboard Container -->
+<div class="container-fluid py-4 bg-black min-vh-100">
+
+    <!-- Primary Welcome/Status Block -->
+    <div class="border-bottom border-success border-opacity-50 pb-3 mb-4">
+        <h1 class="display-5 fw-bold text-success terminal-title font-monospace mb-2">
+            JAGUAR_OS_V0.8.4
+        </h1>
+        <p class="h4 text-secondary font-monospace">
+            MAIN_CONTROL_TERMINAL // STATUS: <span class="text-success blinking-cursor">READY</span>
+        </p>
+    </div>
+
+    <!-- Dashboard Grid Layout (Bootstrap Row/Col) -->
+    <div class="row g-4">
+
+        <!-- Column 1: System Metrics and Time (Col Span 1) -->
+        <div class="col-12 col-lg-4 d-flex flex-column gap-4">
+
+            <!-- Data Card: Real-Time Clock -->
+            <div class="card bg-dark text-white border-success border-opacity-50 shadow-lg">
+                <div class="card-body">
+                    <h2 class="card-title h5 text-success mb-3 font-monospace">:: LOCAL TIME SYNCH</h2>
+                    <div class="fs-2 font-monospace text-white fw-bold">
+                        @DateTime.Now.ToString("HH:mm:ss", CultureInfo.InvariantCulture)
+                    </div>
+                    <div class="small text-secondary mt-1 font-monospace">
+                        @DateTime.Now.ToString("dd MMM yyyy (ddd)", CultureInfo.InvariantCulture)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Card: Core Model Metrics -->
+            <div class="card bg-dark text-white border-success border-opacity-50 shadow-lg">
+                <div class="card-body">
+                    <h2 class="card-title h5 text-success mb-3 font-monospace">:: CORE MODEL METRICS</h2>
+                    <div class="d-grid gap-2">
+                        @foreach (var metric in ModelMetrics)
+                        {
+                            <div class="d-flex justify-content-between align-items-center border-bottom border-secondary border-opacity-50 pb-2">
+                                <span class="text-secondary font-monospace small">@metric.Key</span>
+                                <span class="h6 font-monospace text-white bg-secondary bg-opacity-25 px-2 py-1 rounded">
+                                    @metric.Value
+                                </span>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Data Card: Data Status (Now using the new component) -->
+            <div class="card bg-dark text-white border-success border-opacity-50 shadow-lg">
+                <div class="card-body">
+                    <h2 class="card-title h5 text-success mb-3 font-monospace">:: DATA SUB-SYSTEMS</h2>
+                    <div class="d-grid gap-2">
+                        <StatusIndicator Label="Firestore DB" Status="Online" />
+                        <StatusIndicator Label="Local Cache" Status="Optimized" />
+                        <StatusIndicator Label="API Gateway" Status="Low Latency" />
+                        <StatusIndicator Label="Auth Service" Status="Active" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Column 2: Recent Activity Log (Col Span 2) -->
+        <div class="col-12 col-lg-8">
+            <div class="card bg-dark text-white border-primary border-opacity-50 shadow-lg">
+                <div class="card-body">
+                    <h2 class="card-title h5 text-primary mb-3 border-bottom border-primary border-opacity-50 pb-2 font-monospace">
+                        :: OPERATIONAL LOG // LIVE FEED
+                    </h2>
+                    
+                    <!-- Log Output Area -->
+                    <div class="overflow-auto font-monospace small custom-scrollbar" style="height: 500px;">
+                        
+                        @foreach (var logEntry in RecentActivity)
+                        {
+                            <div class="d-flex gap-3 py-1 bg-dark hover-bg-secondary rounded">
+                                <span class="text-secondary flex-shrink-0" style="width: 90px;">[@logEntry.Time]</span>
+                                <span class="@GetLogColor(logEntry.Level) flex-shrink-0" style="width: 80px;">@logEntry.Level</span>
+                                <span class="text-light">@logEntry.Message</span>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@code {
+    // --- Mock Data Structures ---
+    private class LogEntry
+    {
+        public string Time { get; set; } = string.Empty;
+        public string Level { get; set; } = string.Empty;
+        public string Message { get; set; } = string.Empty;
+    }
+
+    // --- Mock Data ---
+
+    private Dictionary<string, string> ModelMetrics = new Dictionary<string, string>
+    {
+        {"Model Load %", "99.8%" },
+        {"Latencies (ms)", "15-45" },
+        {"Active Threads", "32" },
+        {"Token Buffer", "2.1M / 4M" },
+    };
+
+    private List<LogEntry> RecentActivity = new List<LogEntry>
+    {
+        new LogEntry { Time = "08:45:12", Level = "INFO", Message = "System startup sequence initiated." },
+        new LogEntry { Time = "08:45:15", Level = "CONFIG", Message = "Loaded configuration file 'system.yaml'." },
+        new LogEntry { Time = "08:45:21", Level = "WARN", Message = "Telemetry data buffer 75% full. Auto-purge scheduled." },
+        new LogEntry { Time = "08:45:29", Level = "SUCCESS", Message = "Database connection established and verified." },
+        new LogEntry { Time = "08:45:34", Level = "INFO", Message = "User ID '7a8f1b9c' authenticated successfully." },
+        new LogEntry { Time = "08:45:41", Level = "TASK", Message = "Starting module build: 'CyberLayout'." },
+        new LogEntry { Time = "08:45:49", Level = "TASK", Message = "Module build 'CyberLayout' complete (18ms)." },
+        new LogEntry { Time = "08:46:01", Level = "INFO", Message = "Monitoring thread initialized. Scanning for external requests." },
+        new LogEntry { Time = "08:46:05", Level = "WARN", Message = "High entropy fluctuation detected in sub-process 3. Stabilizing..." },
+        new LogEntry { Time = "08:46:11", Level = "SUCCESS", Message = "Sub-process 3 stabilized. Entropy normalized." },
+        new LogEntry { Time = "08:46:18", Level = "TASK", Message = "Executing command: 'start-server --port 8080'." },
+        new LogEntry { Time = "08:46:25", Level = "SUCCESS", Message = "Server process started (PID: 90210). Listening on 127.0.0.1:8080." },
+        new LogEntry { Time = "08:46:30", Level = "ALERT", Message = "External IP probe detected. Protocol firewall active." },
+        new LogEntry { Time = "08:46:35", Level = "INFO", Message = "System running at optimal performance." },
+    };
+    
+    // Utility method to assign log colors based on level
+    private string GetLogColor(string level) => level switch
+    {
+        "SUCCESS" => "text-success",
+        "INFO" => "text-primary",
+        "WARN" => "text-warning",
+        "ERROR" => "text-danger",
+        "ALERT" => "text-danger terminal-title", // Using text-danger and the glow for alerts
+        "TASK" => "text-info",
+        "CONFIG" => "text-secondary",
+        _ => "text-light"
+    };
+}

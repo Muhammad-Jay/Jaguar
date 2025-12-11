@@ -13,6 +13,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Jaguar.Core\Jaguar.Core.csproj" />
+    <ProjectReference Include="..\Jaguar.LLM\Jaguar.LLM.csproj" />
+    <ProjectReference Include="..\Jaguar.WebUi\Jaguar.WebUi.csproj" />
   </ItemGroup>
 
 </Project>

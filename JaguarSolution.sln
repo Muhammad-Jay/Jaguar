@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaguar.WebUi", "Jaguar.WebU
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaguar.Api", "Jaguar.Api\Jaguar.Api.csproj", "{2E03689B-97BF-4A9D-B285-D08E48AD6ECD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaguar.LLM", "Jaguar.LLM\Jaguar.LLM.csproj", "{422999EF-6657-4827-88A0-E8890054CA3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{2E03689B-97BF-4A9D-B285-D08E48AD6ECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E03689B-97BF-4A9D-B285-D08E48AD6ECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E03689B-97BF-4A9D-B285-D08E48AD6ECD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{422999EF-6657-4827-88A0-E8890054CA3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{422999EF-6657-4827-88A0-E8890054CA3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{422999EF-6657-4827-88A0-E8890054CA3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{422999EF-6657-4827-88A0-E8890054CA3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
