@@ -3,6 +3,11 @@
 ##
 ## Get latest from `dotnet new gitignore`
 
+GEMINI.md
+*/node_modules/*
+node_modules/*
+Jaguar.WebUi/node_modules/
+.gitignore
 # dotenv files
 .env
 
@@ -41,7 +46,7 @@ bld/
 #wwwroot/
 
 # Visual Studio 2017 auto generated files
-Generated\ Files/
+Generated Files/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
@@ -217,7 +222,7 @@ csx/
 *.build.csdef
 
 # Microsoft Azure Emulator
-ecf/
+ec f/
 rcf/
 
 # Windows Store app package directories and files
@@ -400,27 +405,11 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
-# JetBrains Rider
-*.sln.iml
-.idea
+# Windows shortcuts
+*.lnk
 
-##
-## Visual studio for Mac
-##
-
-
-# globs
-Makefile.in
-*.userprefs
-*.usertasks
-config.make
-config.status
-aclocal.m4
-install-sh
-autom4te.cache/
-*.tar.gz
-tarballs/
-test-results/
+# Vim temporary swap files
+*.swp
 
 # Mac bundle stuff
 *.dmg
