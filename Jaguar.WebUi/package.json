@@ -1,0 +1,14 @@
+{
+  "name": "jaguar-webui",
+  "version": "1.0.0",
+  "description": "Configuration for Tailwind CSS compilation in a Blazor WebAssembly project.",
+  "scripts": {
+    "build:tailwind": "npx tailwindcss -i ./wwwroot/app.css -o ./wwwroot/site.css --minify",
+    "watch:tailwind": "npx tailwindcss -i ./wwwroot/app.css -o ./wwwroot/site.css --watch"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.4"
+  }
+}
