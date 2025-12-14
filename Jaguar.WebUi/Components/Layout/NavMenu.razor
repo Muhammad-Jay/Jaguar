@@ -1,69 +1,70 @@
-﻿
-<div class="flex flex-col h-full bg-black text-white border-r border-white/20 shadow-xl">
+﻿@using Microsoft.AspNetCore.Components.Routing
 
-    <div class="flex-shrink-0 p-4 border-b border-white/20 relative">
-        <div class="text-xl font-extrabold uppercase tracking-widest text-white/90 cyberpunk-monochrome-glow font-mono">
-            // JAGUAR PLATFORM
+<div class="@(IsCollapsed ? "w-16" : "w-64") 
+            flex flex-col h-full bg-black transition-all duration-300 ease-in-out shadow-2xl flex-shrink-0">
+
+    <!-- Top Left Corner (Toggle Area) -->
+    <div class="flex-shrink-0 @(IsCollapsed ? "justify-center" : "p-4 justify-start") 
+                flex items-center">
+        <div class="ml-3 w-full !h-[130px] text-lg font-extrabold bg-neutral-900 rounded-lg text-white uppercase tracking-wider">
+            
         </div>
-
-        <button title="Navigation menu" class="lg:hidden absolute top-4 right-4 text-white hover:text-gray-400 focus:outline-none" @onclick="ToggleNavMenu">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-        </button>
     </div>
 
-    <div class="@NavMenuCssClass lg:block flex-grow overflow-y-auto">
-        <nav class="flex flex-col p-0">
+    <!-- Navigation Links -->
+    <nav class="flex-grow p-0 overflow-y-auto">
+        @foreach (var item in navItems)
+        {
+        <div class="mt-2">
+            <NavLink href="@item.Href" Match="NavLinkMatch.All"
+                     class="nav-link-base group transition-300"
+                     title="@item.Name">
+                <!-- Icon -->
+                <span class="bi @item.IconClass @(IsCollapsed ? "text-2xl" : "text-lg") transition-300 flex-shrink-0 transition-transform duration-150"></span>
 
-            <div class="px-4 py-3 text-xs text-gray-500 uppercase font-mono border-b border-white/10">
-                [DATA STREAMS]
-            </div>
+                <!-- Text (Hidden when collapsed) -->
+                @if (!IsCollapsed)
+                {
+                <span class="ml-4 whitespace-nowrap text-xs overflow-hidden text-ellipsis transition-opacity duration-300">
+                            @item.Name
+                        </span>
+                }
+            </NavLink>
+        </div>
+        }
+    </nav>
 
-            <div class="nav-item">
-                <NavLink class="nav-link-monochrome" href="" Match="NavLinkMatch.All">
-                    <span class="bi bi-house-door-fill mr-3" aria-hidden="true"></span> CORE // Dashboard
-                </NavLink>
-            </div>
-
-            <div class="nav-item">
-                <NavLink class="nav-link-monochrome" href="editor">
-                    <span class="bi bi-code-square mr-3" aria-hidden="true"></span> SCRIPTS // Editor
-                </NavLink>
-            </div>
-
-            <div class="nav-item">
-                <NavLink class="nav-link-monochrome" href="logs">
-                    <span class="bi bi-file-earmark-code-fill mr-3" aria-hidden="true"></span> LOGS // Archive
-                </NavLink>
-            </div>
-
-            <div class="px-4 py-3 text-xs text-gray-500 uppercase font-mono border-t border-white/10 border-b border-white/10">
-                [SYSTEM ACCESS]
-            </div>
-
-            <div class="nav-item">
-                <NavLink class="nav-link-monochrome" href="diagnostics">
-                    <span class="bi bi-activity mr-3" aria-hidden="true"></span> MONITOR // Diagnostics
-                </NavLink>
-            </div>
-
-            <div class="nav-item">
-                <NavLink class="nav-link-monochrome" href="config">
-                    <span class="bi bi-gear-fill mr-3" aria-hidden="true"></span> CONFIG // Settings
-                </NavLink>
-            </div>
-        </nav>
+    <!-- Bottom Section (User/Logout Avatar) -->
+    <div class="flex-shrink-0 p-3">
+        <button class="@(IsCollapsed ? "w-full justify-center" : "w-full justify-start") 
+                       flex items-center p-3 text-gray-400 hover:bg-gray-700 hover:text-white rounded transition duration-150">
+            <!-- Icon N (User Initial) -->
+            <span class="text-white text-2xl font-black font-mono">N</span>
+        </button>
     </div>
 </div>
 
 @code {
-private bool collapseNavMenu = true;
+[Parameter]
+public bool IsCollapsed { get; set; }
 
-// Use Tailwind's hidden/block utilities for responsiveness
-private string? NavMenuCssClass => collapseNavMenu ? "hidden" : "block";
+[Parameter]
+public EventCallback OnToggle { get; set; }
 
-private void ToggleNavMenu()
+// Navigation Data Structure
+private NavItem[] navItems = new[]
 {
-collapseNavMenu = !collapseNavMenu;
+new NavItem { Name = "Overview", Href = "/", IconClass = "bi-grid" },
+new NavItem { Name = "My Components", Href = "/components", IconClass = "bi-puzzle" },
+new NavItem { Name = "Analytics", Href = "/analytics", IconClass = "bi-graph-up" }
+};
+
+// Helper class definition (needed for the data array)
+public class NavItem
+{
+public string Name { get; set; } = string.Empty;
+public string Href { get; set; } = string.Empty;
+public string IconClass { get; set; } = string.Empty;
 }
 }
 

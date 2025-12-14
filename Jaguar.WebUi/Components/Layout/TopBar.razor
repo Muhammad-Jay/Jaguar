@@ -1,0 +1,35 @@
+<div class="flex items-center justify-between h-16 px-4 bg-black border-b border-gray-700 shadow-md flex-shrink-0">
+
+    <!-- Left Side: Menu Toggle & Title Placeholder (hidden when sidebar expanded) -->
+    <div class="flex items-center h-full">
+        <!-- This button will be present but likely overlaid by the expanded sidebar, mimicking the screenshot's layout -->
+        <button
+            @onclick="OnToggleSidebar"
+            class="p-2 mr-4 text-white hover:text-gray-400 focus:outline-none transition duration-150">
+            <span class="bi bi-list text-2xl"></span>
+        </button>
+        <!-- Title placeholder for wide screen -->
+        <div class="text-lg font-mono text-gray-500">JAGUAR</div>
+    </div>
+
+    <!-- Center: Status Indicators (Monochrome dots as seen in screenshot) -->
+    <div class="flex space-x-4">
+        <div class="w-3 h-3 bg-white rounded-full opacity-10"></div>
+        <div class="w-3 h-3 bg-white rounded-full opacity-20"></div>
+        <div class="w-3 h-3 bg-white rounded-full opacity-30"></div>
+        <div class="w-3 h-3 bg-white rounded-full opacity-40"></div>
+        <div class="w-3 h-3 bg-white rounded-full opacity-50"></div>
+    </div>
+
+    <!-- Right Side: User Profile -->
+    <div class="flex items-center space-x-4">
+        <button class="p-2 text-white hover:text-gray-400 transition duration-150 rounded-full">
+            <span class="bi bi-person-fill text-2xl"></span>
+        </button>
+    </div>
+</div>
+
+@code {
+[Parameter]
+public EventCallback OnToggleSidebar { get; set; }
+}

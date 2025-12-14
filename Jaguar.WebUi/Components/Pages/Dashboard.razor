@@ -1,6 +1,44 @@
-@page "/dashboard";
+@page "/dashboard"
+@using Jaguar.WebUi.Components.Shared.Panels
+@rendermode  InteractiveServer 
 
 
-<main class="container-full center">
-    Dashboard
+<main class="container-full p-5 !grid !grid-cols-2 gap-10">
+    <div class="w-full h-52 max-w-md p-4 bg-black border border-white hover:border-purple-500 hover:shadow-sm hover:shadow-purple-500 transition-300 rounded-lg shadow-lg">
+        <div class="flex justify-between items-start">
+            <div>
+                <p class="text-sm font-semibold text-white">project simplify</p>
+                <p class="text-xs text-gray-500 font-mono">/iVNpkV/1mqBpPm7xKUT2h</p>
+            </div>
+            <button class="p-1 text-gray-500 hover:text-white rounded">
+                <span class="bi bi-three-dots-vertical"></span>
+            </button>
+        </div>
+    </div>
+    
+    <div class="w-full h-52 max-w-md p-4 bg-black border border-white hover:border-purple-500 hover:shadow-sm hover:shadow-purple-500 transition-300 rounded-lg shadow-lg">
+        <div class="flex justify-between items-start">
+            <div>
+                <p class="text-sm font-semibold text-white">project simplify</p>
+                <p class="text-xs text-gray-500 font-mono">/iVNpkV/1mqBpPm7xKUT2h</p>
+            </div>
+            <button class="p-1 text-gray-500 hover:text-white rounded">
+                <span class="bi bi-three-dots-vertical"></span>
+            </button>
+        </div>
+    </div>
+    
+    <div class="w-full h-52 max-w-md p-4 bg-black border border-white hover:border-purple-500 hover:shadow-sm hover:shadow-purple-500 transition-300 rounded-lg shadow-lg">
+        <div class="flex justify-between items-start">
+            <div>
+                <p class="text-sm font-semibold text-white">project simplify</p>
+                <p class="text-xs text-gray-500 font-mono">/iVNpkV/1mqBpPm7xKUT2h</p>
+            </div>
+            <button class="p-1 text-gray-500 hover:text-white rounded">
+                <span class="bi bi-three-dots-vertical"></span>
+            </button>
+        </div>
+    </div>
+    
+    <PanelWrapper />
 </main>
