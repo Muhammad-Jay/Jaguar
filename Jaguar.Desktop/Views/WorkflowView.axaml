@@ -1,0 +1,19 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             Background="Chartreuse"
+             xmlns:vm="using:Jaguar.Desktop.ViewModels"  x:DataType="vm:WorkflowViewModel"    
+             x:Class="Jaguar.Desktop.Views.WorkflowView">
+
+    <DockPanel>
+        <TextBlock Text="{Binding ViewHeader}" 
+                   DockPanel.Dock="Top" 
+                   Margin="10" 
+                   FontSize="18"/>
+        <!-- <Canvas Background="#282828"> -->
+        <!-- </Canvas> -->
+        <TextBlock>Hello</TextBlock>
+    </DockPanel>
+</UserControl>

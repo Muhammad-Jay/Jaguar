@@ -2,7 +2,9 @@
 <project version="4">
   <component name="UserContentModel">
     <attachedFolders />
-    <explicitIncludes />
+    <explicitIncludes>
+      <Path>Jaguar.Desktop</Path>
+    </explicitIncludes>
     <explicitExcludes />
   </component>
 </project>
