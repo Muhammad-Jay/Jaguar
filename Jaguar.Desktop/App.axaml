@@ -1,17 +1,26 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:views="clr-namespace:Jaguar.Desktop.Views"
-             xmlns:vm="clr-namespace:Jaguar.Desktop.ViewModels"
              x:Class="Jaguar.Desktop.App"
              RequestedThemeVariant="Dark">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.Styles>
         <FluentTheme />
-        <Window.DataTemplates>
-            <DataTemplate DataType="{x:Type vm:WorkflowViewModel}">
-                <views:WorkflowView />
-            </DataTemplate>
-        </Window.DataTemplates>
+        <!-- <Style Selector="Grid.Active"> -->
+        <!--     <Style.Animations> -->
+        <!--         <Animation Duration="0:0:0.5" FillMode="Forward"> -->
+        <!--             <KeyFrame Cue="0%"> -->
+        <!--                 <Setter Property="Opacity" Value="0.0"/> -->
+        <!--             </KeyFrame> -->
+        <!--             <KeyFrame Cue="100%"> -->
+        <!--                 <Setter Property="Opacity" Value="1.0"/> -->
+        <!--             </KeyFrame> -->
+        <!--         </Animation> -->
+        <!--     </Style.Animations> -->
+        <!-- </Style> -->
+        
+        <!-- <Style Selector="Border.SlidingPanel.Closed"> -->
+        <!--     <Setter Property="RenderTransform" Value="translate(300, 0)"/> -->
+        <!-- </Style> -->
     </Application.Styles>
 </Application>
