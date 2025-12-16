@@ -6,6 +6,7 @@ namespace Jaguar.Desktop.Views;
 
 public partial class WorkflowView : UserControl
 {
+    
     public WorkflowView()
     {
         InitializeComponent();

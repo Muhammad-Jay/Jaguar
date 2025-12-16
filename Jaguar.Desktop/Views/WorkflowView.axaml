@@ -2,9 +2,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             Background="Chartreuse"
-             xmlns:vm="using:Jaguar.Desktop.ViewModels"  x:DataType="vm:WorkflowViewModel"    
+             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="550"
+             Background="Black"
+             xmlns:vm="using:Jaguar.Desktop.ViewModels" 
+             x:DataType="vm:WorkflowViewModel"    
              x:Class="Jaguar.Desktop.Views.WorkflowView">
 
     <DockPanel>
@@ -12,8 +13,11 @@
                    DockPanel.Dock="Top" 
                    Margin="10" 
                    FontSize="18"/>
-        <!-- <Canvas Background="#282828"> -->
-        <!-- </Canvas> -->
-        <TextBlock>Hello</TextBlock>
+        <Canvas Width="400" Background="#282828">
+            <Border Width="200" Height="50" Background="Azure" CornerRadius="10" Margin="30, 40">
+                <TextBox Text="{Binding AgentSelectionStatus}" Name="{Binding AgentSelectionStatus}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="1000"></TextBox>
+            </Border>
+            <Button Command="{Binding SetAgentStatus}"></Button>
+        </Canvas>
     </DockPanel>
 </UserControl>
