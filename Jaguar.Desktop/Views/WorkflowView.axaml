@@ -8,16 +8,15 @@
              x:DataType="vm:WorkflowViewModel"    
              x:Class="Jaguar.Desktop.Views.WorkflowView">
 
-    <DockPanel>
-        <TextBlock Text="{Binding ViewHeader}" 
-                   DockPanel.Dock="Top" 
-                   Margin="10" 
-                   FontSize="18"/>
-        <Canvas Width="400" Background="#282828">
-            <Border Width="200" Height="50" Background="Azure" CornerRadius="10" Margin="30, 40">
-                <TextBox Text="{Binding AgentSelectionStatus}" Name="{Binding AgentSelectionStatus}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="1000"></TextBox>
-            </Border>
-            <Button Command="{Binding SetAgentStatus}"></Button>
-        </Canvas>
-    </DockPanel>
+    <!-- <DockPanel> -->
+    <!--     ~1~ <Canvas Width="400" Background="#282828"> @1@ -->
+    <!--     ~1~     <Border Width="200" Height="50" Background="Azure" CornerRadius="10" Margin="30, 40"> @1@ -->
+    <!--     ~1~         <TextBox Text="{Binding AgentSelectionStatus}" Name="{Binding AgentSelectionStatus}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="1000"></TextBox> @1@ -->
+    <!--     ~1~     </Border> @1@ -->
+    <!--     ~1~     <Button Command="{Binding SetAgentStatus}"></Button> @1@ -->
+    <!--     ~1~ </Canvas> @1@ -->
+    <!-- </DockPanel> -->
+    <TextBlock Text="{Binding ViewHeader}" 
+               Margin="10" 
+               FontSize="18"/>
 </UserControl>
