@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Jaguar.Desktop.Views;
 
 namespace Jaguar.Desktop;
 

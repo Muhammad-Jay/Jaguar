@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using System;
 using Jaguar.Desktop.ViewModels;
+using Jaguar.Desktop.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 

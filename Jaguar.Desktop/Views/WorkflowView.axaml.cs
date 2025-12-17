@@ -9,5 +9,6 @@ public partial class WorkflowView : UserControl
     public WorkflowView()
     {
         InitializeComponent();
+        
     }
 }

@@ -4,5 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Jaguar.Desktop.CustomViews.ManuBars.BottomMenuBarView">
-    Welcome to Avalonia!
+    <Border Height="25" Background="#1E1E1E">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0">
+            <TextBlock Text="JAhhhhhhhhh" Foreground="White" FontWeight="SemiBold"/>
+        </StackPanel>
+    </Border>
 </UserControl>

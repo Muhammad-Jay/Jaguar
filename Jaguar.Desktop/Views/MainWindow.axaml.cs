@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace Jaguar.Desktop;
+namespace Jaguar.Desktop.Views;
 
 public partial class MainWindow : Window
 {

@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace Jaguar.Desktop.CustomViews.ManuBars;
 
-public partial class LeftMenubarView : UserControl
+public partial class LeftMenuBarView : UserControl
 {
-    public LeftMenubarView()
+    public LeftMenuBarView()
     {
         InitializeComponent();
     }
