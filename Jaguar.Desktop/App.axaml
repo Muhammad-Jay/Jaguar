@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="Jaguar.Desktop.App"
              RequestedThemeVariant="Dark">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+    
 
     <Application.Styles>
         <FluentTheme />
@@ -22,5 +22,6 @@
         <!-- <Style Selector="Border.SlidingPanel.Closed"> -->
         <!--     <Setter Property="RenderTransform" Value="translate(300, 0)"/> -->
         <!-- </Style> -->
+        <StyleInclude Source="Styles/GlobalStyles.axaml"/>
     </Application.Styles>
 </Application>

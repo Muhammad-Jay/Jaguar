@@ -6,7 +6,7 @@
              x:Class="Jaguar.Desktop.CustomViews.ManuBars.BottomMenuBarView">
     <Border Height="25" Background="#1E1E1E">
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0">
-            <TextBlock Text="JAhhhhhhhhh" Foreground="White" FontWeight="SemiBold"/>
+            <TextBlock Text="f" Foreground="White" FontWeight="SemiBold"/>
         </StackPanel>
     </Border>
 </UserControl>
