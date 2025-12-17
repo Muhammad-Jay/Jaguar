@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="Jaguar.Desktop/App.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/CustomViews/ManuBars/BottomMenuBarView.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/CustomViews/ManuBars/LeftMenuBarView.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/CustomViews/ManuBars/RightMenuBarView.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/CustomViews/ManuBars/TopMenuBarView.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/Styles/GlobalStyles.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/Views/MainWindow.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

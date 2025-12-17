@@ -7,20 +7,22 @@ namespace Jaguar.Desktop.ViewModels.Menus
 {
     public partial class  TopBarMenuViewModel: ViewModelBase
     {
-        [ObservableProperty]
-        private ObservableCollection<MenuItems> _menuItems = new ObservableCollection<MenuItems>()
+        public ObservableCollection<MenuItems> MenuItems {get; set;}
+
+        public TopBarMenuViewModel()
         {
-            new MenuItems("i"),
-            new MenuItems("2"),
-            new MenuItems("i"),
-            new MenuItems("2"),
-            new MenuItems("i"),
-            new MenuItems("2"),
-            new MenuItems("i"),
-            new MenuItems("2"),
-            new MenuItems("i"),
-            new MenuItems("2"),
-        };
+            MenuItems = new ObservableCollection<MenuItems>()
+            {
+                new MenuItems("File"),
+                new MenuItems("Edit"),
+                new MenuItems("Build"),
+                new MenuItems("Run"),
+                new MenuItems("Tools"),
+                new MenuItems("Git"),
+                new MenuItems("Window"),
+                new MenuItems("Help")
+            };
+        }
     }
 }
 

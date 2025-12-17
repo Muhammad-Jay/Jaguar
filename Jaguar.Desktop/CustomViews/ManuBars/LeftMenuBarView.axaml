@@ -3,10 +3,38 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels.Menus"
+             x:DataType="viewModels:LeftBarMenuViewModel"
              x:Class="Jaguar.Desktop.CustomViews.ManuBars.LeftMenuBarView">
-    <Border Width="25" Background="#1E1E1E">
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0">
-            <TextBlock Text="JA" Foreground="White" FontWeight="SemiBold"/>
-        </StackPanel>
+    <Border Width="30" Background="Black"  Padding="5, 5, 0, 10">
+        <ItemsControl
+            ItemsSource="{Binding MenuItems}"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+        >
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical" Spacing="10" Background="Black"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center" 
+                        Classes="MenuBtn" 
+                        Content="{Binding name}"
+                        Width="20" 
+                        Height="20" 
+                        FontSize="10" 
+                        FontWeight="Regular"
+                        Foreground="
+                      White"
+                    >
+                        
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Border>
 </UserControl>

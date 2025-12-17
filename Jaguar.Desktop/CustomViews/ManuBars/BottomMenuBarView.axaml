@@ -2,11 +2,38 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="450"
+             xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels.Menus"
+             x:DataType="viewModels:BottomBarMenuViewModel"
              x:Class="Jaguar.Desktop.CustomViews.ManuBars.BottomMenuBarView">
-    <Border Height="25" Background="#1E1E1E">
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0">
-            <TextBlock Text="f" Foreground="White" FontWeight="SemiBold"/>
-        </StackPanel>
+    <Border Height="30" >
+        <ItemsControl
+            ItemsSource="{Binding MenuItems}"
+            ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+            ScrollViewer.VerticalScrollBarVisibility="Disabled"
+            Background="Black"
+        >
+           <ItemsControl.ItemsPanel>
+               <ItemsPanelTemplate>
+                   <StackPanel Orientation="Horizontal" Spacing="10" Background="Black"/>
+               </ItemsPanelTemplate>
+           </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center" 
+                        Content="{Binding name}"
+                        Classes="MenuBtn" 
+                        FontSize="10" 
+                        FontWeight="Regular" 
+                        Foreground="
+                      White"
+                      >
+                        
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Border>
 </UserControl>

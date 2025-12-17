@@ -1,5 +1,8 @@
+using System;
+using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Jaguar.Desktop.Models;
 
 namespace Jaguar.Desktop.ViewModels
 {
@@ -8,6 +11,7 @@ namespace Jaguar.Desktop.ViewModels
         [ObservableProperty] private ViewModelBase _content;
         [ObservableProperty] private string _isDialogOpen = "Left";
 
+        public ObservableCollection<string> MenuItems {get; set;}
         [RelayCommand]
         private void OpenDialog()
         {
@@ -29,6 +33,12 @@ namespace Jaguar.Desktop.ViewModels
         public MainWindowViewModel()
         {
             Content = new WorkflowViewModel();
+            MenuItems = new ObservableCollection<string>()
+            {
+                "t",
+                "y"
+            };
+            Console.WriteLine(MenuItems.Count);
         }
     }
 }

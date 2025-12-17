@@ -6,20 +6,33 @@
              xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels.Menus"
              x:DataType="viewModels:TopBarMenuViewModel"
              x:Class="Jaguar.Desktop.CustomViews.ManuBars.TopMenuBarView">
-    <Border Height="25" Background="#1E1E1E">
-       <ListBox 
+    <Border Height="30" Background="Black"  Padding="60, 5, 20,0">
+       <ItemsControl
            ItemsSource="{Binding MenuItems}"
            ScrollViewer.HorizontalScrollBarVisibility="Auto" 
            ScrollViewer.VerticalScrollBarVisibility="Disabled"
-           Padding="10, 0 10, 0"
            >
-          <ListBox.ItemTemplate>
-              <DataTemplate DataType="MenuItem">
-                  <Button Margin="0, 1, 10, 0" Classes="MenuBtn" Content="o" Width="15" Height="15" FontSize="10" FontWeight="Regular" Foreground="White">
-                      
-                  </Button>
-              </DataTemplate>
-          </ListBox.ItemTemplate>
-       </ListBox>
+           <ItemsControl.ItemsPanel>
+               <ItemsPanelTemplate>
+                   <StackPanel Orientation="Horizontal" Spacing="10" Background="Black"/>
+               </ItemsPanelTemplate>
+           </ItemsControl.ItemsPanel>
+           <ItemsControl.ItemTemplate>
+               <DataTemplate>
+                   <Button 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       Classes="MenuBtn"
+                       Content="{Binding name}"
+                       FontSize="10"
+                       FontWeight="Regular"
+                       Foreground="White"
+                       >
+                       
+                   </Button>
+               </DataTemplate>
+           </ItemsControl.ItemTemplate>
+       </ItemsControl>
+     
     </Border>
 </UserControl>
