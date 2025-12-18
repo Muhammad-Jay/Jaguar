@@ -405,6 +405,7 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
+Jaguar.Desktop/appsettings.json
 # Windows shortcuts
 *.lnk
 

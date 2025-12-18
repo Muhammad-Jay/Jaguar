@@ -9,7 +9,9 @@
         <entry key="Jaguar.Desktop/CustomViews/ManuBars/RightMenuBarView.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/CustomViews/ManuBars/TopMenuBarView.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/Styles/GlobalStyles.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/ViewModels/Panels/PanelWrapper.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/Views/MainWindow.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/Views/WorkflowView.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
       </map>
     </option>
   </component>

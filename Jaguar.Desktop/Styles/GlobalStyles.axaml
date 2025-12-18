@@ -1,7 +1,7 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style Selector="Button.MenuBtn">
-        <Setter Property="Background" Value="#00cbe6"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="CornerRadius" Value="5"/>
         <Setter Property="Transitions">
             <Transitions>
@@ -23,9 +23,11 @@
                 <Animation Duration="0:0:0.4" IterationCount="1">
                     <KeyFrame Cue="0%">
                         <Setter Property="Opacity" Value="0"/>
+                        <Setter Property="Background" Value="Transparent"/>
                     </KeyFrame>
                     <KeyFrame Cue="100%">
                         <Setter Property="Opacity" Value="1"/>
+                        <Setter Property="Background" Value="#00cbe6"/>
                     </KeyFrame>
                 </Animation>
             </Style.Animations>

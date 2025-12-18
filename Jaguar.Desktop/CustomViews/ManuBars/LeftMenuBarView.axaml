@@ -24,12 +24,9 @@
                         VerticalAlignment="Center" 
                         Classes="MenuBtn" 
                         Content="{Binding name}"
-                        Width="20" 
-                        Height="20" 
                         FontSize="10" 
                         FontWeight="Regular"
-                        Foreground="
-                      White"
+                        Foreground="DarkGray"
                     >
                         
                     </Button>

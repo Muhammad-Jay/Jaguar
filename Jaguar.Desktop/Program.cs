@@ -1,7 +1,10 @@
 ﻿using Avalonia;
 using System;
+using Jaguar.Core.Abstractions;
+using Jaguar.Core.Services;
 using Jaguar.Desktop.ViewModels;
 using Jaguar.Desktop.Views;
+using Jaguar.LLM.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -20,11 +23,16 @@ class Program
         {
             // Create the Generic Host
             AppHost = Host.CreateDefaultBuilder(args)
-                .ConfigureServices(services =>
+                .ConfigureServices((context, services) =>
                 {
-                    services.AddTransient<MainWindowViewModel>(); 
+                    services.Configure<Jaguar.Core.Models.GeminiConfig>(
+                        context.Configuration.GetSection("GeminiConfig"));
                     
+                    services.AddTransient<MainWindowViewModel>(); 
+                    services.AddTransient<WorkflowViewModel>();
                     services.AddSingleton<MainWindow>();
+                    services.AddTransient<IAiProvider, LlmProvider>(); 
+                    services.AddSingleton<Orchestrator>();
 
                 })
                 .Build();

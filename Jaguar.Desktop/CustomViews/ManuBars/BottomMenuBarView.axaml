@@ -26,9 +26,8 @@
                         Content="{Binding name}"
                         Classes="MenuBtn" 
                         FontSize="10" 
-                        FontWeight="Regular" 
-                        Foreground="
-                      White"
+                        FontWeight="Regular"
+                        Foreground="DarkGray"
                       >
                         
                     </Button>
