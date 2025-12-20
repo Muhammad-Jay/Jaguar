@@ -13,14 +13,14 @@ namespace Jaguar.Desktop.ViewModels.Menus
         {
             MenuItems = new ObservableCollection<MenuItems>()
             {
-                new MenuItems("File"),
-                new MenuItems("Edit"),
-                new MenuItems("Build"),
-                new MenuItems("Run"),
-                new MenuItems("Tools"),
-                new MenuItems("Git"),
-                new MenuItems("Window"),
-                new MenuItems("Help")
+                new MenuItems("File", "File", "Top"),
+                new MenuItems("Edit", "Edit", "Top"),
+                new MenuItems("Build", "Build", "Top"),
+                new MenuItems("Run", "Run", "Top"),
+                new MenuItems("Tools", "Tools", "Top"),
+                new MenuItems("Git", "Git", "Top"),
+                new MenuItems("Window", "Window", "Top"),
+                new MenuItems("Help", "Help", "Top")
             };
         }
     }

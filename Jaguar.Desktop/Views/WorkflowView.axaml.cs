@@ -1,7 +1,4 @@
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
-using Jaguar.Core.Services;
 using Jaguar.Desktop.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,7 +11,6 @@ public partial class WorkflowView : UserControl
         InitializeComponent();
         if (Program.AppHost != null)
         {
-            // This gets the ViewModel and injects that orchestrator into it automatically
             DataContext = Program.AppHost.Services.GetRequiredService<WorkflowViewModel>();
         }
     }

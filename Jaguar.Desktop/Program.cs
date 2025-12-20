@@ -2,6 +2,8 @@
 using System;
 using Jaguar.Core.Abstractions;
 using Jaguar.Core.Services;
+using Jaguar.Desktop.Abstractions;
+using Jaguar.Desktop.Services.AppState;
 using Jaguar.Desktop.ViewModels;
 using Jaguar.Desktop.Views;
 using Jaguar.LLM.Services;
@@ -31,6 +33,7 @@ class Program
                     services.AddTransient<MainWindowViewModel>(); 
                     services.AddTransient<WorkflowViewModel>();
                     services.AddSingleton<MainWindow>();
+                    services.AddSingleton<IAppStateService, AppStateService>();
                     services.AddTransient<IAiProvider, LlmProvider>(); 
                     services.AddSingleton<Orchestrator>();
 

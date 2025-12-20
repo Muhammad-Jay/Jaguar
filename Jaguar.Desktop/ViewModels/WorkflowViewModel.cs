@@ -16,12 +16,27 @@ namespace Jaguar.Desktop.ViewModels
         [ObservableProperty] private OrchestratorAnalysis _analysis;
         [ObservableProperty] private string _isDialogOpen = "Run Command";
         [ObservableProperty] private string _agentSelectionStatus = "Select PM Agent";
+        [ObservableProperty] private bool _isOverlayVisible;
+
+        [RelayCommand] 
+        public void ToggleOverlay()
+        {
+            IsOverlayVisible = !IsOverlayVisible;
+        }
         
         [RelayCommand]
         public void SetAgentStatus()
         {
             Console.WriteLine(AgentSelectionStatus);
         }
+        
+        // public async Task ShowDialogAsync()
+        // {
+        //     var dialog = new SettingsWindow();
+        //     // 'this' is the parent window. 
+        //     // ShowDialog makes it modal (locks the parent).
+        //     await dialog.ShowDialog(this); 
+        // }
         
         public WorkflowViewModel()
         {

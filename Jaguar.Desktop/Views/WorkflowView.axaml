@@ -3,23 +3,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
+             xmlns:panels="clr-namespace:Jaguar.Desktop.CustomViews.Panels"
              x:DataType="viewModels:WorkflowViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Jaguar.Desktop.Views.WorkflowView">
-    <DockPanel LastChildFill="True">
-        <Border HorizontalAlignment="Center" VerticalAlignment="Center" Width="400" Height="400" CornerRadius="40">
-            <Button 
-                HorizontalAlignment="Center" 
-                VerticalAlignment="Center" 
-                Classes="MenuBtn" 
-                Content="{Binding IsDialogOpen}"
-                FontSize="10" 
-                FontWeight="Regular"
-                Foreground="White"
-                Command="{Binding RunTestCommand}"
-            >
-                        
-            </Button>
+    <Grid IsHitTestVisible="True">
+        <panels:PanelWrapper IsVisible="{Binding IsOverlayVisible}"/>
+        <Border HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="40">
+                <StackPanel>
+                    <TextBlock Text="Jaguar Workflow Control" />
+                    <Button Content="{Binding IsOverlayVisible}" Command="{Binding ToggleOverlayCommand}" />
+                </StackPanel>
         </Border>
-    </DockPanel>
+        <!-- <panels:PanelWrapper HorizontalAlignment="Right" IsVisible="{Binding IsOverlayVisible}"/> -->
+    </Grid>
 </UserControl>

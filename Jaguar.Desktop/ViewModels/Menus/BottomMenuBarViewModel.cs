@@ -15,14 +15,14 @@ namespace Jaguar.Desktop.ViewModels.Menus
          {
              MenuItems = new ObservableCollection<MenuItems>(new List<MenuItems>
              {
-                 new MenuItems("Ready"),
-                 new MenuItems("Jaguar.Api: Connected"),
-                 new MenuItems("LLM: Ollama (Llama 3)"),
-                 new MenuItems("CPU: 12%"),
-                 new MenuItems("Memory: 1.2GB"),
-                 new MenuItems("UTF-8"),
-                 new MenuItems("Ln 1, Col 1"),
-                 new MenuItems("Main-Branch")
+                 new MenuItems("Ready", "Ready", "Bottom"),
+                 new MenuItems("Jaguar.Api: Connected", "Status", "Bottom"),
+                 new MenuItems("LLM: Ollama (Llama 3)", "Status", "Bottom"),
+                 new MenuItems("CPU: 12%", "Status", "Bottom"),
+                 new MenuItems("Memory: 1.2GB",  "Status", "Bottom"),
+                 new MenuItems("UTF-8", "None", "Bottom"),
+                 new MenuItems("Ln 1, Col 1", "None", "Bottom"),
+                 new MenuItems("Main-Branch", "Git", "Bottom")
              });
          }
     }
