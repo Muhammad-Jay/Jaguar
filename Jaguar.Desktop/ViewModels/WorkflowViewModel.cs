@@ -6,28 +6,23 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Jaguar.Core.Models;
 using Jaguar.Core.Services;
+using Jaguar.Desktop.Services.AppState;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Jaguar.Desktop.ViewModels
 {
     public partial class WorkflowViewModel : ViewModelBase
     {
-        private readonly Orchestrator _orchestrator;
-        [ObservableProperty] private OrchestratorAnalysis _analysis;
-        [ObservableProperty] private string _isDialogOpen = "Run Command";
-        [ObservableProperty] private string _agentSelectionStatus = "Select PM Agent";
+        
+        [ObservableProperty] private Orchestrator? _workFlowOrchestrator;
+        [ObservableProperty] private AppStateService? _appState;
+        [ObservableProperty] private OrchestratorAnalysis? _analysis;
         [ObservableProperty] private bool _isOverlayVisible;
 
         [RelayCommand] 
         public void ToggleOverlay()
         {
             IsOverlayVisible = !IsOverlayVisible;
-        }
-        
-        [RelayCommand]
-        public void SetAgentStatus()
-        {
-            Console.WriteLine(AgentSelectionStatus);
         }
         
         // public async Task ShowDialogAsync()
@@ -42,19 +37,18 @@ namespace Jaguar.Desktop.ViewModels
         {
             if (Program.AppHost != null)
             {
-                _orchestrator = Program.AppHost.Services.GetRequiredService<Orchestrator>();
+                // AppState = Program.AppHost.Services.GetRequiredService<AppStateService>();
+                WorkFlowOrchestrator = Program.AppHost.Services.GetRequiredService<Orchestrator>();
             }
         }
         
-        [RelayCommand]
-        public async Task RunTestCommand()
-        {
-            IsDialogOpen = "Running Test Command...";
-            Console.WriteLine("Running Test Command...");
-            string testPrompt = "Design a small console app that logs Zorin OS system temperatures.";
-            
-            Analysis = await _orchestrator.InitializeProjectAsync(testPrompt);
-            IsDialogOpen = Analysis.Goal;
-        }
+        // [RelayCommand]
+        // public async Task RunTestCommand()
+        // {
+        //     Console.WriteLine("Running Test Command...");
+        //     string testPrompt = "Design a small console app that logs Zorin OS system temperatures.";
+        //     
+        //     Analysis = await WorkFlowOrchestrator.InitializeProjectAsync(testPrompt);
+        // }
     }
 }

@@ -12,9 +12,6 @@ public partial class MainWindow : Window
         InitializeComponent();
         if (Program.AppHost != null)
         {
-            // This gets the Orchestrator with all its DI (LlmProvider, API Keys, etc.)
-            var orchestrator = Program.AppHost.Services.GetRequiredService<Orchestrator>();
-            
             // This gets the ViewModel and injects that orchestrator into it automatically
             DataContext = Program.AppHost.Services.GetRequiredService<MainWindowViewModel>();
         }

@@ -1,0 +1,33 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
+             xmlns:nodes="clr-namespace:Jaguar.Desktop.CustomViews.Nodes"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="viewModels:CanvasViewModel"
+             x:Class="Jaguar.Desktop.Views.CanvasView">
+        <ItemsControl ItemsSource="{Binding   CurrentScope.Children}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="DimGray"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        
+            <ItemsControl.ItemContainerTheme>
+                <ControlTheme TargetType="ContentPresenter">
+                    <!-- <Setter Property="Canvas.Left" Value="{Binding  X}"/> -->
+                    <!-- <Setter Property="Canvas.Top" Value="{Binding  Y}"/> -->
+                </ControlTheme>
+            </ItemsControl.ItemContainerTheme>
+        
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <nodes:AgentNodeView
+                        PointerPressed="OnPointerPressed"
+                        PointerMoved="OnPointerMoved"
+                        PointerReleased="OnPointerReleased"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+</UserControl>

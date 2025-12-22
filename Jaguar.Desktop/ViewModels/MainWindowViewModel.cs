@@ -7,7 +7,7 @@ namespace Jaguar.Desktop.ViewModels
     {
         [ObservableProperty] private ViewModelBase _content;
         
-        public MainWindowViewModel(Orchestrator orchestrator)
+        public MainWindowViewModel()
         {
             Content = new WorkflowViewModel();
         }

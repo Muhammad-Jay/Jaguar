@@ -4,17 +4,29 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
              xmlns:panels="clr-namespace:Jaguar.Desktop.CustomViews.Panels"
+             xmlns:views="clr-namespace:Jaguar.Desktop.Views"
              x:DataType="viewModels:WorkflowViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Jaguar.Desktop.Views.WorkflowView">
     <Grid IsHitTestVisible="True">
-        <panels:PanelWrapper IsVisible="{Binding IsOverlayVisible}"/>
-        <Border HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="40">
-                <StackPanel>
-                    <TextBlock Text="Jaguar Workflow Control" />
-                    <Button Content="{Binding IsOverlayVisible}" Command="{Binding ToggleOverlayCommand}" />
-                </StackPanel>
-        </Border>
-        <!-- <panels:PanelWrapper HorizontalAlignment="Right" IsVisible="{Binding IsOverlayVisible}"/> -->
+            <ContentControl>
+                <views:CanvasView></views:CanvasView>
+            </ContentControl>
+        
+        <!-- <Border -->
+        <!--     MinHeight="400" -->
+        <!--     MaxHeight="700" -->
+        <!--     Background="DimGray" -->
+        <!--     Margin="20" -->
+        <!--     CornerRadius="12" -->
+        <!--     BoxShadow="0 10 20 0 #40000000" -->
+        <!--     Width="{Binding AppState.ActivePanel.Size}" -->
+        <!--     HorizontalAlignment="Right" -->
+        <!--     VerticalAlignment="Stretch" -->
+        <!--     Padding="30" -->
+        <!-- > -->
+        <!--     ~1~ <ContentControl  Content="{Binding AppState.ActivePanel.Position}"/> @1@ -->
+        <!-- </Border> -->
+        <panels:PanelWrapper/>
     </Grid>
 </UserControl>

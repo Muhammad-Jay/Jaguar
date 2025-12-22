@@ -18,12 +18,14 @@ public partial class App : Application
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            var mainWindow = Program.AppHost.Services.GetRequiredService<MainWindow>();
-        
-            // Ensure the DataContext is the injected ViewModel
-            mainWindow.DataContext = Program.AppHost.Services.GetRequiredService<MainWindowViewModel>();
+            if (Program.AppHost != null)
+            {
+                var mainWindow = Program.AppHost.Services.GetRequiredService<MainWindow>();
             
-            desktop.MainWindow = new MainWindow();
+                mainWindow.DataContext = Program.AppHost.Services.GetRequiredService<MainWindowViewModel>();
+            
+                desktop.MainWindow = new MainWindow();
+            }
         }
 
         base.OnFrameworkInitializationCompleted();

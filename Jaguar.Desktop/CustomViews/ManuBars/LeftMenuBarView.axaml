@@ -23,10 +23,12 @@
                         HorizontalAlignment="Center" 
                         VerticalAlignment="Center" 
                         Classes="MenuBtn" 
+                        CommandParameter="{Binding}"
                         Content="{Binding name}"
                         FontSize="10" 
                         FontWeight="Regular"
                         Foreground="DarkGray"
+                        Command="{Binding $parent[ItemsControl].((viewModels:LeftBarMenuViewModel)DataContext).OnSelectedMenuChange}"
                     >
                         
                     </Button>

@@ -5,6 +5,7 @@ using Jaguar.Core.Services;
 using Jaguar.Desktop.Abstractions;
 using Jaguar.Desktop.Services.AppState;
 using Jaguar.Desktop.ViewModels;
+using Jaguar.Desktop.ViewModels.MenuItemViewModel;
 using Jaguar.Desktop.Views;
 using Jaguar.LLM.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,13 +30,14 @@ class Program
                 {
                     services.Configure<Jaguar.Core.Models.GeminiConfig>(
                         context.Configuration.GetSection("GeminiConfig"));
-                    
                     services.AddTransient<MainWindowViewModel>(); 
                     services.AddTransient<WorkflowViewModel>();
                     services.AddSingleton<MainWindow>();
-                    services.AddSingleton<IAppStateService, AppStateService>();
                     services.AddTransient<IAiProvider, LlmProvider>(); 
                     services.AddSingleton<Orchestrator>();
+                    services.AddSingleton<AppStateService>();
+                    services.AddSingleton<SettingsViewModel>();
+                    services.AddSingleton<CanvasViewModel>();
 
                 })
                 .Build();

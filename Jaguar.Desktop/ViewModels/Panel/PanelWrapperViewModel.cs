@@ -6,8 +6,8 @@ namespace Jaguar.Desktop.ViewModels.Panel
 {
     public partial class PanelWrapperViewModel : ViewModelBase
     {
-        [ObservableProperty] private ViewModelBase _content;
-        [ObservableProperty] private AppStateService _appState;
+        [ObservableProperty] private ViewModelBase? _content;
+        [ObservableProperty] private AppStateService? _appState;
         
         public PanelWrapperViewModel()
         {

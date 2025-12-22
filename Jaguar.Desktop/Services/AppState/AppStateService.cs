@@ -28,6 +28,7 @@ namespace Jaguar.Desktop.Services.AppState
             if (ActivePanel?.ViewModel.GetType() == vm.GetType())
             {
                 IsPanelOpen = false;
+                ActivePanel = null;
             }
             else
             {

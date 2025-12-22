@@ -8,17 +8,40 @@
              x:Class="Jaguar.Desktop.CustomViews.Panels.PanelWrapper">
     
     <Border
-        Width="250"
+        Tag="{Binding AppState.ActivePanel.Position}"
         MinHeight="400"
         MaxHeight="700"
         Background="DimGray"
         Margin="20"
         CornerRadius="12"
         BoxShadow="0 10 20 0 #40000000"
-        HorizontalAlignment="Left" 
-        VerticalAlignment="Stretch"
+        IsVisible="{Binding AppState.IsPanelOpen}"
+        Width="{Binding AppState.ActivePanel.Size}"
         Padding="30"
     >
-        <ContentControl  Content="{Binding Content}"/>
+        <Border.Styles>
+            <Style Selector="Border[Tag=Left]">
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Stretch"/>
+            </Style>
+            <Style Selector="Border[Tag=Right]">
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="VerticalAlignment" Value="Stretch"/>
+            </Style>
+            <Style Selector="Border[Tag=Top]">
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="VerticalAlignment" Value="Top"/>
+            </Style>
+            <Style Selector="Border[Tag=Bottom]">
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="VerticalAlignment" Value="Bottom"/>
+            </Style>
+        </Border.Styles>
+        <Border.Transitions>
+            <Transitions>
+                <TransformOperationsTransition Property="RenderTransform" Duration="0:0:1"/>
+            </Transitions>
+        </Border.Transitions>
+        <ContentControl  Content="{Binding AppState.CurrentView}"/>
     </Border>
 </UserControl>
