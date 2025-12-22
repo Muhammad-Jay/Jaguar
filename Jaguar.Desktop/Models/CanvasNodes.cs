@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Jaguar.Core.Abstractions;
@@ -14,8 +15,6 @@ public partial class FlowNode : ObservableObject, IDraggableNode
     [ObservableProperty] private double _x;
     [ObservableProperty] private double _y;
 
-    public ObservableCollection<FlowNode> Children { get; set; } = new();
-    public FlowNode? Parent { get; set; }
+    public List<IDraggableNode> Children { get; set; } = new();
+    public IDraggableNode? Parent { get; set; }
 }
-
-public enum NodeType { Orchestrator, Milestone, Agent, Task }

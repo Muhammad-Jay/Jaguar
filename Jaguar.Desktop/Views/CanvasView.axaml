@@ -9,12 +9,19 @@
              x:DataType="viewModels:CanvasViewModel"
              x:Class="Jaguar.Desktop.Views.CanvasView">
     <Grid>
-        <ItemsControl ItemsSource="{Binding CurrentScope.Children}">
+        <ItemsControl 
+            Name="NodeCanvas"
+            DragDrop.AllowDrop="True"
+            ItemsSource="{Binding CurrentScope.Children}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Canvas Background="Transparent" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
+            
+            <!-- <ItemsControl.Clip> -->
+            <!--     <StreamGeometry>M 20,20 H 780 V 400 L 850,550 H 150 L 20,400 Z</StreamGeometry> -->
+            <!-- </ItemsControl.Clip> -->
 
             <ItemsControl.Styles>
                 <Style Selector="ItemsControl > ContentPresenter" x:DataType="models:FlowNode">

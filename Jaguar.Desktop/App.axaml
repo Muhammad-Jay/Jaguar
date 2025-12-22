@@ -23,5 +23,8 @@
         <!--     <Setter Property="RenderTransform" Value="translate(300, 0)"/> -->
         <!-- </Style> -->
         <StyleInclude Source="Styles/GlobalStyles.axaml"/>
+        <Style Selector="ScrollBar /template/ Thumb">
+            <Setter Property="Background" Value="#3300C8FF"/>
+        </Style>
     </Application.Styles>
 </Application>

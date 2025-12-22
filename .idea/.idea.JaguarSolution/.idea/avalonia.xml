@@ -11,7 +11,9 @@
         <entry key="Jaguar.Desktop/CustomViews/MenuItemView/SettingsView.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/CustomViews/Nodes/AgentNodeView.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/CustomViews/Panels/PanelWrapper.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/CustomViews/Panels/WorkflowSidebarPanel.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/CustomViews/Settings.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/CustomViews/Templates/AgentTemplatesView.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/Styles/GlobalStyles.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/ViewModels/Panels/PanelWrapper.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/Views/CanvasView.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />

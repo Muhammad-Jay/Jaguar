@@ -38,10 +38,8 @@ namespace Jaguar.Desktop.Behaviors
             if (AssociatedObject == null || AssociatedObject.Parent is not Visual parent) return;
 
             _isDragging = true;
-            _prevPos = e.GetPosition(parent); // Reference point on the Canvas
-    
-            // This stops the 'ghosting' by telling the OS to ignore other 
-            // elements until the mouse is released.
+            _prevPos = e.GetPosition(parent);
+            
             e.Pointer.Capture(AssociatedObject);
             e.Handled = true;
         }
@@ -49,16 +47,13 @@ namespace Jaguar.Desktop.Behaviors
         private void OnPointerMoved(object? sender, PointerEventArgs e)
         {
             if (!_isDragging || AssociatedObject?.Parent is not Visual parent) return;
-
-            // Get current position relative to the Canvas
+            
             var currentPos = e.GetPosition(parent);
-    
-            // Calculate how far we moved since the last frame
+            
             var diff = currentPos - _prevPos;
 
             if (AssociatedObject.DataContext is IDraggableNode node)
             {
-                // Smoothly increment the position
                 node.X += diff.X;
                 node.Y += diff.Y;
             }
