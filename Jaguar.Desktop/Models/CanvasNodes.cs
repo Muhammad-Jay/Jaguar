@@ -1,10 +1,11 @@
 using System;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Jaguar.Core.Abstractions;
 
 namespace Jaguar.Desktop.Models;
 
-public partial class FlowNode : ObservableObject
+public partial class FlowNode : ObservableObject, IDraggableNode
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public required string Title { get; set; }

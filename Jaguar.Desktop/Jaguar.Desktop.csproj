@@ -19,6 +19,7 @@
         </PackageReference>
         <PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.3.0.6" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+        <PackageReference Include="HelixToolkit" Version="3.1.2" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.1" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.1" />
         <PackageReference Include="ReactiveUI" Version="22.3.1" />

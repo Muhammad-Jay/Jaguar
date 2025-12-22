@@ -3,11 +3,25 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:behaviors="clr-namespace:Jaguar.Desktop.Behaviors"
+             xmlns:models="clr-namespace:Jaguar.Desktop.Models"
              x:Class="Jaguar.Desktop.CustomViews.Nodes.AgentNodeView"
              >
-    <Border Background="White" CornerRadius="10" Padding="10" Width="150" Height="150">
-        <StackPanel>
-            <TextBlock Foreground="Black"> i am a node</TextBlock>
+    <i:Interaction.Behaviors>
+        <behaviors:DraggableBehavior />
+    </i:Interaction.Behaviors>
+
+    <Border Background="White" 
+            x:DataType="models:FlowNode"
+            Width="200"
+            Height="200"
+            CornerRadius="20"
+            DoubleTapped="OnDoubleTapped"> 
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Foreground="Black" Text="{Binding Title}" 
+                       
+                       HorizontalAlignment="Right"/>
         </StackPanel>
     </Border>
 </UserControl>
