@@ -1,5 +1,8 @@
 using System.Collections.ObjectModel;
+using Avalonia.Controls;
+using Avalonia.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Jaguar.Desktop.Models;
 using Jaguar.Desktop.Models.Templates;
 
@@ -14,4 +17,5 @@ public partial class AgentTemplatesViewModel : ViewModelBase
     {
         _availableTemplates = new ObservableCollection<FlowNode>(AgentTemplates.GetAvailableAgents());
     }
+    
 }

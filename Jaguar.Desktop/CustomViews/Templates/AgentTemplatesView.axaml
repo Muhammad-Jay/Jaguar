@@ -16,7 +16,7 @@
                             Background="#1A1A1A" 
                             BorderThickness="1" 
                             CornerRadius="8"
-                            PointerPressed="OnTemplatePointerPressed"
+                            PointerPressed="OnTemplateClicked"
                             Cursor="Hand">
                     
                         <Grid ColumnDefinitions="Auto, *">

@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Jaguar.Desktop.Models;
+using Jaguar.Desktop.ViewModels;
 using Jaguar.Desktop.ViewModels.Templates;
 
 namespace Jaguar.Desktop.CustomViews.Templates;
@@ -27,6 +28,18 @@ public partial class AgentTemplatesView : UserControl
            // 3. Start the drag operation
            // On Zorin OS/Linux, using 'Copy' effect is standard for "dragging out"
            await DragDrop.DoDragDrop(e, dragData, DragDropEffects.Copy);
+       }
+   }
+   
+   
+   private void OnTemplateClicked(object? sender, PointerPressedEventArgs e)
+   {
+       if (sender is Border b && b.DataContext is FlowNode template)
+       {
+           if (DataContext is CanvasViewModel vm)
+           {
+             
+           }
        }
    }
 }

@@ -8,9 +8,9 @@
              x:DataType="viewModels:WorkflowViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Jaguar.Desktop.Views.WorkflowView">
-    <Grid IsHitTestVisible="True">
+    <Grid>
             <ContentControl>
-                <views:CanvasView></views:CanvasView>
+                <views:CanvasView/>
             </ContentControl>
         
       

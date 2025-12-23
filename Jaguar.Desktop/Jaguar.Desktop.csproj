@@ -9,6 +9,7 @@
 
     <ItemGroup>
         <PackageReference Include="Avalonia" Version="11.3.9" />
+        <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="11.3.0" />
         <PackageReference Include="Avalonia.Desktop" Version="11.3.9" />
         <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.9" />
         <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.9" />
@@ -23,6 +24,8 @@
         <PackageReference Include="LiteDB" Version="5.0.21" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.1" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.1" />
+        <PackageReference Include="Nodify.Avalonia" Version="1.0.2" />
+        <PackageReference Include="NodifyM.Avalonia" Version="1.1.6" />
         <PackageReference Include="ReactiveUI" Version="22.3.1" />
     </ItemGroup>
 

@@ -1,58 +1,28 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
-             xmlns:nodes="clr-namespace:Jaguar.Desktop.CustomViews.Nodes"
              xmlns:models="clr-namespace:Jaguar.Desktop.Models"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:avalonia="clr-namespace:Nodify.Avalonia;assembly=Nodify.Avalonia"
              x:DataType="viewModels:CanvasViewModel"
              x:Class="Jaguar.Desktop.Views.CanvasView">
+   
     <Grid>
-        <ItemsControl 
-            Name="NodeCanvas"
-            DragDrop.AllowDrop="True"
-            ItemsSource="{Binding CurrentScope.Children}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Canvas Background="Transparent" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
+        <avalonia:NodifyEditor ItemsSource="{Binding Nodes}"
+                               Connections="{Binding Connections}"
+                               Width="1000"
+                               Height="300"
+                               PendingConnection="{Binding PendingConnection, Mode=TwoWay}">
+            <!-- <avalonia:NodifyEditor.DataContext> -->
+            <!--     <viewModels:CanvasViewModel /> -->
+            <!-- </avalonia:NodifyEditor.DataContext> -->
             
-            <!-- <ItemsControl.Clip> -->
-            <!--     <StreamGeometry>M 20,20 H 780 V 400 L 850,550 H 150 L 20,400 Z</StreamGeometry> -->
-            <!-- </ItemsControl.Clip> -->
-
-            <ItemsControl.Styles>
-                <Style Selector="ItemsControl > ContentPresenter" x:DataType="models:FlowNode">
-                    <Setter Property="Canvas.Left" Value="{Binding X, Mode=TwoWay}" />
-                    <Setter Property="Canvas.Top" Value="{Binding Y, Mode=TwoWay}" />
-                    <!-- <Setter Property="Transitions" Value="{x:Null}" /> -->
-                </Style>
-                <Style Selector="ItemsControl > ContentPresenter:pointerover">
-                    <Setter Property="ZIndex" Value="99"/>
-                </Style>
-            </ItemsControl.Styles>
-
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <nodes:AgentNodeView />
+            <avalonia:NodifyEditor.ItemTemplate>
+                <DataTemplate DataType="models:FlowNode">
+                    <Border Width="150" Height="100" Background="White" CornerRadius="10">
+                   
+                    </Border>
                 </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-
-        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20">
-            <Button Content=" Back to Parent" 
-                    Command="{Binding NavigateUp}"
-                    IsVisible="{Binding CurrentScope.Parent, Converter={x:Static ObjectConverters.IsNotNull}}"
-                    Background="#33000000"
-                    Padding="10,5"/>
-            
-            <TextBlock Text="{Binding CurrentScope.Title}" 
-                       FontSize="18" 
-                       FontWeight="Bold" 
-                       Foreground="Gray" 
-                       Margin="0,10,0,0"/>
-        </StackPanel>
+            </avalonia:NodifyEditor.ItemTemplate>
+        </avalonia:NodifyEditor>
     </Grid>
 </UserControl>
