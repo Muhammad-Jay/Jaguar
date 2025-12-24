@@ -3,9 +3,17 @@
              x:Class="Jaguar.Desktop.App"
              RequestedThemeVariant="Dark">
     
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="avares://Nodify/Theme.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+    
     <Application.Styles>
         <FluentTheme />
-        <StyleInclude Source="avares://Nodify/Themes/Dark.axaml"/>
+        <!-- <StyleInclude Source="avares://Nodify/Theme.axaml"/> -->
         <StyleInclude Source="Styles/GlobalStyles.axaml"/>
         <Style Selector="ScrollBar /template/ Thumb">
             <Setter Property="Background" Value="#3300C8FF"/>

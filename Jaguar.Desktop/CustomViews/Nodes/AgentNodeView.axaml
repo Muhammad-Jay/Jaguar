@@ -4,13 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:behaviors="clr-namespace:Jaguar.Desktop.Behaviors"
              xmlns:models="clr-namespace:Jaguar.Desktop.Models"
              x:Class="Jaguar.Desktop.CustomViews.Nodes.AgentNodeView"
              >
-    <i:Interaction.Behaviors>
-        <behaviors:DraggableBehavior />
-    </i:Interaction.Behaviors>
+    <!-- <i:Interaction.Behaviors> -->
+    <!--     <behaviors:DraggableBehavior /> -->
+    <!-- </i:Interaction.Behaviors> -->
 
     <Border Background="#202020" 
             x:DataType="models:FlowNode"

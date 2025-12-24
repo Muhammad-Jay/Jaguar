@@ -30,7 +30,7 @@ public partial class AgentNodeView : UserControl
                     var canvasVM = Program.AppHost.Services.GetRequiredService<CanvasViewModel>();
                 
                     // 3. Trigger the navigation
-                    canvasVM.NavigateDown(node);
+                    // canvasVM.NavigateDown(node);
                 }
             }
         }
