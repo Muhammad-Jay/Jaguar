@@ -8,20 +8,18 @@ namespace Jaguar.Core.Services.Storage
     {
         private readonly string _dbPath = "JaguarData.db";
 
-        public void SaveNodeState(IDraggableNode node)
+        public void SaveNodeState(DraggableNode node)
         {
-            // The 'using' statement ensures the file is closed after writing
             using var db = new LiteDatabase(_dbPath);
-            var col = db.GetCollection<IDraggableNode>("nodes");
+            var col = db.GetCollection<DraggableNode>("nodes");
             
-            // Upsert will update if the ID exists, or insert if it's new
             col.Upsert(node);
         }
 
-        public IEnumerable<IDraggableNode> GetAllNodes()
+        public IEnumerable<DraggableNode> GetAllNodes()
         {
             using var db = new LiteDatabase(_dbPath);
-            return db.GetCollection<IDraggableNode>("nodes").FindAll().ToList();
+            return db.GetCollection<DraggableNode>("nodes").FindAll().ToList();
         }
     }
 }

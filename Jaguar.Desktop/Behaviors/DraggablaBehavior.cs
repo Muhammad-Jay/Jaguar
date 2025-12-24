@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Xaml.Interactivity;
 using Jaguar.Core.Abstractions;
+using Jaguar.Desktop.Models;
 
 namespace Jaguar.Desktop.Behaviors
 {
@@ -52,11 +53,11 @@ namespace Jaguar.Desktop.Behaviors
             
             var diff = currentPos - _prevPos;
 
-            // if (AssociatedObject.DataContext is IDraggableNode node)
-            // {
-            //     node.X += diff.X;
-            //     node.Y += diff.Y;
-            // }
+            if (AssociatedObject.DataContext is FlowNode node)
+            {
+                node.X += diff.X;
+                node.Y += diff.Y;
+            }
 
             _prevPos = currentPos;
         }

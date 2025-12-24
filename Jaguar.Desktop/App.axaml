@@ -5,10 +5,7 @@
     
     <Application.Styles>
         <FluentTheme />
-        
-        <!-- <Style Selector="Border.SlidingPanel.Closed"> -->
-        <!--     <Setter Property="RenderTransform" Value="translate(300, 0)"/> -->
-        <!-- </Style> -->
+        <StyleInclude Source="avares://Nodify/Themes/Dark.axaml"/>
         <StyleInclude Source="Styles/GlobalStyles.axaml"/>
         <Style Selector="ScrollBar /template/ Thumb">
             <Setter Property="Background" Value="#3300C8FF"/>

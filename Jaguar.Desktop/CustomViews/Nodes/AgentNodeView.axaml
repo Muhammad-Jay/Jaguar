@@ -14,24 +14,13 @@
 
     <Border Background="#202020" 
             x:DataType="models:FlowNode"
+            BorderThickness="2"
+            BorderBrush="DarkCyan"
             Width="150"
             Height="150"
             CornerRadius="75"
             DoubleTapped="OnDoubleTapped">
         <Panel>
-            <!-- <Path Fill="#202020"  -->
-            <!--       Stroke="#00C8FF"  -->
-            <!--       StrokeThickness="2" -->
-            <!--       Stretch="Fill"  -->
-            <!--       Data="M51.1216 3.54541C57.0002 0.151387 64.243 0.151387 70.1216 3.54541L110.744 26.9985C116.622 30.3926 120.244 36.6648 120.244 43.4526V90.3589C120.244 97.1468 116.622 103.419 110.744 106.813L70.1216 130.266C64.243 133.66 57.0002 133.66 51.1216 130.266L10.4995 106.813C4.62112 103.419 0.999558 97.1468 0.999512 90.3589V43.4526C0.999558 36.6648 4.62112 30.3926 10.4995 26.9985L51.1216 3.54541Z" -->
-            <!-- -->
-            <!-- > -->
-            <!--           -->
-            <!--     ~1~ <Path.Effect> @1@ -->
-            <!--     ~1~     <DropShadowEffect Color="#00C8FF" BlurRadius="15" Opacity="0.4"/> @1@ -->
-            <!--     ~1~ </Path.Effect> @1@ -->
-            <!-- -->
-            <!-- </Path> -->
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock TextWrapping="Wrap" FontSize="10" Text="{Binding Title}"></TextBlock>
             </StackPanel>

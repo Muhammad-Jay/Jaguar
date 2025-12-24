@@ -6,6 +6,7 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Jaguar.Desktop.Models;
 using Jaguar.Desktop.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Jaguar.Desktop.CustomViews.Nodes;
 
@@ -18,23 +19,20 @@ public partial class AgentNodeView : UserControl
     
     public void OnDoubleTapped(object sender, TappedEventArgs e)
     {
-        if (DataContext is FlowNode node && node.Children.Any())
+        if (this.DataContext is FlowNode node)
         {
-            // Reach up to the CanvasViewModel to trigger navigation
-            // Note: You can also use a Message Bus (CommunityToolkit.Mvvm.Messaging)
-            var topLevel = this.VisualRoot as Window;
-            if (topLevel?.DataContext is WorkflowViewModel mainVM)
+            // 1. Check if the node has children
+            if (node.Children.Any())
             {
-                // mainVM.CanvasViewModel.NavigateDown(node);
+                if (Program.AppHost != null)
+                {
+                    // 2. Get your ViewModel from the Service Provider
+                    var canvasVM = Program.AppHost.Services.GetRequiredService<CanvasViewModel>();
+                
+                    // 3. Trigger the navigation
+                    canvasVM.NavigateDown(node);
+                }
             }
         }
     }
-
-    // private void OnDoubleTapped(object? sender, RoutedEventArgs e)
-    // {
-    //     if (DataContext is FlowNode node)
-    //     {
-    //         
-    //     }
-    // }
 }

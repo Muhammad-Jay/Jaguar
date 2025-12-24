@@ -7,11 +7,11 @@
              x:DataType="viewModels:AgentTemplatesViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Jaguar.Desktop.CustomViews.Templates.AgentTemplatesView">
-    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+    <ScrollViewer Margin="25" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
         <ItemsControl ItemsSource="{Binding AvailableTemplates}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate x:DataType="models:FlowNode">
-                    <Border Margin="20" 
+                    <Border Margin="7" 
                             Padding="12" 
                             Background="#1A1A1A" 
                             BorderThickness="1" 

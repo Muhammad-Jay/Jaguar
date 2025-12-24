@@ -1,6 +1,5 @@
 using System;
-using System.Collections.Generic;
-using Avalonia;
+using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Jaguar.Core.Abstractions;
 
@@ -12,15 +11,11 @@ public partial class FlowNode : ObservableObject
     public required string Title { get; set; }
     public NodeType Type { get; set; }
 
-    [ObservableProperty] private Point _location;
+    [ObservableProperty] private double _x;
+    [ObservableProperty] private double _y;
 
-    public List<FlowNode> Children { get; set; } = new();
+    public ObservableCollection<FlowNode> Children { get; set; } = new();
     public FlowNode? Parent { get; set; }
-    
-    [ObservableProperty] private Point _input;
-
-    [ObservableProperty] private Point _output;
-    
-    [ObservableProperty] private string _status = "Idle"; // "Working", "Completed", "Failed"
-    public string Description { get; set; }
 }
+
+public enum NodeType { Orchestrator, Milestone, Agent, Task }

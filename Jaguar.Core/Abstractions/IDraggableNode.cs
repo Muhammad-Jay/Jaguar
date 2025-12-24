@@ -1,24 +1,25 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Jaguar.Core.Abstractions;
 
-public interface IDraggableNode
+public partial class DraggableNode: ObservableObject
 {
     string Id { get; }
     string Title { get; set; }
-    NodeType Type { get; }
+    INodeType Type { get; }
     
     // Spatial coordinates for the Cyberpunk Canvas
-    Point Location { get; set; }
+   [ObservableProperty] private double _x;
+   [ObservableProperty] private double _y;
 
-    // Hierarchy management
-    IDraggableNode? Parent { get; set; }
-    
-    List<IDraggableNode> Children { get; }
+   public ObservableCollection<DraggableNode> Children { get; set; } = new();
+   public DraggableNode? Parent { get; set; }
 }
 
-public enum NodeType
+public enum INodeType
 {
     Orchestrator, Milestone, Agent, Task   
 }
