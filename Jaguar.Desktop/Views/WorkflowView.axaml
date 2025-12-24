@@ -8,12 +8,53 @@
              x:DataType="viewModels:WorkflowViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Jaguar.Desktop.Views.WorkflowView">
-    <Grid>
-            <ContentControl>
-                <views:CanvasView ZIndex="100"/>
-            </ContentControl>
-        
-      
-        <panels:PanelWrapper/>
+    <Design.DataContext>
+        <viewModels:WorkflowViewModel/>
+    </Design.DataContext>
+    
+    <Grid ColumnDefinitions="*, Auto" Margin="0,0,0, 0">
+       
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                <GradientStop Color="#4B4B4B" Offset="0.0" />
+                <GradientStop Color="#8D8D8D" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+   
+        <Border Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,0,0"
+                Width="15" Height="245" Background="#2A2A2A" CornerRadius="10"
+                ZIndex="10"/>
+   
+        <Grid Grid.Column="0" Margin="7">
+            <Border HorizontalAlignment="Center" VerticalAlignment="Top"
+                    Width="500" Height="20" Background="#2A2A2A" CornerRadius="10" Margin="0,-5,0,0" />
+   
+            <Panel>
+                <Path 
+                      StrokeThickness="0"
+                      Stretch="Fill"
+                      Data="{Binding LayoutPath}"
+                      >
+                    <Path.Fill>
+                        <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                            <GradientStop Color="#101010" Offset="0.0" />
+                            <GradientStop Color="#0B0B0B" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Path.Fill>
+                </Path>
+                
+                <!-- <Panel.Clip> -->
+                <!--     <GeometryGroup> -->
+                <!--         <PathGeometry Figures="{Binding LayoutPath}" /> -->
+                <!--     </GeometryGroup> -->
+                <!-- </Panel.Clip> -->
+   
+                <ContentControl>
+                    <views:CanvasView/>
+                </ContentControl>
+            </Panel>
+        </Grid>
+   
+        <panels:WorkflowSidebarPanel Grid.Column="1"/>
     </Grid>
 </UserControl>

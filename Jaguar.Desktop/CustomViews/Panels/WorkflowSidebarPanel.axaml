@@ -3,6 +3,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:templates="clr-namespace:Jaguar.Desktop.CustomViews.Templates"
+             xmlns:manuBars="clr-namespace:Jaguar.Desktop.CustomViews.ManuBars"
+             xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels.Panel"
+             x:DataType="viewModels:WorkflowSidebarPanelViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Jaguar.Desktop.CustomViews.Panels.WorkflowSidebarPanel">
     <Panel Width="300" VerticalAlignment="Stretch" Margin="0, 7, 7, 7">
@@ -16,6 +19,11 @@
                     <DropShadowEffect Color="#2A2A2A" BlurRadius="15" Opacity="0.4"/>
                 </Path.Effect>
             </Path>
-        <templates:AgentTemplatesView/>
+        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" RowDefinitions="Auto, *">
+            <manuBars:PanelTabMenuView Grid.Row="0"/>
+            <Panel Grid.Row="1">
+                <ContentControl Content="{Binding Content}"/>
+            </Panel>
+        </Grid>
     </Panel>
 </UserControl>

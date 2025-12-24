@@ -1,0 +1,44 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels.Menus"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:models="clr-namespace:Jaguar.Desktop.Models"
+             x:DataType="viewModels:PanelTabMenuViewModel"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Jaguar.Desktop.CustomViews.ManuBars.PanelTabMenuView">
+    
+    <Border Background="Black" CornerRadius="10" Padding="5">
+       <ScrollViewer>
+           <ItemsControl ItemsSource="{Binding ItemList}">
+               <ItemsControl.ItemsPanel>
+                  <ItemsPanelTemplate>
+                      <StackPanel Orientation="Horizontal" Spacing="7"/>
+                  </ItemsPanelTemplate>
+               </ItemsControl.ItemsPanel>
+               
+               <ItemsControl.ItemTemplate>
+                   <DataTemplate x:DataType="models:MenuItems">
+                       <Button
+                           Background="DimGray"
+                           CornerRadius="5"
+                           Padding="2"
+                           Width="20"
+                           Height="20"
+                           VerticalContentAlignment="Center"
+                           HorizontalContentAlignment="Center"
+                           CommandParameter="{Binding}"
+                           Command="{Binding $parent[ItemsControl].((viewModels:PanelTabMenuViewModel)DataContext).SelectMenuItemCommand}"
+                           >
+                           <avalonia:MaterialIcon Kind="{Binding Icon}" 
+                                                       Width="15" 
+                                                       Height="15" 
+                                                       Foreground="DarkCyan" />
+                       </Button>
+                   </DataTemplate>
+               </ItemsControl.ItemTemplate>
+           </ItemsControl>
+       </ScrollViewer>
+   </Border>
+</UserControl>

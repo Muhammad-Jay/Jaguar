@@ -6,6 +6,7 @@ using Jaguar.Desktop.Models;
 using Jaguar.Desktop.Models.Ui;
 using Jaguar.Desktop.Services.AppState;
 using Jaguar.Desktop.ViewModels.MenuItemViewModel;
+using Material.Icons;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Jaguar.Desktop.ViewModels.Menus
@@ -24,7 +25,7 @@ namespace Jaguar.Desktop.ViewModels.Menus
                 
                 MenuItems = new ObservableCollection<MenuItems>
                 {
-                    new MenuItems("S", typeof(SettingsViewModel), Position.Left), // Explorer
+                    new MenuItems("S",  MaterialIconKind.Settings, typeof(SettingsViewModel), Position.Left), // Explorer
                     // new MenuItems("B", "Agents", "Left"), // Agents
                     // new MenuItems("C️", "Workflows", "Left"), // Workflows
                     // new MenuItems("D", "Knowledge", "Left"), // Knowledge
@@ -39,7 +40,7 @@ namespace Jaguar.Desktop.ViewModels.Menus
             if (item == null) throw new ArgumentNullException(nameof(item));
             if (AppState != null && Program.AppHost != null)
             {
-                var vm = Program.AppHost?.Services.GetRequiredService(item.viewModel);
+                var vm = Program.AppHost?.Services.GetRequiredService(item.ViewModel);
 
                 if (vm != null)
                 {

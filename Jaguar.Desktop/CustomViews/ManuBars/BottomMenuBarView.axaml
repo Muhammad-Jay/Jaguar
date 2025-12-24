@@ -23,7 +23,7 @@
                     <Button 
                         HorizontalAlignment="Center" 
                         VerticalAlignment="Center" 
-                        Content="{Binding name}"
+                        Content="{Binding Name}"
                         Classes="MenuBtn" 
                         FontSize="10" 
                         FontWeight="Regular"

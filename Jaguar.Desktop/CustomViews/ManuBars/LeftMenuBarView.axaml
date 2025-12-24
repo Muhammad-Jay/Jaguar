@@ -24,7 +24,7 @@
                         VerticalAlignment="Center" 
                         Classes="MenuBtn" 
                         CommandParameter="{Binding}"
-                        Content="{Binding name}"
+                        Content="{Binding Name}"
                         FontSize="10" 
                         FontWeight="Regular"
                         Foreground="DarkGray"

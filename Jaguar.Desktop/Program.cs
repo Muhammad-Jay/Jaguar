@@ -6,6 +6,7 @@ using Jaguar.Desktop.Abstractions;
 using Jaguar.Desktop.Services.AppState;
 using Jaguar.Desktop.ViewModels;
 using Jaguar.Desktop.ViewModels.MenuItemViewModel;
+using Jaguar.Desktop.ViewModels.Panel;
 using Jaguar.Desktop.Views;
 using Jaguar.LLM.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,6 +33,7 @@ class Program
                         context.Configuration.GetSection("GeminiConfig"));
                     services.AddTransient<MainWindowViewModel>(); 
                     services.AddTransient<WorkflowViewModel>();
+                    services.AddSingleton<WorkflowSidebarPanelViewModel>();
                     services.AddSingleton<MainWindow>();
                     services.AddTransient<IAiProvider, LlmProvider>(); 
                     services.AddSingleton<Orchestrator>();

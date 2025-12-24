@@ -15,6 +15,7 @@
         <FluentTheme />
         <!-- <StyleInclude Source="avares://Nodify/Theme.axaml"/> -->
         <StyleInclude Source="Styles/GlobalStyles.axaml"/>
+        <StyleInclude Source="avares://Material.Icons.Avalonia/App.xaml" />
         <Style Selector="ScrollBar /template/ Thumb">
             <Setter Property="Background" Value="#3300C8FF"/>
         </Style>

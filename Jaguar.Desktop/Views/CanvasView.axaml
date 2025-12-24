@@ -28,6 +28,15 @@
                     </VisualBrush.Visual>
                 </VisualBrush>
             </nodify:NodifyEditor.Background>
+            
+            <nodify:NodifyEditor.ConnectionTemplate>
+                <DataTemplate x:DataType="models:ConnectionViewModel">
+                    <nodify:CircuitConnection Source="{Binding Source}" 
+                                              Target="{Binding Target}"
+                                              Stroke="DarkCyan"
+                                              StrokeThickness="2" />
+                </DataTemplate>
+            </nodify:NodifyEditor.ConnectionTemplate>
         
             <nodify:NodifyEditor.ItemTemplate>
                 <DataTemplate>
