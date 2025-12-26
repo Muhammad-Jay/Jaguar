@@ -1,5 +1,6 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              x:Class="Jaguar.Desktop.App"
              RequestedThemeVariant="Dark">
     
@@ -9,15 +10,33 @@
                 <ResourceInclude Source="avares://Nodify/Theme.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
+        
+        <SolidColorBrush x:Key="CanvasBg" Color="Black" />
+        <SolidColorBrush x:Key="MainBg" Color="#1E1F20"/>
+        <SolidColorBrush x:Key="GeminiSurface" Color="#1E1F20" />
+        <SolidColorBrush x:Key="GeminiBorder" Color="#444746" />
+        <SolidColorBrush x:Key="GeminiAccent" Color="#8AB4F8" />
+        <SolidColorBrush x:Key="GeminiTextPrimary" Color="#E3E3E3" />
+        <SolidColorBrush x:Key="GeminiTextSecondary" Color="#C4C7C5" />
+    
+        <LinearGradientBrush x:Key="GeminiSpark" StartPoint="0%,50%" EndPoint="100%,50%">
+            <GradientStop Offset="0.0" Color="#4285F4" />
+            <GradientStop Offset="0.33" Color="#9B72CB" />
+            <GradientStop Offset="0.66" Color="#D96570" />
+            <GradientStop Offset="1.0" Color="#F4AF5F" />
+        </LinearGradientBrush>
     </Application.Resources>
     
     <Application.Styles>
+    
+        <avalonia:MaterialIconStyles />
         <FluentTheme />
-        <!-- <StyleInclude Source="avares://Nodify/Theme.axaml"/> -->
+      
         <StyleInclude Source="Styles/GlobalStyles.axaml"/>
-        <StyleInclude Source="avares://Material.Icons.Avalonia/App.xaml" />
+        
         <Style Selector="ScrollBar /template/ Thumb">
             <Setter Property="Background" Value="#3300C8FF"/>
         </Style>
+        
     </Application.Styles>
 </Application>

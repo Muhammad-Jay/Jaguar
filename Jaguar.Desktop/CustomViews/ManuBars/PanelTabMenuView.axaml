@@ -2,39 +2,51 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels.Menus"
              xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
-             xmlns:models="clr-namespace:Jaguar.Desktop.Models"
-             x:DataType="viewModels:PanelTabMenuViewModel"
+             xmlns:panel="clr-namespace:Jaguar.Desktop.ViewModels.Panel"
+             x:DataType="panel:WorkflowSidebarPanelViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Jaguar.Desktop.CustomViews.ManuBars.PanelTabMenuView">
     
-    <Border Background="Black" CornerRadius="10" Padding="5">
-       <ScrollViewer>
-           <ItemsControl ItemsSource="{Binding ItemList}">
+    <Border Background="Black" CornerRadius="10" Padding="3">
+       <ScrollViewer Background="Transparent" Height="30">
+           <ItemsControl
+               ItemsSource="{Binding   ItemList}"
+               ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+               ScrollViewer.VerticalScrollBarVisibility="Disabled"
+               >
                <ItemsControl.ItemsPanel>
                   <ItemsPanelTemplate>
-                      <StackPanel Orientation="Horizontal" Spacing="7"/>
+                      <StackPanel Orientation="Horizontal"  Background="Transparent" Spacing="10"/>
                   </ItemsPanelTemplate>
                </ItemsControl.ItemsPanel>
                
                <ItemsControl.ItemTemplate>
-                   <DataTemplate x:DataType="models:MenuItems">
+                   <DataTemplate>
                        <Button
-                           Background="DimGray"
+                           Background="#2A2A2A"
                            CornerRadius="5"
                            Padding="2"
-                           Width="20"
+                           Width="30"
                            Height="20"
+                           Margin="2, 2, 0, 2"
                            VerticalContentAlignment="Center"
                            HorizontalContentAlignment="Center"
                            CommandParameter="{Binding}"
-                           Command="{Binding $parent[ItemsControl].((viewModels:PanelTabMenuViewModel)DataContext).SelectMenuItemCommand}"
+                           Command="{Binding $parent[ItemsControl].((panel:WorkflowSidebarPanelViewModel)DataContext).SelectMenuItemCommand}"
                            >
-                           <avalonia:MaterialIcon Kind="{Binding Icon}" 
-                                                       Width="15" 
-                                                       Height="15" 
-                                                       Foreground="DarkCyan" />
+                          <StackPanel 
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Center" 
+                              Orientation="Horizontal">
+                              
+                              <avalonia:MaterialIcon Kind="{Binding Icon}" 
+                                                     Width="16" 
+                                                     Height="16" 
+                                                     Foreground="White" />
+                                                     
+                            
+                          </StackPanel>
                        </Button>
                    </DataTemplate>
                </ItemsControl.ItemTemplate>

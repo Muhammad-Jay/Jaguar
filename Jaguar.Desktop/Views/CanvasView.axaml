@@ -4,6 +4,8 @@
              xmlns:vm="clr-namespace:Jaguar.Desktop.ViewModels"
              xmlns:nodes="clr-namespace:Jaguar.Desktop.CustomViews.Nodes"
              xmlns:models="clr-namespace:Jaguar.Desktop.Models"
+             xmlns:services="clr-namespace:Jaguar.Desktop.Services"
+             xmlns:agents="clr-namespace:Jaguar.Desktop.CustomViews.Nodes.Agents"
              x:DataType="vm:CanvasViewModel"
              x:Class="Jaguar.Desktop.Views.CanvasView">
     
@@ -11,23 +13,46 @@
         <vm:CanvasViewModel />
     </UserControl.DataContext>
     
+    <UserControl.Resources>
+        <DataTemplate x:Key="RegularAgentTemplate" DataType="models:FlowNode">
+            <agents:RegularAgentNodeView/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="OrchestratorTemplate" DataType="models:FlowNode">
+            <agents:OrchestratorNodeView/>
+        </DataTemplate>
+        
+        <DataTemplate x:Key="PmTemplate" DataType="models:FlowNode">
+            <agents:PmNodeView/>
+        </DataTemplate>
+        
+        <services:NodeTemplateSelector 
+            x:Key="MyNodeSelector" 
+            RegularAgentLayout="{StaticResource RegularAgentTemplate}"
+            OrchestratorLayout="{StaticResource OrchestratorTemplate}"
+            PmLayout="{StaticResource PmTemplate}"
+        />
+    </UserControl.Resources>
+    
     <Grid Background="Transparent">
-        <nodify:NodifyEditor ItemsSource="{Binding Nodes}"
-                             GridCellSize="20">
+        <nodify:NodifyEditor 
+            Background="Transparent"
+            ItemsSource="{Binding Nodes}"
+            Template="{StaticResource MyNodeSelector}"
+            GridCellSize="20">
+            
+            <nodify:NodifyEditor.SelectionRectangleStyle>
+                <ControlTheme TargetType="Rectangle">
+                    <Setter Property="Stroke" Value="Transparent" />
+                    <Setter Property="Fill" Value="Transparent" />
+                </ControlTheme>
+            </nodify:NodifyEditor.SelectionRectangleStyle>
         
             <nodify:NodifyEditor.Styles>
                 <Style Selector="nodify|ItemContainer" x:DataType="models:FlowNode">
                     <Setter Property="Location" Value="{Binding Location, Mode=TwoWay}" />
                 </Style>
             </nodify:NodifyEditor.Styles>
-            
-            <nodify:NodifyEditor.Background>
-                <VisualBrush TileMode="Tile" SourceRect="0,0,30,30" DestinationRect="0,0,30,30">
-                    <VisualBrush.Visual>
-                        <Path Data="M 0 0 L 0 30 M 0 0 L 30 0" Stroke="#202020" StrokeThickness="0.5" />
-                    </VisualBrush.Visual>
-                </VisualBrush>
-            </nodify:NodifyEditor.Background>
             
             <nodify:NodifyEditor.ConnectionTemplate>
                 <DataTemplate x:DataType="models:ConnectionViewModel">
@@ -38,11 +63,11 @@
                 </DataTemplate>
             </nodify:NodifyEditor.ConnectionTemplate>
         
-            <nodify:NodifyEditor.ItemTemplate>
-                <DataTemplate>
-                    <nodes:AgentNodeView/>
-                </DataTemplate>
-            </nodify:NodifyEditor.ItemTemplate>
+            <!-- <nodify:NodifyEditor.ItemTemplate> -->
+            <!--     <DataTemplate> -->
+            <!--         <nodes:AgentNodeView/> -->
+            <!--     </DataTemplate> -->
+            <!-- </nodify:NodifyEditor.ItemTemplate> -->
         
         </nodify:NodifyEditor>
     </Grid>

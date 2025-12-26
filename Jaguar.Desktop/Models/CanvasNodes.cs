@@ -13,6 +13,8 @@ public partial class FlowNode : ObservableObject
     public required string Title { get; set; }
     public NodeType Type { get; set; }
 
+    public string Description { get; set; } = string.Empty;
+
     [ObservableProperty] private Point _location;
 
     public ObservableCollection<ConnectorViewModel> Input { get; } = new();
@@ -21,4 +23,4 @@ public partial class FlowNode : ObservableObject
     public FlowNode? Parent { get; set; }
 }
 
-public enum NodeType { Orchestrator, Milestone, Agent, Task }
+public enum NodeType { Orchestrator, Milestone, Agent, Task, Pm }

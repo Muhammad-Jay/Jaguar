@@ -1,6 +1,5 @@
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
+using Jaguar.Desktop.ViewModels.Panel;
 
 namespace Jaguar.Desktop.CustomViews.Panels;
 
@@ -9,5 +8,6 @@ public partial class WorkflowSidebarPanel : UserControl
     public WorkflowSidebarPanel()
     {
         InitializeComponent();
+        DataContext = new WorkflowSidebarPanelViewModel();
     }
 }
