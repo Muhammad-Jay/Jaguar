@@ -20,13 +20,32 @@ public partial class CanvasViewModel : ViewModelBase
         Nodes.Add(new FlowNode 
         { 
             Title = "Node 1", 
-            Location = new Point(100, 100) 
+            Location = new Point(100, 100),
+            Type = NodeType.Pm
         });
            
         Nodes.Add(new FlowNode 
         { 
             Title = "Node 2", 
-            Location = new Point(400, 200) 
+            Location = new Point(400, 200),
+            Type = NodeType.Agent
+        });
+        
+        Nodes.Add(new FlowNode 
+        { 
+            Title = "Node 3", 
+            Location = new Point(100, 100),
+            Type = NodeType.Orchestrator
+        });
+    }
+
+    public void AddNode(FlowNode node)
+    {
+        Nodes.Add(new FlowNode 
+        { 
+            Title = node.Title, 
+            Location = new Point(100, 100),
+            Type = node.Type
         });
     }
         

@@ -1,0 +1,79 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+   <ControlTemplate x:Key="GlassPanelTemplate" TargetType="ContentControl">
+       <Panel>
+           <Border CornerRadius="16" BoxShadow="0 10 40 0 #60000000" />
+
+           <Border CornerRadius="16" BorderThickness="1.5" BorderBrush="#40FFFFFF">
+               <Border.Background>
+                   <VisualBrush Stretch="None" TileMode="Tile" SourceRect="0,0,100,100" DestinationRect="0,0,100,100">
+                       <VisualBrush.Visual>
+                           <Canvas Width="100" Height="100" Background="#10FFFFFF">
+                               <Path Data="M0,0 L1,1 M2,2 L3,3" Stroke="#20FFFFFF" StrokeThickness="1" />
+                           </Canvas>
+                       </VisualBrush.Visual>
+                   </VisualBrush>
+               </Border.Background>
+           </Border>
+
+           <Border CornerRadius="16" Padding="{TemplateBinding Padding}">
+               <Border.Background>
+                   <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                       <GradientStop Offset="0" Color="#40171717" />
+                       <GradientStop Offset="0.5" Color="#20262626" />
+                       <GradientStop Offset="1" Color="#50171717" />
+                   </LinearGradientBrush>
+               </Border.Background>
+            
+               <ContentPresenter Content="{TemplateBinding Content}"
+                                 ContentTemplate="{TemplateBinding ContentTemplate}"/>
+           </Border>
+       </Panel>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="GlassPanelDarkTemplate" TargetType="ContentControl">
+        <Panel>
+            <ExperimentalAcrylicBorder CornerRadius="16">
+                <ExperimentalAcrylicBorder.Material>
+                    <ExperimentalAcrylicMaterial 
+                        BackgroundSource="Digger"
+                        TintColor="#000000"
+                        TintOpacity="0.85"
+                        MaterialOpacity="0.6"/>
+                </ExperimentalAcrylicBorder.Material>
+            </ExperimentalAcrylicBorder>
+
+            <Border CornerRadius="16"
+                    BorderThickness="1"
+                    BorderBrush="#33FFFFFF"
+                    BoxShadow="0 8 32 0 #66000000"
+                    Padding="{TemplateBinding Padding}">
+                <ContentPresenter Content="{TemplateBinding Content}"
+                                  ContentTemplate="{TemplateBinding ContentTemplate}"/>
+            </Border>
+        </Panel>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="GlassPanelBlueTemplate" TargetType="ContentControl">
+        <Panel>
+            <ExperimentalAcrylicBorder CornerRadius="16">
+                <ExperimentalAcrylicBorder.Material>
+                    <ExperimentalAcrylicMaterial 
+                        BackgroundSource="Digger"
+                        TintColor="#3498db"
+                        TintOpacity="0.4"
+                        MaterialOpacity="0.7"/>
+                </ExperimentalAcrylicBorder.Material>
+            </ExperimentalAcrylicBorder>
+
+            <Border CornerRadius="16"
+                    BorderThickness="1"
+                    BorderBrush="#605dade2"
+                    BoxShadow="0 8 32 0 #40000000"
+                    Padding="{TemplateBinding Padding}">
+                <ContentPresenter Content="{TemplateBinding Content}"
+                                  ContentTemplate="{TemplateBinding ContentTemplate}"/>
+            </Border>
+        </Panel>
+    </ControlTemplate>
+</ResourceDictionary>

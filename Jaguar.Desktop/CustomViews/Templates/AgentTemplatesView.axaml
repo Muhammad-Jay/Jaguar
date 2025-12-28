@@ -6,37 +6,52 @@
              xmlns:models="clr-namespace:Jaguar.Desktop.Models"
              x:DataType="viewModels:AgentTemplatesViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Jaguar.Desktop.CustomViews.Templates.AgentTemplatesView">
+             x:Class="Jaguar.Desktop.CustomViews.Templates.AgentTemplatesView"
+             x:Name="Root">
     <ScrollViewer CornerRadius="10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
         <ItemsControl ItemsSource="{Binding AvailableTemplates}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Background="Transparent" Spacing="8"/>
+                    <StackPanel Background="Transparent" Spacing="7"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             
             <ItemsControl.ItemTemplate>
                 <DataTemplate x:DataType="models:FlowNode">
-                    <Border Margin="7" 
-                            Padding="7" 
-                            Background="#1F1F1F" 
-                            BorderBrush="Transparent" 
-                            BorderThickness="1"
-                            CornerRadius="8"
-                            PointerPressed="OnTemplateClicked"
-                            Cursor="Hand">
+                <Border Margin="7,0,7,0" 
+                        Padding="7" 
+                        Background="{StaticResource MainBg}" 
+                        BorderThickness="1"
+                        CornerRadius="7"
+                        ClipToBounds="True"
+                        Cursor="Hand">
                         
                         <Border.Transitions>
                             <Transitions>
-                                <BrushTransition Property="BorderBrush" Duration="0:0:0.2"/>
+                                <BrushTransition Property="BorderBrush" Duration="0:0:0.4"/>
                             </Transitions>
                         </Border.Transitions>
         
                         <Border.Styles>
-                            <Style Selector="Border:pointerover">
+                            <Style Selector="Border[IsPointerOver=True]">
                                 <Setter Property="BorderBrush" Value="DarkCyan"/>
+                                <Setter Property="Background" Value="{StaticResource JaguarBorder}"/>
                             </Style>
                         </Border.Styles>
+                        
+                    <Button
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        CornerRadius="5"
+                        CommandParameter="{Binding}"
+                        Command="{Binding #Root.((viewModels:AgentTemplatesViewModel)DataContext).ItemClickCommand}"
+                        Background="{StaticResource JaguarBorder}"
+                        >
+                        <Button.Transitions>
+                            <Transitions>
+                                <BrushTransition Property="BorderBrush" Duration="0:0:0.4"/>
+                            </Transitions>
+                        </Button.Transitions>
                         
                         <StackPanel Orientation="Vertical" Spacing="10">
                             <Grid ColumnDefinitions="Auto, *">
@@ -52,6 +67,7 @@
                                 <TextBlock TextWrapping="Wrap" Text="{Binding  Description}" Foreground="WhiteSmoke" FontSize="11" FontWeight="Normal"/>
                             </Border>
                         </StackPanel>
+                    </Button>
                     </Border>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

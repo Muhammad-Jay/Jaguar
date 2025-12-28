@@ -57,6 +57,11 @@ class Program
     public static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
+            .With(new X11PlatformOptions 
+            { 
+                EnableMultiTouch = true,
+                RenderingMode = new[] { X11RenderingMode.Glx, X11RenderingMode.Software }
+            })
             .WithInterFont()
             .LogToTrace(Avalonia.Logging.LogEventLevel.Debug);
 }

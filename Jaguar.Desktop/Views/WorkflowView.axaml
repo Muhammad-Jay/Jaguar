@@ -12,20 +12,13 @@
         <viewModels:WorkflowViewModel/>
     </Design.DataContext>
     
-    <Grid Background="{StaticResource MainBg}" ColumnDefinitions="*, Auto" Margin="0,0,0, 0">
-       
-        <!-- <Grid.Background> -->
-        <!--     <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%"> -->
-        <!--         <GradientStop Color="#4B4B4B" Offset="0.0" /> -->
-        <!--         <GradientStop Color="#8D8D8D" Offset="1.0" /> -->
-        <!--     </LinearGradientBrush> -->
-        <!-- </Grid.Background> -->
+    <Grid Background="{StaticResource MainBg}"  Margin="0,0,0, 0">
    
-        <Border Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,0,0"
+        <Border  VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,0,0"
                 Width="15" Height="245" Background="#2A2A2A" CornerRadius="10"
                 ZIndex="10"/>
    
-        <Grid Grid.Column="0" Margin="8">
+        <Grid Margin="8">
             <Border HorizontalAlignment="Center" VerticalAlignment="Top"
                     Width="500" Height="20" Background="#2A2A2A" CornerRadius="10" Margin="0,-5,0,0" />
    
@@ -47,6 +40,6 @@
             </Panel>
         </Grid>
    
-        <panels:WorkflowSidebarPanel Grid.Column="1"/>
+        <panels:WorkflowSidebarPanel HorizontalAlignment="Right" VerticalAlignment="Center"/>
     </Grid>
 </UserControl>

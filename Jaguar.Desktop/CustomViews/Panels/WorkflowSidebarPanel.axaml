@@ -19,7 +19,7 @@
                 </Path.Effect>
             </Path>
         
-        <Grid RowSpacing="20" ColumnSpacing="20" Margin="3,10,16, 7" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" RowDefinitions="Auto, *">
+        <Grid RowSpacing="40" ColumnSpacing="40" Margin="3,10,16, 7" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" RowDefinitions="Auto, *">
             <manuBars:PanelTabMenuView Grid.Row="0"/>
             <Panel Grid.Row="1">
                 <TransitioningContentControl Content="{Binding Content}"/>

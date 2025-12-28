@@ -2,17 +2,87 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:Jaguar.Desktop.Models"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="models:FlowNode"
              x:Class="Jaguar.Desktop.CustomViews.Nodes.Agents.PmNodeView">
-    <Border
-        Width="130"
-        Height="130"
-        CornerRadius="65"
-        Background="#1E1F20"
-    >
-        <Border.Effect>
-            <DropShadowEffect Color="#1E1F20" Opacity="0.3"></DropShadowEffect>
-        </Border.Effect>
-        
+    <Border Name="PmNode"
+            Width="130"
+            Height="130"
+            CornerRadius="65"
+            BorderThickness="2"
+            Background="{StaticResource MainBg}"
+            ClipToBounds="False"
+            ToolTip.Tip="{Binding Type}">
+
+        <Border.Styles>
+            <Style Selector="Border#PmNode">
+                <Setter Property="BorderBrush" Value="#444746"/>
+                <Setter Property="BoxShadow" Value="0 0 0 0 Transparent"/>
+            </Style>
+            <Style Selector="Border#PmNode[IsPointerOver=True]">
+                <Setter Property="BorderBrush" Value="Cyan"/>
+                <Setter Property="BoxShadow" Value="0 0 15 2 Cyan"/>
+            </Style>
+        </Border.Styles>
+
+        <Border.Transitions>
+            <Transitions>
+                <BoxShadowsTransition Property="BoxShadow" Duration="0:0:0.2"/>
+                <BrushTransition Property="BorderBrush" Duration="0:0:0.2"/>
+            </Transitions>
+        </Border.Transitions>
+
+        <Grid>
+            <Border Margin="12"
+                    BorderBrush="Cyan"
+                    BorderThickness="1.5"
+                    CornerRadius="60"
+                    Background="{StaticResource JaguarSurface}">
+            
+                <Border Margin="10"
+                        BorderBrush="Cyan"
+                        BorderThickness="1"
+                        CornerRadius="50"
+                        Background="#212121">
+
+                    <Button HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Margin="0"
+                            CornerRadius="40"
+                            Background="Transparent"
+                            BorderBrush="Yellow"
+                            BorderThickness="3">
+                        <Button.Styles>
+                            <Style Selector="Button:pointerover /template/ ContentPresenter">
+                                <Setter Property="Background" Value="#333333"/>
+                            </Style>
+                        </Button.Styles>
+                        
+                        <Button.Flyout>
+                            <Flyout Placement="Bottom" OverlayDismissEventPassThrough="True">
+                                <Border Background="Transparent" 
+                                        Padding="0" 
+                                        CornerRadius="10" 
+                                        BorderThickness="0"
+                                        Width="350">
+                                    <StackPanel Spacing="10">
+                                        <TextBlock Text="Agent Configuration" Foreground="Cyan" FontWeight="Bold"/>
+                                        <TextBox Text="{Binding Title}" 
+                                                 AcceptsReturn="True" 
+                                                 HorizontalAlignment="Stretch"
+                                                 CornerRadius="7"
+                                                 BorderThickness="0"
+                                                 Background="{StaticResource MainBg}"
+                                                 Height="150" 
+                                                 Watermark="Type your logic here..." />
+                                       </StackPanel>
+                                </Border>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                </Border>
+            </Border>
+        </Grid>
     </Border>
 </UserControl>

@@ -1,9 +1,6 @@
-using System;
-using Avalonia.Controls;              // Provides 'Control'
-using Avalonia.Controls.Templates;    // Provides 'IDataTemplate'
-using Avalonia.Markup.Xaml.Templates; // Provides 'DataTemplate'
-using Jaguar.Core.Models;
-using Jaguar.Desktop.Models; // Provides 'FlowNode' and 'NodeType'
+using Avalonia.Controls;            
+using Avalonia.Controls.Templates;  
+using Jaguar.Desktop.Models;
 
 namespace Jaguar.Desktop.Services
 {
@@ -15,17 +12,19 @@ namespace Jaguar.Desktop.Services
 
         public bool Match(object? data) => data is FlowNode;
 
-        public Control? Build(object? param)
+        public Control? Build(object? data)
         {
-            if (param is FlowNode node)
+            if (data is FlowNode node)
             {
-                return node.Type switch
+                var template = node.Type switch
                 {
-                    NodeType.Orchestrator => OrchestratorLayout?.Build(param),
-                    NodeType.Agent        => RegularAgentLayout?.Build(param),
-                    NodeType.Pm          => PmLayout?.Build(param),
-                    _                     => RegularAgentLayout?.Build(param)
+                    NodeType.Orchestrator => OrchestratorLayout,
+                    NodeType.Pm => PmLayout,
+                    _ => RegularAgentLayout
                 };
+
+                // This cast is where the crash happens if the types don't match
+                return template?.Build(data) as Control;
             }
             return null;
         }

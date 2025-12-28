@@ -2,7 +2,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:nodify="clr-namespace:Nodify;assembly=Nodify"
              xmlns:vm="clr-namespace:Jaguar.Desktop.ViewModels"
-             xmlns:nodes="clr-namespace:Jaguar.Desktop.CustomViews.Nodes"
              xmlns:models="clr-namespace:Jaguar.Desktop.Models"
              xmlns:services="clr-namespace:Jaguar.Desktop.Services"
              xmlns:agents="clr-namespace:Jaguar.Desktop.CustomViews.Nodes.Agents"
@@ -10,10 +9,22 @@
              x:Class="Jaguar.Desktop.Views.CanvasView">
     
     <UserControl.DataContext>
-        <vm:CanvasViewModel />
+        <vm:CanvasViewModel/>
     </UserControl.DataContext>
     
     <UserControl.Resources>
+        <DrawingBrush x:Key="DottedBackgroundBrush" 
+                      TileMode="Tile" 
+                      DestinationRect="0,0,40,40" 
+                      Stretch="None">
+            <DrawingBrush.Drawing>
+                <GeometryDrawing Brush="#33444746"> <GeometryDrawing.Geometry>
+                        <EllipseGeometry Center="1,1" RadiusX="1" RadiusY="1" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+        
         <DataTemplate x:Key="RegularAgentTemplate" DataType="models:FlowNode">
             <agents:RegularAgentNodeView/>
         </DataTemplate>
@@ -38,8 +49,8 @@
         <nodify:NodifyEditor 
             Background="Transparent"
             ItemsSource="{Binding Nodes}"
-            Template="{StaticResource MyNodeSelector}"
-            GridCellSize="20">
+            ItemTemplate="{StaticResource MyNodeSelector}"
+            GridCellSize="40">
             
             <nodify:NodifyEditor.SelectionRectangleStyle>
                 <ControlTheme TargetType="Rectangle">
@@ -49,7 +60,39 @@
             </nodify:NodifyEditor.SelectionRectangleStyle>
         
             <nodify:NodifyEditor.Styles>
+                <!-- <Style Selector="nodify|NodifyEditor /template/ nodify|NodifyCanvas"> -->
+                <!--     <Setter Property="Background" Value="{DynamicResource DottedBackgroundBrush}" /> -->
+                <!-- </Style> -->
+                
+                <Style Selector="nodify|ItemContainer[IsSelected=True] Border#RegularNode">
+                    <Setter Property="BorderBrush" Value="Cyan" />
+                    <Setter Property="BoxShadow" Value="0 0 15 2 Cyan" />
+                </Style>
+                <Style Selector="nodify|ItemContainer[IsSelected=True] Border#PmNode">
+                    <Setter Property="BorderBrush" Value="Cyan" />
+                    <Setter Property="BoxShadow" Value="0 0 15 2 Cyan" />
+                </Style>
+                <Style Selector="nodify|ItemContainer[IsSelected=True] Border#OrchestratorNode">
+                    <Setter Property="BorderBrush" Value="Cyan" />
+                    <Setter Property="BoxShadow" Value="0 0 15 2 Cyan" />
+                </Style>
+                
+                <Style Selector="nodify|ItemContainer[IsSelected=True]">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="Padding" Value="10" />
+                </Style>
+                
+                <Style Selector="nodify|ItemContainer">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderBrush" Value="Transparent" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="Padding" Value="10" />
+                </Style>
+                
                 <Style Selector="nodify|ItemContainer" x:DataType="models:FlowNode">
+                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
                     <Setter Property="Location" Value="{Binding Location, Mode=TwoWay}" />
                 </Style>
             </nodify:NodifyEditor.Styles>
@@ -62,12 +105,6 @@
                                               StrokeThickness="2" />
                 </DataTemplate>
             </nodify:NodifyEditor.ConnectionTemplate>
-        
-            <!-- <nodify:NodifyEditor.ItemTemplate> -->
-            <!--     <DataTemplate> -->
-            <!--         <nodes:AgentNodeView/> -->
-            <!--     </DataTemplate> -->
-            <!-- </nodify:NodifyEditor.ItemTemplate> -->
         
         </nodify:NodifyEditor>
     </Grid>

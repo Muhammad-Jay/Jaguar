@@ -16,30 +16,16 @@ public partial class AgentTemplatesView : UserControl
         DataContext = new AgentTemplatesViewModel();
     }
     
-   private async void OnTemplatePointerPressed(object? sender, PointerPressedEventArgs e)
-   {
-       // 1. 'sender' is the Border that was clicked
-       if (sender is Border border && border.DataContext is FlowNode template)
-       {
-           // 2. Prepare the data
-           var dragData = new DataObject();
-           dragData.Set("AgentTemplate", template);
-   
-           // 3. Start the drag operation
-           // On Zorin OS/Linux, using 'Copy' effect is standard for "dragging out"
-           await DragDrop.DoDragDrop(e, dragData, DragDropEffects.Copy);
-       }
-   }
-   
-   
-   private void OnTemplateClicked(object? sender, PointerPressedEventArgs e)
-   {
-       if (sender is Border b && b.DataContext is FlowNode template)
-       {
-           if (DataContext is CanvasViewModel vm)
-           {
-             
-           }
-       }
-   }
+    private async void OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        if (sender is Control control && control.DataContext is AgentTemplatesViewModel selected)
+        {
+            // var data = new DataObject();
+            // // Custom key to identify Jaguar agents
+            // data.Set("JaguarNode", selected);
+            //
+            // // Start the async drag operation
+            // await DragDrop.DoDragDropAsync(e, data, DragDropEffects.Copy);
+        }
+    }
 }

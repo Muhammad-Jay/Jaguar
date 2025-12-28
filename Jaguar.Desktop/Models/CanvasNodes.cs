@@ -14,6 +14,13 @@ public partial class FlowNode : ObservableObject
     public NodeType Type { get; set; }
 
     public string Description { get; set; } = string.Empty;
+    
+    private bool _isSelected;
+    public bool IsSelected
+    {
+        get => _isSelected;
+        set => SetProperty(ref _isSelected, value);
+    }
 
     [ObservableProperty] private Point _location;
 

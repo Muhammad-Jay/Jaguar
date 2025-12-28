@@ -8,18 +8,26 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceInclude Source="avares://Nodify/Theme.axaml" />
+                <ResourceInclude Source="/Styles/GlassTheme.axaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
         
+        <Color x:Key="Neutral900">#171717</Color>
+        <Color x:Key="Neutral800">#262626</Color>
+        <Color x:Key="JaguarCyan">#00FFFF</Color>
+
+        <SolidColorBrush x:Key="Neutral900Brush" Color="{StaticResource Neutral900}"/>
+        <SolidColorBrush x:Key="Neutral800Brush" Color="{StaticResource Neutral800}"/>
+        
         <SolidColorBrush x:Key="CanvasBg" Color="Black" />
         <SolidColorBrush x:Key="MainBg" Color="#1E1F20"/>
-        <SolidColorBrush x:Key="GeminiSurface" Color="#1E1F20" />
-        <SolidColorBrush x:Key="GeminiBorder" Color="#444746" />
-        <SolidColorBrush x:Key="GeminiAccent" Color="#8AB4F8" />
-        <SolidColorBrush x:Key="GeminiTextPrimary" Color="#E3E3E3" />
-        <SolidColorBrush x:Key="GeminiTextSecondary" Color="#C4C7C5" />
+        <SolidColorBrush x:Key="JaguarSurface" Color="#1E1F20" />
+        <SolidColorBrush x:Key="JaguarBorder" Color="#444746" />
+        <SolidColorBrush x:Key="JaguarAccent" Color="#8AB4F8" />
+        <SolidColorBrush x:Key="JaguarTextPrimary" Color="#E3E3E3" />
+        <SolidColorBrush x:Key="JaguarTextSecondary" Color="#C4C7C5" />
     
-        <LinearGradientBrush x:Key="GeminiSpark" StartPoint="0%,50%" EndPoint="100%,50%">
+        <LinearGradientBrush x:Key="JaguarSpark" StartPoint="0%,50%" EndPoint="100%,50%">
             <GradientStop Offset="0.0" Color="#4285F4" />
             <GradientStop Offset="0.33" Color="#9B72CB" />
             <GradientStop Offset="0.66" Color="#D96570" />
