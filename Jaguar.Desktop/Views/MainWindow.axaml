@@ -4,12 +4,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
         xmlns:views="clr-namespace:Jaguar.Desktop.Views"
+        xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Jaguar.Desktop.Views.MainWindow"
         x:DataType="viewModels:MainWindowViewModel"
         Title="Jaguar"
-        TransparencyLevelHint="AcrylicBlur"
+        SystemDecorations="None"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        TransparencyLevelHint="Transparent"
+        WindowStartupLocation="CenterScreen"
         Background="Transparent"
+        CornerRadius="15"
         TransparencyBackgroundFallback="Transparent"
         ExtendClientAreaToDecorationsHint="True"
         >
@@ -17,7 +22,38 @@
         <viewModels:MainWindowViewModel/>
     </Design.DataContext>
     
-    <ContentControl>
-        <views:WorkflowView/>
-    </ContentControl>
+    <Panel>
+        <Border Background="{StaticResource MainBg}" IsHitTestVisible="False" />
+
+        <DockPanel>
+            <Grid DockPanel.Dock="Top" Height="30" Background="Transparent" ColumnDefinitions="Auto, *, Auto">
+            
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
+                    <TextBlock Text="JAGUAR" Foreground="White" FontSize="10" FontWeight="Regular" LetterSpacing="2" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <Border Grid.Column="1" Background="Transparent" DoubleTapped="OnTitleBarDoubleTapped" PointerPressed="OnTitleBarPointerPressed" />
+
+                <StackPanel Grid.Column="2" Spacing="10" Orientation="Horizontal">
+                    <Button Classes="WindowControl" Click="OnMinimizeClick">
+                        <avalonia:MaterialIcon Kind="WindowMinimize" Width="10" Height="10" Foreground="{StaticResource  JaguarTextPrimary}"/>
+                    </Button>
+    
+                    <Button Classes="WindowControl" Click="OnMaximizeClick">
+                        <avalonia:MaterialIcon Kind="WindowMaximize" Width="10" Height="10" Foreground="{StaticResource JaguarTextPrimary} " Name="MaximizeIcon"/>
+                    </Button>
+    
+                    <Button Classes="WindowControl" Click="OnCloseClick" Name="CloseButton">
+                        <avalonia:MaterialIcon Kind="WindowClose" Width="10" Height="10" Foreground="{StaticResource JaguarTextPrimary} "/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <Panel>
+                <ContentControl>
+                    <views:WorkflowView/>
+                </ContentControl>
+            </Panel>
+        </DockPanel>
+    </Panel>
 </Window>

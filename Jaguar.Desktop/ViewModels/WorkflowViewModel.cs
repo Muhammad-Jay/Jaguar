@@ -6,6 +6,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Jaguar.Core.Models;
 using Jaguar.Core.Services;
+using Jaguar.Desktop.Models;
 using Jaguar.Desktop.Services.AppState;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -43,6 +44,7 @@ namespace Jaguar.Desktop.ViewModels
                 WorkFlowOrchestrator = Program.AppHost.Services.GetRequiredService<Orchestrator>();
             }
         }
+        
         
         // [RelayCommand]
         // public async Task RunTestCommand()

@@ -2,26 +2,67 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
    <ControlTemplate x:Key="GlassPanelTemplate" TargetType="ContentControl">
        <Panel>
-           <Border CornerRadius="16" BoxShadow="0 10 40 0 #60000000" />
+           <Border CornerRadius="{TemplateBinding CornerRadius}" BoxShadow="0 10 30 0 #80000000" />
 
-           <Border CornerRadius="16" BorderThickness="1.5" BorderBrush="#40FFFFFF">
-               <Border.Background>
-                   <VisualBrush Stretch="None" TileMode="Tile" SourceRect="0,0,100,100" DestinationRect="0,0,100,100">
+           <Border CornerRadius="{TemplateBinding CornerRadius}" 
+                   Background="#25171717"
+                   BorderThickness="1.5" 
+                   BorderBrush="#40FFFFFF">
+               <Border.OpacityMask>
+                   <VisualBrush TileMode="Tile" SourceRect="0,0,50,50" DestinationRect="0,0,50,50">
                        <VisualBrush.Visual>
-                           <Canvas Width="100" Height="100" Background="#10FFFFFF">
-                               <Path Data="M0,0 L1,1 M2,2 L3,3" Stroke="#20FFFFFF" StrokeThickness="1" />
+                           <Canvas Width="50" Height="50">
+                               <Ellipse Width="1" Height="1" Fill="White" Opacity="0.4" Canvas.Left="5" Canvas.Top="10"/>
+                               <Ellipse Width="1.5" Height="1.5" Fill="White" Opacity="0.2" Canvas.Left="25" Canvas.Top="35"/>
+                               <Ellipse Width="1" Height="1" Fill="White" Opacity="0.3" Canvas.Left="40" Canvas.Top="5"/>
                            </Canvas>
                        </VisualBrush.Visual>
                    </VisualBrush>
-               </Border.Background>
+               </Border.OpacityMask>
            </Border>
 
-           <Border CornerRadius="16" Padding="{TemplateBinding Padding}">
+           <Border CornerRadius="{TemplateBinding CornerRadius}" Padding="{TemplateBinding Padding}">
                <Border.Background>
                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
-                       <GradientStop Offset="0" Color="#40171717" />
-                       <GradientStop Offset="0.5" Color="#20262626" />
-                       <GradientStop Offset="1" Color="#50171717" />
+                       <GradientStop Offset="0" Color="#20FFFFFF" />
+                       <GradientStop Offset="0.4" Color="#05FFFFFF" />
+                       <GradientStop Offset="1" Color="#15FFFFFF" />
+                   </LinearGradientBrush>
+               </Border.Background>
+            
+               <ContentPresenter Content="{TemplateBinding Content}"
+                                 ContentTemplate="{TemplateBinding ContentTemplate}"/>
+           </Border>
+       </Panel>
+    </ControlTemplate>
+    
+     <ControlTemplate x:Key="WorkflowGlassPanelTemplate" TargetType="ContentControl">
+       <Panel ZIndex="50">
+           <Border CornerRadius="{TemplateBinding CornerRadius}" BoxShadow="0 10 30 0 #80000000" />
+
+           <Border CornerRadius="{TemplateBinding CornerRadius}" 
+                   Background="#25171717"
+                   BorderThickness="1.5" 
+                   BorderBrush="#40FFFFFF">
+               <Border.OpacityMask>
+                   <VisualBrush TileMode="Tile" SourceRect="0,0,50,50" DestinationRect="0,0,50,50">
+                       <VisualBrush.Visual>
+                           <Canvas Width="50" Height="50">
+                               <Ellipse Width="1" Height="1" Fill="White" Opacity="0.4" Canvas.Left="5" Canvas.Top="10"/>
+                               <Ellipse Width="1.5" Height="1.5" Fill="White" Opacity="0.2" Canvas.Left="25" Canvas.Top="35"/>
+                               <Ellipse Width="1" Height="1" Fill="White" Opacity="0.3" Canvas.Left="40" Canvas.Top="5"/>
+                           </Canvas>
+                       </VisualBrush.Visual>
+                   </VisualBrush>
+               </Border.OpacityMask>
+           </Border>
+
+           <Border CornerRadius="{TemplateBinding CornerRadius}" Padding="{TemplateBinding Padding}">
+               <Border.Background>
+                   <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                       <GradientStop Offset="0" Color="#20FFFFFF" />
+                       <GradientStop Offset="0.4" Color="#05FFFFFF" />
+                       <GradientStop Offset="1" Color="#15FFFFFF" />
                    </LinearGradientBrush>
                </Border.Background>
             
@@ -31,46 +72,69 @@
        </Panel>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="GlassPanelDarkTemplate" TargetType="ContentControl">
-        <Panel>
-            <ExperimentalAcrylicBorder CornerRadius="16">
-                <ExperimentalAcrylicBorder.Material>
-                    <ExperimentalAcrylicMaterial 
-                        BackgroundSource="Digger"
-                        TintColor="#000000"
-                        TintOpacity="0.85"
-                        MaterialOpacity="0.6"/>
-                </ExperimentalAcrylicBorder.Material>
-            </ExperimentalAcrylicBorder>
 
-            <Border CornerRadius="16"
-                    BorderThickness="1"
-                    BorderBrush="#33FFFFFF"
-                    BoxShadow="0 8 32 0 #66000000"
-                    Padding="{TemplateBinding Padding}">
+    <ControlTemplate x:Key="GlassPanelCyanTemplate" TargetType="ContentControl">
+        <Panel>
+            <Border CornerRadius="{TemplateBinding CornerRadius}" BoxShadow="0 10 30 0 #80000000" />
+
+            <Border CornerRadius="{TemplateBinding CornerRadius}" 
+                    Background="#25001A1A"
+                    BorderThickness="1.5" 
+                    BorderBrush="#4000FFFF"> <Border.OpacityMask>
+                    <VisualBrush TileMode="Tile" SourceRect="0,0,50,50" DestinationRect="0,0,50,50">
+                        <VisualBrush.Visual>
+                            <Canvas Width="50" Height="50">
+                                <Ellipse Width="1" Height="1" Fill="White" Opacity="0.4" Canvas.Left="5" Canvas.Top="10"/>
+                                <Ellipse Width="1.5" Height="1.5" Fill="White" Opacity="0.2" Canvas.Left="25" Canvas.Top="35"/>
+                                <Ellipse Width="1" Height="1" Fill="White" Opacity="0.3" Canvas.Left="40" Canvas.Top="5"/>
+                            </Canvas>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </Border.OpacityMask>
+            </Border>
+
+            <Border CornerRadius="{TemplateBinding CornerRadius}" Padding="{TemplateBinding Padding}">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                        <GradientStop Offset="0" Color="#2000FFFF" /> <GradientStop Offset="0.4" Color="#0500FFFF" />
+                        <GradientStop Offset="1" Color="#1500FFFF" />
+                    </LinearGradientBrush>
+                </Border.Background>
+         
                 <ContentPresenter Content="{TemplateBinding Content}"
                                   ContentTemplate="{TemplateBinding ContentTemplate}"/>
             </Border>
         </Panel>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="GlassPanelBlueTemplate" TargetType="ContentControl">
+    <ControlTemplate x:Key="GlassPanelNeutralTemplate" TargetType="ContentControl">
         <Panel>
-            <ExperimentalAcrylicBorder CornerRadius="16">
-                <ExperimentalAcrylicBorder.Material>
-                    <ExperimentalAcrylicMaterial 
-                        BackgroundSource="Digger"
-                        TintColor="#3498db"
-                        TintOpacity="0.4"
-                        MaterialOpacity="0.7"/>
-                </ExperimentalAcrylicBorder.Material>
-            </ExperimentalAcrylicBorder>
+            <Border CornerRadius="{TemplateBinding CornerRadius}" BoxShadow="0 10 30 0 #80000000" />
 
-            <Border CornerRadius="16"
-                    BorderThickness="1"
-                    BorderBrush="#605dade2"
-                    BoxShadow="0 8 32 0 #40000000"
-                    Padding="{TemplateBinding Padding}">
+            <Border CornerRadius="{TemplateBinding CornerRadius}" 
+                    Background="#25262626" BorderThickness="1.5" 
+                    BorderBrush="#40404040"> <Border.OpacityMask>
+                    <VisualBrush TileMode="Tile" SourceRect="0,0,50,50" DestinationRect="0,0,50,50">
+                        <VisualBrush.Visual>
+                            <Canvas Width="50" Height="50">
+                                <Ellipse Width="1" Height="1" Fill="White" Opacity="0.4" Canvas.Left="5" Canvas.Top="10"/>
+                                <Ellipse Width="1.5" Height="1.5" Fill="White" Opacity="0.2" Canvas.Left="25" Canvas.Top="35"/>
+                                <Ellipse Width="1" Height="1" Fill="White" Opacity="0.3" Canvas.Left="40" Canvas.Top="5"/>
+                            </Canvas>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </Border.OpacityMask>
+            </Border>
+
+            <Border CornerRadius="{TemplateBinding CornerRadius}" Padding="{TemplateBinding Padding}">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                        <GradientStop Offset="0" Color="#15FFFFFF" /> 
+                        <GradientStop Offset="0.4" Color="#05FFFFFF" />
+                        <GradientStop Offset="1" Color="#10FFFFFF" />
+                    </LinearGradientBrush>
+                </Border.Background>
+         
                 <ContentPresenter Content="{TemplateBinding Content}"
                                   ContentTemplate="{TemplateBinding ContentTemplate}"/>
             </Border>

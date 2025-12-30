@@ -24,6 +24,7 @@ public partial class FlowNode : ObservableObject
 
     [ObservableProperty] private Point _location;
 
+    public ObservableCollection<ConnectorViewModel> Connectors { get; } = new();
     public ObservableCollection<ConnectorViewModel> Input { get; } = new();
     public ObservableCollection<ConnectorViewModel> Output { get; } = new();
     public ObservableCollection<FlowNode> Children { get; set; } = new();

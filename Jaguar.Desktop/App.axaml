@@ -9,6 +9,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceInclude Source="avares://Nodify/Theme.axaml" />
                 <ResourceInclude Source="/Styles/GlassTheme.axaml"/>
+                <ResourceInclude Source="/CustomViews/ContextMenus/CanvasContextMenu.axaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
         

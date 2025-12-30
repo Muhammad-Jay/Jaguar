@@ -13,17 +13,6 @@
     </UserControl.DataContext>
     
     <UserControl.Resources>
-        <DrawingBrush x:Key="DottedBackgroundBrush" 
-                      TileMode="Tile" 
-                      DestinationRect="0,0,40,40" 
-                      Stretch="None">
-            <DrawingBrush.Drawing>
-                <GeometryDrawing Brush="#33444746"> <GeometryDrawing.Geometry>
-                        <EllipseGeometry Center="1,1" RadiusX="1" RadiusY="1" />
-                    </GeometryDrawing.Geometry>
-                </GeometryDrawing>
-            </DrawingBrush.Drawing>
-        </DrawingBrush>
         
         <DataTemplate x:Key="RegularAgentTemplate" DataType="models:FlowNode">
             <agents:RegularAgentNodeView/>
@@ -60,21 +49,20 @@
             </nodify:NodifyEditor.SelectionRectangleStyle>
         
             <nodify:NodifyEditor.Styles>
-                <!-- <Style Selector="nodify|NodifyEditor /template/ nodify|NodifyCanvas"> -->
-                <!--     <Setter Property="Background" Value="{DynamicResource DottedBackgroundBrush}" /> -->
-                <!-- </Style> -->
-                
                 <Style Selector="nodify|ItemContainer[IsSelected=True] Border#RegularNode">
                     <Setter Property="BorderBrush" Value="Cyan" />
+                    <Setter Property="BorderThickness" Value="2" />
                     <Setter Property="BoxShadow" Value="0 0 15 2 Cyan" />
                 </Style>
                 <Style Selector="nodify|ItemContainer[IsSelected=True] Border#PmNode">
                     <Setter Property="BorderBrush" Value="Cyan" />
+                    <Setter Property="BorderThickness" Value="2" />
                     <Setter Property="BoxShadow" Value="0 0 15 2 Cyan" />
                 </Style>
                 <Style Selector="nodify|ItemContainer[IsSelected=True] Border#OrchestratorNode">
                     <Setter Property="BorderBrush" Value="Cyan" />
-                    <Setter Property="BoxShadow" Value="0 0 15 2 Cyan" />
+                    <Setter Property="BorderThickness" Value="2" />
+                    <Setter Property="CornerRadius" Value="75"/>
                 </Style>
                 
                 <Style Selector="nodify|ItemContainer[IsSelected=True]">
@@ -96,6 +84,10 @@
                     <Setter Property="Location" Value="{Binding Location, Mode=TwoWay}" />
                 </Style>
             </nodify:NodifyEditor.Styles>
+            
+            <nodify:NodifyEditor.ContextMenu>
+                <StaticResource ResourceKey="CanvasContextMenu" />
+            </nodify:NodifyEditor.ContextMenu>
             
             <nodify:NodifyEditor.ConnectionTemplate>
                 <DataTemplate x:DataType="models:ConnectionViewModel">

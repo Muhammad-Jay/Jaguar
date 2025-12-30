@@ -1,7 +1,10 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Jaguar.Desktop.Abstractions;
+using Jaguar.Desktop.CustomViews.Templates;
 using Jaguar.Desktop.Models.Ui;
 using Jaguar.Desktop.ViewModels;
+using Jaguar.Desktop.ViewModels.Templates;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Jaguar.Desktop.Services.AppState
@@ -10,13 +13,13 @@ namespace Jaguar.Desktop.Services.AppState
     {
         [ObservableProperty] private object? _currentView;
         [ObservableProperty] private PanelRequest? _activePanel;
-        [ObservableProperty] private bool _isPanelOpen;
+        [ObservableProperty] private bool _isPanelOpen = true;
 
         public AppStateService()
         {
             if (Program.AppHost != null)
             {
-                CurrentView = Program.AppHost.Services.GetRequiredService<WorkflowViewModel>();
+                CurrentView = Program.AppHost.Services.GetRequiredService<AgentTemplatesView>();
                 ActivePanel = new PanelRequest { ViewModel = CurrentView, Position = Position.Left};
                 IsPanelOpen = false;
             }
@@ -37,6 +40,10 @@ namespace Jaguar.Desktop.Services.AppState
             }
         }
         
+        [RelayCommand]
         public void ClosePanel () =>  IsPanelOpen = false;
+        
+        [RelayCommand]
+        public void TogglePanel () =>  IsPanelOpen = !IsPanelOpen;
     }
 }

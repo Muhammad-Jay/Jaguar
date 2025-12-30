@@ -22,8 +22,7 @@ namespace Jaguar.Desktop.Services
                     NodeType.Pm => PmLayout,
                     _ => RegularAgentLayout
                 };
-
-                // This cast is where the crash happens if the types don't match
+                
                 return template?.Build(data) as Control;
             }
             return null;

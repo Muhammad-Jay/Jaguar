@@ -6,7 +6,14 @@
              xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels.Menus"
              x:DataType="viewModels:RightBarMenuViewModel"
              x:Class="Jaguar.Desktop.CustomViews.ManuBars.RightMenuBarView">
-    <Border Width="30" Background="Black"  Padding="0, 5, 5, 10" >
+    <Border BorderThickness="1"
+            BorderBrush="{StaticResource JaguarSurface}"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            Background="Transparent" 
+            CornerRadius="6" 
+            Padding="2, 5, 2, 5" >
+        
         <ItemsControl
             ItemsSource="{Binding MenuItems}"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
@@ -14,18 +21,22 @@
         >
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Vertical" Spacing="10" Background="Black"/>
+                    <StackPanel Orientation="Vertical" Spacing="10" Background="Transparent"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
+            
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Button 
-                        HorizontalAlignment="Center" 
-                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Stretch" 
+                        Height="20"
+                        Background="DarkCyan"
+                        CornerRadius="3"
                         Classes="MenuBtn" 
-                        Content="{Binding Name}"
                         FontSize="10" 
+                        Click="{Binding $parent[ItemsControl].((viewModels:RightBarMenuViewModel)DataContext).AppState.TogglePanelCommand}"
                         FontWeight="Regular"
+                        CommandParameter="{Binding}"
                         Foreground="DarkGray"
                         >
                         

@@ -2,8 +2,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Avalonia;
-using CommunityToolkit.Mvvm;
-using Jaguar.Core.Abstractions;
 using Jaguar.Desktop.Models;
 using Jaguar.Desktop.Views;
 
@@ -16,28 +14,33 @@ public partial class CanvasViewModel : ViewModelBase
        
     public CanvasViewModel()
     {
-        // Create some test nodes
-        Nodes.Add(new FlowNode 
-        { 
-            Title = "Node 1", 
-            Location = new Point(100, 100),
-            Type = NodeType.Pm
-        });
-           
-        Nodes.Add(new FlowNode 
-        { 
-            Title = "Node 2", 
-            Location = new Point(400, 200),
-            Type = NodeType.Agent
-        });
-        
         Nodes.Add(new FlowNode 
         { 
             Title = "Node 3", 
-            Location = new Point(100, 100),
+            Location = new Point(400, 400),
             Type = NodeType.Orchestrator
         });
     }
+    
+    // public void CreateLink(FlowNode sourceNode, FlowNode targetNode)
+    // {
+    //     // Find the Output port of the source (Orchestrator)
+    //     var sourcePort = sourceNode.Connectors.FirstOrDefault(c => c.Type == ConnectorType.Output);
+    //
+    //     // Find the Input port of the target (Agent)
+    //     var targetPort = targetNode.Connectors.FirstOrDefault(c => c.Type == ConnectorType.Input);
+    //
+    //     if (sourcePort != null && targetPort != null)
+    //     {
+    //         var connection = new ConnectionViewModel
+    //         {
+    //             Source = sourcePort,
+    //             Target = targetPort 
+    //         };
+    //
+    //         Connections.Add(connection);
+    //     }
+    // }
 
     public void AddNode(FlowNode node)
     {

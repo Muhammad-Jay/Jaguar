@@ -6,17 +6,118 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="models:FlowNode"
              x:Class="Jaguar.Desktop.CustomViews.Nodes.Agents.OrchestratorNodeView">
-    <ContentControl
-        Template="{StaticResource GlassPanelTemplate}"
-        Width="150"
-        Height="150">
+    
+             <Border
+                 Name="OrchestratorNode"
+                 Width="150"
+                 Height="150"
+                 Background="Transparent"
+                 BorderThickness="2"
+                 IsHitTestVisible="True"
+                 ClipToBounds="False"
+                 BorderBrush="{StaticResource JaguarSurface}"
+                 CornerRadius="75"
+                 >
+                 
+                   <Border.ContextMenu>
+                       <!-- <ContextMenu -->
+                       <!--     BorderThickness="0" -->
+                       <!--     Padding="0" -->
+                       <!--     -->
+                       <!--     BorderBrush="{StaticResource JaguarSurface}" -->
+                       <!--     CornerRadius="10" -->
+                       <!--     Width="300" -->
+                       <!--     MaxHeight="400" -->
+                       <!--     Background="Transparent"> -->
+                       <!--      -->
+                       <!--     <ContextMenu.Styles> -->
+                       <!--         <Style Selector="MenuItem[IsPointerOver=True] /template/ Border#PART_LayoutRoot"> -->
+                       <!--             <Setter Property="Background" Value="Transparent"/> -->
+                       <!--         </Style> -->
+                       <!--     </ContextMenu.Styles> -->
+                       <!--      -->
+                       <!--     <ContentControl  -->
+                       <!--         Margin="0" -->
+                       <!--         CornerRadius="10" -->
+                       <!--         VerticalAlignment="Stretch" -->
+                       <!--         HorizontalAlignment="Stretch" -->
+                       <!--         Padding="10" -->
+                       <!--         Template="{StaticResource GlassPanelNeutralTemplate}"> -->
+                       <!--               <ScrollViewer -->
+                       <!--                   VerticalAlignment="Stretch" -->
+                       <!--                   HorizontalAlignment="Stretch" -->
+                       <!--                   Margin="0" -->
+                       <!--                   > -->
+                       <!--                   <StackPanel -->
+                       <!--                       VerticalAlignment="Stretch" -->
+                       <!--                       HorizontalAlignment="Stretch" -->
+                       <!--                       Spacing="5" -->
+                       <!--                       Orientation="Vertical"> -->
+                       <!--                       <MenuItem  -->
+                       <!--                           Header="Add New Agent"   -->
+                       <!--                           CornerRadius="5" -->
+                       <!--                           Padding="6" -->
+                       <!--                           Classes="MenuItemClass" -->
+                       <!--                           HorizontalAlignment="Stretch" -->
+                       <!--                           FontSize="10" -->
+                       <!--                           Background="{StaticResource MainBg}" -->
+                       <!--                       /> -->
+                       <!--                       <MenuItem  -->
+                       <!--                           CornerRadius="5" -->
+                       <!--                           Padding="6" -->
+                       <!--                           HorizontalAlignment="Stretch" -->
+                       <!--                           FontSize="10" -->
+                       <!--                           Classes="MenuItemClass" -->
+                       <!--                           Background="{StaticResource MainBg}" -->
+                       <!--                           Header="Export Workflow" /> -->
+                       <!--                       <Separator /> -->
+                       <!--                       <MenuItem  -->
+                       <!--                           CornerRadius="5" -->
+                       <!--                           Padding="6" -->
+                       <!--                           HorizontalAlignment="Stretch" -->
+                       <!--                           FontSize="10" -->
+                       <!--                           Classes="MenuItemClass" -->
+                       <!--                           Background="{StaticResource MainBg}" -->
+                       <!--                           Header="Settings" /> -->
+                       <!--                   </StackPanel> -->
+                       <!--               </ScrollViewer> -->
+                       <!--           </ContentControl> -->
+                       <!--       </ContextMenu> -->
+                       
+                       <StaticResource ResourceKey="CanvasContextMenu" />
+                   </Border.ContextMenu>
+                 
+                 <Border.Styles>
+                     <Style Selector="Border#OrchestratorNode[IsPointerOver=True]">
+                         <Setter Property="BorderBrush" Value="Cyan"/>
+                     </Style>
+                 </Border.Styles>
         
-        <Grid>
-            <TextBlock Text="Orchestrator" 
-                       VerticalAlignment="Center" 
-                       HorizontalAlignment="Center" 
-                       Foreground="Cyan"/>
-        </Grid>
-        
-    </ContentControl>
+                 <Border.Transitions>
+                     <Transitions>
+                         <BrushTransition Property="BorderBrush" Duration="0:0:0.2"/>
+                     </Transitions>
+                 </Border.Transitions>
+                 
+                 <ContentControl
+                     Template="{StaticResource GlassPanelNeutralTemplate}"
+                     Width="150"
+                     Height="150"
+                     Padding="20"
+                     CornerRadius="75"
+                 >
+                     
+                     <Border 
+                         VerticalAlignment="Stretch"
+                         HorizontalAlignment="Stretch"
+                         BorderThickness="5"
+                         BorderBrush="DimGray"
+                         Background="{StaticResource MainBg}"
+                         CornerRadius="60">
+                         
+                         
+                     </Border>
+                 </ContentControl>
+             </Border>
+    
 </UserControl>

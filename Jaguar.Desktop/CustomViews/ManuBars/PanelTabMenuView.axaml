@@ -5,12 +5,12 @@
              xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              xmlns:panel="clr-namespace:Jaguar.Desktop.ViewModels.Panel"
              x:DataType="panel:WorkflowSidebarPanelViewModel"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="450"
              x:Name="Root"
              x:Class="Jaguar.Desktop.CustomViews.ManuBars.PanelTabMenuView">
     
-    <Border Background="{StaticResource MainBg}" CornerRadius="10" Padding="3">
-       <ScrollViewer Background="Transparent" Height="30">
+    <Border Background="{StaticResource MainBg}" Margin="7,0,7,0" CornerRadius="7" Padding="2.2">
+       <ScrollViewer Background="Transparent" Height="28">
            <ItemsControl
                ItemsSource="{Binding   ItemList}"
                ScrollViewer.HorizontalScrollBarVisibility="Auto" 
@@ -18,18 +18,18 @@
                >
                <ItemsControl.ItemsPanel>
                   <ItemsPanelTemplate>
-                      <StackPanel Orientation="Horizontal"  Background="Transparent" Spacing="10"/>
+                      <StackPanel Orientation="Horizontal"  Background="Transparent" Spacing="8"/>
                   </ItemsPanelTemplate>
                </ItemsControl.ItemsPanel>
                
                <ItemsControl.ItemTemplate>
                    <DataTemplate>
                        <Button
-                           Background="{StaticResource JaguarSurface}"
-                           CornerRadius="5"
+                           Background="DarkCyan"
+                           CornerRadius="3.5"
                            Padding="2"
-                           Width="30"
-                           Height="20"
+                           Width="25"
+                           Height="18"
                            Margin="2, 2, 0, 2"
                            VerticalContentAlignment="Center"
                            HorizontalContentAlignment="Center"
@@ -41,18 +41,7 @@
                                    <Setter Property="Background" Value="Cyan"/>
                                </Style>
                            </Button.Styles>
-                           <!-- <StackPanel  -->
-                          <!--     VerticalAlignment="Center" -->
-                          <!--     HorizontalAlignment="Center"  -->
-                          <!--     Orientation="Horizontal"> -->
-                          <!--      -->
-                          <!--     <avalonia:MaterialIcon Kind="{Binding Icon}"  -->
-                          <!--                            Width="16"  -->
-                          <!--                            Height="16"  -->
-                          <!--                            Foreground="White" /> -->
-                          <!--                             -->
-                          <!--    -->
-                          <!-- </StackPanel> -->
+                         
                        </Button>
                    </DataTemplate>
                </ItemsControl.ItemTemplate>
