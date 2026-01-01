@@ -1,28 +1,29 @@
-# JAGUAR: Local Development Orchestrator
+# Jaguar: AI-Powered Development Orchestrator
 
-**Jaguar** is a self-hosted, offline-first development platform designed to streamline and automate project lifecycles. It transforms complex provisioning and build scripts into a deterministic, visual node-based workflow, executed entirely on the user's local operating system.
+Jaguar is a development platform designed to streamline and automate project lifecycles using AI. It transforms complex development tasks into a deterministic, visual node-based workflow, executed on the user's local operating system.
 
 ---
 
 ## Core Objectives
 
-1.  **Offline Capability:** Operates entirely locally, utilizing a lightweight, self-contained AI model and local file access.
-2.  **Workflow Visualization:** Provides a Blazor-based interface for designing project structure and build processes via a connectable node graph.
-3.  **CLI Orchestration:** Provides a powerful command-line interface for managing the platform's lifecycle (startup, status, execution) and triggering workflow events.
-4.  **Local Mastery:** Enables secure, direct interaction with the user's file system for instantaneous project generation and modification.
+1.  **AI-Powered Orchestration:** Utilizes a Large Language Model (LLM) to interpret user prompts and generate structured project plans.
+2.  **Visual Workflow Editor:** Provides a desktop application with a visual, node-based canvas for designing and visualizing project workflows.
+3.  **Local-First Execution:** Operates primarily on the local machine, allowing direct and secure interaction with the file system.
+4.  **Multi-faceted Interaction:** Offers multiple interfaces for interacting with the platform, including a desktop GUI, a command-line interface (CLI), and a web API.
 
 ---
 
 ## Architecture Overview
 
-The platform is designed around a decoupled, four-component architecture to ensure scalability, stability, and clean separation of concerns. 
+The platform is designed with a decoupled, multi-component architecture to ensure a clean separation of concerns.
 
 | Component | Type | Responsibility |
 | :--- | :--- | :--- |
-| **`Jaguar.Cli`** | Console Application | The primary entry point. Responsible for launching, monitoring, and controlling the **Backend** and **WebUI** processes. |
-| **`Jaguar.Backend`** | ASP.NET Core Web API | The execution server. Exposes secure, local API endpoints for File System I/O, Template Management, and interfacing with the **Core** logic. |
-| **`Jaguar.WebUI`** | Blazor Server Application | The user interface. Renders the visual node-based workflow editor. Communicates exclusively with the **Backend** via `HttpClient`. |
-| **`Jaguar.Core`** | C# Class Library | The shared intelligence layer. Contains all non-web logic, including the Node Flow Solver, Local AI Model wrappers, and critical domain models. |
+| **`Jaguar.Desktop`** | Avalonia UI Application | The primary user interface. It provides the visual node-based workflow editor and interacts with the core logic. |
+| **`Jaguar.Core`** | C# Class Library | The shared intelligence layer. It contains the core logic, including the `Orchestrator`, domain models, and business rules. |
+| **`Jaguar.LLM`** | C# Class Library | Handles all interactions with the Large Language Model (Google's Gemini Pro) to provide the AI capabilities. |
+| **`Jaguar.Api`** | ASP.NET Core Web API | Exposes Jaguar's functionality over HTTP, allowing for remote or programmatic interaction with the platform. |
+| **`Jaguar.Cli`** | .NET Console Application | Provides a command-line interface for scripting and automating interactions with the Jaguar platform. |
 
 ---
 
@@ -41,15 +42,15 @@ The platform is designed around a decoupled, four-component architecture to ensu
     cd Jaguar
     ```
 
-2.  **Build Solution:**
+2.  **Build the Solution:**
     ```bash
     dotnet build JaguarSolution.sln
     ```
 
-3.  **Run the Platform:**
-    The CLI will launch the necessary services and open the WebUI in your default browser.
+3.  **Run the Desktop Application:**
+    The primary way to use Jaguar is through the desktop application.
     ```bash
-    dotnet run --project Jaguar.Cli run
+    dotnet run --project Jaguar.Desktop
     ```
 
 ---
@@ -60,15 +61,7 @@ The **`Jaguar.Cli`** provides high-level control over the platform:
 
 | Command | Function |
 | :--- | :--- |
-| **`jaguar run`** | Starts the `Backend` API and `WebUI` services and opens the browser. |
-| **`jaguar stop`** | Gracefully shuts down all active Jaguar processes. |
-| **`jaguar status`** | Reports the current operational status and ports of the running services. |
+| **`jaguar run`** | Starts the necessary background services for the Jaguar platform. |
+| **`jaguar status`** | Reports the current operational status of the running services. |
 | **`jaguar init`** | Initializes a new project directory, prompting for a template. |
 | **`jaguar flow execute`** | Executes the workflow defined in the current project's manifest file (`jaguar.json`). |
-
----
-
-This revision is professional, clearly defines the architecture, and uses direct language appropriate for sophisticated developer tooling.
-
-Do you have any further refinements or specific sections you'd like to add to this professional README?
-
