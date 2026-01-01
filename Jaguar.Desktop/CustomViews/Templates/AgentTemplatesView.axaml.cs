@@ -15,17 +15,4 @@ public partial class AgentTemplatesView : UserControl
         InitializeComponent();
         DataContext = new AgentTemplatesViewModel();
     }
-    
-    private async void OnPointerPressed(object? sender, PointerPressedEventArgs e)
-    {
-        if (sender is Control control && control.DataContext is AgentTemplatesViewModel selected)
-        {
-            // var data = new DataObject();
-            // // Custom key to identify Jaguar agents
-            // data.Set("JaguarNode", selected);
-            //
-            // // Start the async drag operation
-            // await DragDrop.DoDragDropAsync(e, data, DragDropEffects.Copy);
-        }
-    }
 }

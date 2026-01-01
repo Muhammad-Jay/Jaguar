@@ -6,46 +6,51 @@
     <ContextMenu
         x:Key="CanvasContextMenu"
         x:DataType="vm:CanvasViewModel"
-        Width="300"
+        Width="310"
         MaxHeight="500"
-        Padding="0"
         Background="Transparent"
+        CornerRadius="10"
         >
+      
         <ContextMenu.Styles>
-            <Style Selector="MenuItem[IsPointerOver=True] /template/ ContextMenu">
+            <Style Selector="MenuItem">
                 <Setter Property="Background" Value="Transparent"/>
+            </Style>
+
+            <Style Selector="MenuItem[IsPointerOver=True] /template/ ContentPresenter">
+                <Setter Property="Background" Value="Transparent"/>
+            </Style>
+
+            <Style Selector="MenuItem[IsPointerOver=True]">
+                <Setter Property="TextBlock.Foreground" Value="Cyan"/>
             </Style>
         </ContextMenu.Styles>
 
-        <ContextMenu.Template>
-            <ControlTemplate>
-                <Border 
-                    CornerRadius="10"
-                    BorderThickness="1"
-                    Background="{StaticResource JaguarSurface}"
-                    BorderBrush="{StaticResource JaguarSurface}"
-                    Width="{TemplateBinding Width}"
-                    Padding="{TemplateBinding Padding}">
-                          
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" AllowAutoHide="True">
-                        <ItemsPresenter Name="PART_ItemsPresenter">
-                            <ItemsPresenter.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Spacing="10" />
-                                </ItemsPanelTemplate>
-                            </ItemsPresenter.ItemsPanel>
-                        </ItemsPresenter>
-                    </ScrollViewer>
-                </Border>
-            </ControlTemplate>
-        </ContextMenu.Template>
-
-        <MenuItem 
+       <ContentControl
+           VerticalAlignment="Stretch"
+           Width="310"
+           BorderThickness="1"
+           BorderBrush="{StaticResource Neutral800Brush}"
+           CornerRadius="10"
+           Padding="10"
+           ClipToBounds="True"
+           Template="{StaticResource WorkflowGlassPanelTemplate}">
+           
+           
+           <ScrollViewer 
+               ClipToBounds="True"
+               IsHitTestVisible="False"
+               ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+               ScrollViewer.VerticalScrollBarVisibility="Auto"
+               VerticalAlignment="Stretch"
+               HorizontalAlignment="Stretch">
+               
+               <StackPanel Orientation="Vertical" Spacing="5">
+                    <MenuItem 
             CornerRadius="5"
             Padding="6"
             HorizontalAlignment="Stretch"
             FontSize="10"
-            Classes="MenuItemClass"
             Background="{StaticResource MainBg}"
             Header="Add Research Agent">
             <MenuItem.Icon><avalonia:MaterialIcon Kind="SearchWeb" Foreground="Cyan"/></MenuItem.Icon>
@@ -56,7 +61,6 @@
             Padding="6"
             HorizontalAlignment="Stretch"
             FontSize="10"
-            Classes="MenuItemClass"
             Background="{StaticResource MainBg}"
             Header="Add Utility Agent">
             <MenuItem.Icon><avalonia:MaterialIcon Kind="Tools" /></MenuItem.Icon>
@@ -67,7 +71,6 @@
             Padding="6"
             HorizontalAlignment="Stretch"
             FontSize="10"
-            Classes="MenuItemClass"
             Background="{StaticResource MainBg}"
             Header="Clear Canvas">
             <MenuItem.Icon><avalonia:MaterialIcon Kind="DeleteVariant" Foreground="Red"/></MenuItem.Icon>
@@ -78,7 +81,6 @@
             Padding="6"
             HorizontalAlignment="Stretch"
             FontSize="10"
-            Classes="MenuItemClass"
             Background="{StaticResource MainBg}"
             Header="Add Research Agent">
             <MenuItem.Icon><avalonia:MaterialIcon Kind="SearchWeb" Foreground="Cyan"/></MenuItem.Icon>
@@ -89,7 +91,6 @@
             Padding="6"
             HorizontalAlignment="Stretch"
             FontSize="10"
-            Classes="MenuItemClass"
             Background="{StaticResource MainBg}"
             Header="Add Utility Agent">
             <MenuItem.Icon><avalonia:MaterialIcon Kind="Tools" /></MenuItem.Icon>
@@ -100,43 +101,13 @@
             Padding="6"
             HorizontalAlignment="Stretch"
             FontSize="10"
-            Classes="MenuItemClass"
             Background="{StaticResource MainBg}"
             Header="Clear Canvas">
             <MenuItem.Icon><avalonia:MaterialIcon Kind="DeleteVariant" Foreground="Red"/></MenuItem.Icon>
         </MenuItem>
+               </StackPanel>
+           </ScrollViewer>
+       </ContentControl>
         
-        <MenuItem 
-            CornerRadius="5"
-            Padding="6"
-            HorizontalAlignment="Stretch"
-            FontSize="10"
-            Classes="MenuItemClass"
-            Background="{StaticResource MainBg}"
-            Header="Add Research Agent">
-            <MenuItem.Icon><avalonia:MaterialIcon Kind="SearchWeb" Foreground="Cyan"/></MenuItem.Icon>
-        </MenuItem>
-        
-        <MenuItem 
-            CornerRadius="5"
-            Padding="6"
-            HorizontalAlignment="Stretch"
-            FontSize="10"
-            Classes="MenuItemClass"
-            Background="{StaticResource MainBg}"
-            Header="Add Utility Agent">
-            <MenuItem.Icon><avalonia:MaterialIcon Kind="Tools" /></MenuItem.Icon>
-        </MenuItem>
-        <Separator />
-        <MenuItem 
-            CornerRadius="5"
-            Padding="6"
-            HorizontalAlignment="Stretch"
-            FontSize="10"
-            Classes="MenuItemClass"
-            Background="{StaticResource MainBg}"
-            Header="Clear Canvas">
-            <MenuItem.Icon><avalonia:MaterialIcon Kind="DeleteVariant" Foreground="Red"/></MenuItem.Icon>
-        </MenuItem>
     </ContextMenu>
 </ResourceDictionary>

@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Jaguar.Desktop.CustomViews.Templates;
 using Jaguar.Desktop.Models;
 using Jaguar.Desktop.Models.Ui;
 using Jaguar.Desktop.Services.AppState;
@@ -24,7 +25,7 @@ namespace Jaguar.Desktop.ViewModels.Menus
             }
             MenuItems = new ObservableCollection<MenuItems>()
             {
-                new MenuItems(" ",  MaterialIconKind.Settings, typeof(AgentTemplatesViewModel), Position.Right), // Explorer
+                new MenuItems(" ",  MaterialIconKind.Settings, new AgentTemplatesView(), Position.Right), // Explorer
                 // new MenuItems("B", "Explorer", "Right"), // Agents
                 // new MenuItems("C️", "Workflows", "Right"), // Workflows
                 // new MenuItems("D", "Knowledge", "Right"), // Knowledge

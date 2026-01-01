@@ -1,0 +1,104 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:dialog="clr-namespace:Jaguar.Desktop.ViewModels.Dialog"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Jaguar.Desktop.CustomViews.Dialog.DialogView"
+             x:DataType="dialog:DialogViewModel">
+   
+   <Panel
+       IsVisible="{Binding AppState.IsAgentDialogOpen}"
+       Width="600"
+       Height="500"
+       Background="Transparent"
+       ZIndex="70"
+       ClipToBounds="True">
+       
+       <Border
+           Width="600"
+           Height="500"
+           VerticalAlignment="Center"
+           HorizontalAlignment="Center"
+           CornerRadius="15"
+           Background="Transparent"
+           BorderThickness="2"
+           BorderBrush="{StaticResource JaguarSurface}"
+           ClipToBounds="True"
+       >
+        <ContentControl Template="{StaticResource GlassPanelTemplate}"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch" 
+                        Padding="10"
+                        BorderBrush="{StaticResource JaguarSurface}"
+                        ClipToBounds="True">
+            
+               <Grid RowDefinitions="30, *, 30">
+            <Border 
+                HorizontalAlignment="Stretch"
+                Height="30"
+                Padding="5"
+                Grid.Row="0">
+                
+                <StackPanel
+                    Width="20"
+                    HorizontalAlignment="Right"
+                    Height="20">
+                    
+                    <Button
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Stretch"
+                        CornerRadius="10"
+                        Padding="3"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        Background="Transparent"
+                        Command="{Binding ToggleAgentDialogCommand}"
+                    >
+                        <avalonia:MaterialIcon 
+                            Kind="Close" FontSize="12"
+                            FontWeight="SemiBold"
+                            Foreground="{StaticResource JaguarTextPrimary}"/>
+                    </Button>
+                </StackPanel>
+            </Border>
+            
+            <Border
+                Grid.Row="1"
+                Margin="10"
+                CornerRadius="10"
+                Background="Transparent"
+                HorizontalAlignment="Stretch">
+                
+                <TransitioningContentControl Content="{Binding CurrentView}"/>
+                
+            </Border>
+            
+            <Border
+                Grid.Row="2"
+                HorizontalAlignment="Stretch"
+                Height="20"
+                Padding="5">
+                
+                <Button
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    CornerRadius="10"
+                    Padding="3"
+                    VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    Foreground="White"
+                    FontWeight="Regular"
+                    FontSize="10"
+                    Background="Transparent"
+                    Content="cancel"
+                    Command="{Binding ToggleAgentDialogCommand}"
+                />
+            </Border>
+        </Grid>
+            
+        </ContentControl>
+    </Border>
+   </Panel>
+</UserControl>

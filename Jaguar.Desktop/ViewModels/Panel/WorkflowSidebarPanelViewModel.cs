@@ -47,12 +47,8 @@ public partial class  WorkflowSidebarPanelViewModel: ViewModelBase
         if (Program.AppHost != null)
         {
             WorkflowSidebarPanelViewModel currentVm = Program.AppHost.Services.GetRequiredService<WorkflowSidebarPanelViewModel>();
-            var vm = Program.AppHost.Services.GetService(selectedItem.ViewModel);
-
-            if (currentVm.Content != vm || vm != null)
-            {
-                currentVm.SetContent(vm);;
-            }
+            
+                currentVm.SetContent(selectedItem.ViewModel);
         }
     }
 

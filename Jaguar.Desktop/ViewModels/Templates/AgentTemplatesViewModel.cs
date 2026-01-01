@@ -14,7 +14,8 @@ public partial class AgentTemplatesViewModel : ViewModelBase
 {
     [ObservableProperty]
     private ObservableCollection<FlowNode> _availableTemplates;
-
+    
+    [ObservableProperty]
     private CanvasViewModel? _canvasVm;
 
     public AgentTemplatesViewModel()
@@ -22,15 +23,15 @@ public partial class AgentTemplatesViewModel : ViewModelBase
         _availableTemplates = new ObservableCollection<FlowNode>(AgentTemplates.GetAvailableAgents());
         if (Program.AppHost != null)
         {
-            _canvasVm = Program.AppHost.Services.GetRequiredService<CanvasViewModel>();
+            CanvasVm = Program.AppHost.Services.GetRequiredService<CanvasViewModel>();
         }
     }
 
     [RelayCommand]
     public void OnItemClick(FlowNode item)
     {
-        if(_canvasVm == null) return;
-        Console.WriteLine(item.Type);
-        _canvasVm.AddNode(item);
+        if(CanvasVm == null) return;
+        Console.WriteLine($"{item.Type} Node Added to the Workflow.");
+        CanvasVm.AddNode(item);
     }
 }

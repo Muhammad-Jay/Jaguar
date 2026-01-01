@@ -2,7 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
    <ControlTemplate x:Key="GlassPanelTemplate" TargetType="ContentControl">
        <Panel>
-           <Border CornerRadius="{TemplateBinding CornerRadius}" BoxShadow="0 10 30 0 #80000000" />
+           <Border CornerRadius="{TemplateBinding CornerRadius}" BoxShadow="0 10 30 0 #80000000" >
+               <Border.Effect>
+                   <BlurEffect Radius="20"/>
+               </Border.Effect>
+           </Border>
 
            <Border CornerRadius="{TemplateBinding CornerRadius}" 
                    Background="#25171717"
@@ -38,11 +42,15 @@
     
      <ControlTemplate x:Key="WorkflowGlassPanelTemplate" TargetType="ContentControl">
        <Panel ZIndex="50">
-           <Border CornerRadius="{TemplateBinding CornerRadius}" BoxShadow="0 10 30 0 #80000000" />
-
+           <Border CornerRadius="{TemplateBinding CornerRadius}" BoxShadow="0 10 30 0 #80000000" >
+               <Border.Effect>
+                   <BlurEffect Radius="20"/>
+               </Border.Effect>
+           </Border>
            <Border CornerRadius="{TemplateBinding CornerRadius}" 
                    Background="#25171717"
                    BorderThickness="1.5" 
+                   ClipToBounds="True"
                    BorderBrush="#40FFFFFF">
                <Border.OpacityMask>
                    <VisualBrush TileMode="Tile" SourceRect="0,0,50,50" DestinationRect="0,0,50,50">
@@ -57,7 +65,10 @@
                </Border.OpacityMask>
            </Border>
 
-           <Border CornerRadius="{TemplateBinding CornerRadius}" Padding="{TemplateBinding Padding}">
+           <Border 
+               ClipToBounds="True"
+               CornerRadius="{TemplateBinding CornerRadius}"
+               Padding="{TemplateBinding Padding}">
                <Border.Background>
                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
                        <GradientStop Offset="0" Color="#20FFFFFF" />
@@ -65,7 +76,6 @@
                        <GradientStop Offset="1" Color="#15FFFFFF" />
                    </LinearGradientBrush>
                </Border.Background>
-            
                <ContentPresenter Content="{TemplateBinding Content}"
                                  ContentTemplate="{TemplateBinding ContentTemplate}"/>
            </Border>
@@ -109,8 +119,12 @@
 
     <ControlTemplate x:Key="GlassPanelNeutralTemplate" TargetType="ContentControl">
         <Panel>
-            <Border CornerRadius="{TemplateBinding CornerRadius}" BoxShadow="0 10 30 0 #80000000" />
-
+            <Border CornerRadius="{TemplateBinding CornerRadius}" BoxShadow="0 10 30 0 #80000000" >
+                <Border.Effect>
+                    <BlurEffect Radius="20"/>
+                </Border.Effect>
+            </Border>
+            
             <Border CornerRadius="{TemplateBinding CornerRadius}" 
                     Background="#25262626" BorderThickness="1.5" 
                     BorderBrush="#40404040"> <Border.OpacityMask>

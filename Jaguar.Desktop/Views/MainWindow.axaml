@@ -11,7 +11,7 @@
         Title="Jaguar"
         SystemDecorations="None"
         ExtendClientAreaTitleBarHeightHint="-1"
-        TransparencyLevelHint="Transparent"
+        TransparencyLevelHint="AcrylicBlur"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
         CornerRadius="15"

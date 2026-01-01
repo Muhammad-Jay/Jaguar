@@ -2,8 +2,8 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Avalonia;
+using CommunityToolkit.Mvvm.Input;
 using Jaguar.Desktop.Models;
-using Jaguar.Desktop.Views;
 
 namespace Jaguar.Desktop.ViewModels;
 
@@ -14,12 +14,32 @@ public partial class CanvasViewModel : ViewModelBase
        
     public CanvasViewModel()
     {
-        Nodes.Add(new FlowNode 
-        { 
-            Title = "Node 3", 
+        var orches = new FlowNode
+        {
+            Title = "Node 3",
             Location = new Point(400, 400),
             Type = NodeType.Orchestrator
-        });
+        };
+
+        var output = new ConnectorViewModel(orches, "Output");
+        orches.Connectors.Add(output);
+        
+        var Kernel = new FlowNode
+        {
+            Title = "Node 3",
+            Location = new Point(400, 400),
+            Type = NodeType.Agent
+        };
+        var input = new ConnectorViewModel(Kernel, "Input");
+        Kernel.Connectors.Add(input);
+        
+        Nodes.Add(orches);
+        Nodes.Add(Kernel);
+        
+
+        var connection = new ConnectionViewModel(output.Anchor, input.Anchor);
+        
+        Connections.Add(connection);
     }
     
     // public void CreateLink(FlowNode sourceNode, FlowNode targetNode)
@@ -41,7 +61,7 @@ public partial class CanvasViewModel : ViewModelBase
     //         Connections.Add(connection);
     //     }
     // }
-
+    
     public void AddNode(FlowNode node)
     {
         Nodes.Add(new FlowNode 

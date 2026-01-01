@@ -4,6 +4,7 @@ using Jaguar.Core.Abstractions;
 using Jaguar.Core.Services;
 using Jaguar.Desktop.Abstractions;
 using Jaguar.Desktop.Services.AppState;
+using Jaguar.Desktop.Services.Workflow;
 using Jaguar.Desktop.ViewModels;
 using Jaguar.Desktop.ViewModels.MenuItemViewModel;
 using Jaguar.Desktop.ViewModels.Panel;
@@ -35,6 +36,7 @@ class Program
                     services.AddTransient<WorkflowViewModel>();
                     services.AddSingleton<WorkflowSidebarPanelViewModel>();
                     services.AddSingleton<MainWindow>();
+                    services.AddSingleton<IWorkflowState, WorkflowState>();
                     services.AddTransient<IAiProvider, LlmProvider>(); 
                     services.AddSingleton<Orchestrator>();
                     services.AddSingleton<AppStateService>();

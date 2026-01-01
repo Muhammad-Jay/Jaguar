@@ -1,0 +1,94 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
+                    x:DataType="viewModels:WorkflowViewModel">
+
+    <LinearGradientBrush x:Key="CyanHoverGradient" StartPoint="0%,0%" EndPoint="100%,0%">
+        <GradientStop Offset="0.0" Color="#00FFFF" />
+        <GradientStop Offset="1.0" Color="#008B8B" />
+    </LinearGradientBrush>
+    
+    <ControlTheme x:Key="JaguarFlyoutTheme" TargetType="FlyoutPresenter">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="MinWidth" Value="0"/>
+        <Setter Property="MinHeight" Value="0"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <ContentPresenter Name="PART_ContentPresenter"
+                                  Background="{TemplateBinding Background}"
+                                  BorderBrush="{TemplateBinding BorderBrush}"
+                                  BorderThickness="{TemplateBinding BorderThickness}"
+                                  Content="{TemplateBinding Content}"
+                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                  Padding="{TemplateBinding Padding}"
+                                  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+    
+    <Flyout x:Key="OrchestratorContextMenu" 
+            FlyoutPresenterTheme="{StaticResource JaguarFlyoutTheme}">
+        
+        <ContentControl
+            VerticalAlignment="Stretch"
+            Width="310"
+            BorderThickness="1"
+            BorderBrush="{StaticResource Neutral800Brush}"
+            CornerRadius="10"
+            Padding="10"
+            ClipToBounds="True"
+            Template="{StaticResource WorkflowGlassPanelTemplate}">
+            
+            <Border 
+                    Background="Transparent"
+                    CornerRadius="10"
+                    Padding="10"
+                    Width="310"
+                >
+                 <StackPanel Spacing="4">
+                     
+                    <ScrollViewer Background="Transparent" MaxHeight="500">
+                        <StackPanel
+                            Background="Transparent"
+                            Orientation="Vertical" Spacing="2" Classes="JaguarMenu">
+                    
+                            <StackPanel.Styles>
+                                <Style Selector="MenuItem">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                </Style>
+                                <Style Selector="MenuItem[IsPointerOver=True] /template/ ContentPresenter#PART_HeaderPresenter">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                </Style>
+                                <Style Selector="MenuItem[IsPointerOver=True]">
+                                    <Setter Property="TextBlock.Foreground" Value="Cyan"/>
+                                </Style>
+                            </StackPanel.Styles>
+                    
+                            <MenuItem Command="{Binding ToggleAgentDialogCommand}"  Header="Initialize 3-Step Plan" FontWeight="Bold" />
+                            <MenuItem Header="Pause All Workstreams" />
+                            <Separator />
+
+                            <MenuItem Header="Semantic Intelligence">
+                                <MenuItem Header="Analyze Context Overlap" />
+                                <MenuItem Header="Prune Irrelevant Vectors" />
+                            </MenuItem>
+
+                            <MenuItem Header="Agent Workforce">
+                                <MenuItem Header="Spawn Research Swarm" />
+                                <MenuItem Header="View Chain of Thought" />
+                            </MenuItem>
+
+                            <Separator />
+                            <MenuItem Header="Terminate Workflow" Foreground="#FF5555" />
+                        </StackPanel>
+                    </ScrollViewer>
+                    
+                </StackPanel>
+            </Border>
+        </ContentControl>
+    </Flyout>
+</ResourceDictionary>

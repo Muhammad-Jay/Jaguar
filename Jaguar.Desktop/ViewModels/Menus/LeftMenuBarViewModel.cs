@@ -2,6 +2,7 @@ using System;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Jaguar.Desktop.CustomViews.MenuItemView;
 using Jaguar.Desktop.Models;
 using Jaguar.Desktop.Models.Ui;
 using Jaguar.Desktop.Services.AppState;
@@ -25,7 +26,7 @@ namespace Jaguar.Desktop.ViewModels.Menus
                 
                 MenuItems = new ObservableCollection<MenuItems>
                 {
-                    new MenuItems("S",  MaterialIconKind.Settings, typeof(SettingsViewModel), Position.Left), // Explorer
+                    new MenuItems("S",  MaterialIconKind.Settings, new SettingsView(), Position.Left), // Explorer
                     // new MenuItems("B", "Agents", "Left"), // Agents
                     // new MenuItems("C️", "Workflows", "Left"), // Workflows
                     // new MenuItems("D", "Knowledge", "Left"), // Knowledge
@@ -40,13 +41,9 @@ namespace Jaguar.Desktop.ViewModels.Menus
             if (item == null) throw new ArgumentNullException(nameof(item));
             if (AppState != null && Program.AppHost != null)
             {
-                var vm = Program.AppHost?.Services.GetRequiredService(item.ViewModel);
-
-                if (vm != null)
-                {
-                    AppState.CurrentView = vm;
-                    AppState.RequestPanel(vm, item.Position);
-                }
+               
+                    AppState.CurrentView = item.ViewModel;
+                    AppState.RequestPanel(item.ViewModel, item.Position);
             }
         }
     }

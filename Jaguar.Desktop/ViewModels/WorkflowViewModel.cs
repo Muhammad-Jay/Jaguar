@@ -21,27 +21,29 @@ namespace Jaguar.Desktop.ViewModels
         [ObservableProperty] private AppStateService? _appState;
         [ObservableProperty] private OrchestratorAnalysis? _analysis;
         [ObservableProperty] private bool _isOverlayVisible;
-
+        
         [RelayCommand] 
         public void ToggleOverlay()
         {
             IsOverlayVisible = !IsOverlayVisible;
         }
         
-        // public async Task ShowDialogAsync()
-        // {
-        //     var dialog = new SettingsWindow();
-        //     // 'this' is the parent window. 
-        //     // ShowDialog makes it modal (locks the parent).
-        //     await dialog.ShowDialog(this); 
-        // }
-        
         public WorkflowViewModel()
         {
             if (Program.AppHost != null)
             {
-                // AppState = Program.AppHost.Services.GetRequiredService<AppStateService>();
+                AppState = Program.AppHost.Services.GetRequiredService<AppStateService>();
+                
                 WorkFlowOrchestrator = Program.AppHost.Services.GetRequiredService<Orchestrator>();
+            }
+        }
+        
+        [RelayCommand]
+        public void ToggleAgentDialog()
+        {
+            if(AppState != null)
+            {
+                AppState.IsAgentDialogOpen = !AppState.IsAgentDialogOpen;   
             }
         }
         

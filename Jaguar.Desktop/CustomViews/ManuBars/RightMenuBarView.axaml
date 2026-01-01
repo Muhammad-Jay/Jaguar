@@ -34,9 +34,9 @@
                         CornerRadius="3"
                         Classes="MenuBtn" 
                         FontSize="10" 
-                        Click="{Binding $parent[ItemsControl].((viewModels:RightBarMenuViewModel)DataContext).AppState.TogglePanelCommand}"
-                        FontWeight="Regular"
                         CommandParameter="{Binding}"
+                        Command="{Binding $parent[ItemsControl].((viewModels:RightBarMenuViewModel)DataContext).AppState.TogglePanelCommand}"
+                        FontWeight="Regular"
                         Foreground="DarkGray"
                         >
                         
