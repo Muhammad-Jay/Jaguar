@@ -6,6 +6,7 @@
              xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels.Menus"
              x:DataType="viewModels:RightBarMenuViewModel"
              x:Class="Jaguar.Desktop.CustomViews.ManuBars.RightMenuBarView">
+    
     <Border BorderThickness="1"
             BorderBrush="{StaticResource JaguarSurface}"
             VerticalAlignment="Stretch"
@@ -35,7 +36,7 @@
                         Classes="MenuBtn" 
                         FontSize="10" 
                         CommandParameter="{Binding}"
-                        Command="{Binding $parent[ItemsControl].((viewModels:RightBarMenuViewModel)DataContext).AppState.TogglePanelCommand}"
+                        Command="{Binding $parent[ItemsControl].((viewModels:RightBarMenuViewModel)DataContext).SelectedMenuChangeCommand}"
                         FontWeight="Regular"
                         Foreground="DarkGray"
                         >

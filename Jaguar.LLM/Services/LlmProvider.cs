@@ -37,7 +37,8 @@ public class LlmProvider: IAiProvider
             };
             
             request.AddText($"{systemInstruction}\n {prompt}");
-        
+
+           
             var response = await model.GenerateContentAsync(request);
             
             var jsonString = response.ToObject<OrchestratorAnalysis>();

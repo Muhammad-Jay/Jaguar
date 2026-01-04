@@ -18,9 +18,6 @@
         TransparencyBackgroundFallback="Transparent"
         ExtendClientAreaToDecorationsHint="True"
         >
-    <Design.DataContext>
-        <viewModels:MainWindowViewModel/>
-    </Design.DataContext>
     
     <Panel>
         <Border Background="{StaticResource MainBg}" IsHitTestVisible="False" />
@@ -50,9 +47,7 @@
             </Grid>
 
             <Panel>
-                <ContentControl>
-                    <views:WorkflowView/>
-                </ContentControl>
+                <TransitioningContentControl Content="{Binding Content}"/>
             </Panel>
         </DockPanel>
     </Panel>

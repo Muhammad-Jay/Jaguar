@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Jaguar.Desktop.ViewModels;
 
@@ -10,21 +11,16 @@ public partial class OrchestratorNodeView : UserControl
     public OrchestratorNodeView()
     {
         InitializeComponent();
-        DataContext = new WorkflowViewModel();
     }
     
     private void OnPointerPressed(object sender, PointerPressedEventArgs e)
     {
-        var pointerUpdate = e.GetCurrentPoint(this);
-        if (pointerUpdate.Properties.IsRightButtonPressed)
+        if (e.GetCurrentPoint(this).Properties.IsRightButtonPressed)
         {
-            // Fetch the generic Flyout from resources
-            if (Application.Current?.TryGetResource("OrchestratorContextMenu", out var res) == true 
-                && res is Flyout flyout)
-            {
-                flyout.ShowAt(this, showAtPointer: true);
-                e.Handled = true;
-            }
+            // If you are using the property approach, you don't even need this.
+            // But if you want to be 100% sure:
+            this.ContextMenu?.Open(this);
+            e.Handled = true; // This prevents the parent ItemContainer from opening ITS menu
         }
     }
 }

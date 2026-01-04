@@ -22,15 +22,17 @@ public partial class ConnectionViewModel : ViewModelBase
 public partial class Anchor: ViewModelBase
 {
     [ObservableProperty]
-        private Point _position;
+    private Point _position;
 }
 
 public partial class ConnectorViewModel : ViewModelBase
 {
     public string Name {get; set;}
     public FlowNode ParentNode { get; }
+
+    [ObservableProperty] private bool _isConnected;
     
-    public Anchor Anchor { get; } = new();
+    public Anchor Anchor { get; } = new Anchor();
 
     public ConnectorViewModel(FlowNode parent, string name)
     {

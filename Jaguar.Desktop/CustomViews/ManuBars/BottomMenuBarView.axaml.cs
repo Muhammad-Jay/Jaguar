@@ -13,7 +13,5 @@ public partial class BottomMenuBarView : UserControl
     public BottomMenuBarView()
     {
         InitializeComponent();
-        
-        DataContext = new BottomBarMenuViewModel();
     }
 }

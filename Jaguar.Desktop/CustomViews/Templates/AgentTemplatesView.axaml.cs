@@ -13,6 +13,5 @@ public partial class AgentTemplatesView : UserControl
     public AgentTemplatesView()
     {
         InitializeComponent();
-        DataContext = new AgentTemplatesViewModel();
     }
 }

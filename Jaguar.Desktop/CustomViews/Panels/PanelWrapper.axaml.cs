@@ -10,6 +10,5 @@ public partial class PanelWrapper : UserControl
     public PanelWrapper()
     {
         InitializeComponent();
-        DataContext = new PanelWrapperViewModel();
     }
 }

@@ -25,6 +25,7 @@
         <entry key="Jaguar.Desktop/CustomViews/Settings.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/CustomViews/Templates/AgentTemplatesView.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/Resources/Dialogs/OrchestratorDialogPromptView.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/Resources/NodeResources.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/Styles/GlassTheme.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/Styles/GlobalStyles.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/ViewModels/Panels/PanelWrapper.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />

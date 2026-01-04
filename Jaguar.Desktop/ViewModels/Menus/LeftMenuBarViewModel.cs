@@ -18,15 +18,15 @@ namespace Jaguar.Desktop.ViewModels.Menus
         [ObservableProperty] private MenuItems? _selectedMenu;
         public ObservableCollection<MenuItems>? MenuItems { get; }
 
-        public LeftBarMenuViewModel()
+        public LeftBarMenuViewModel(AppStateService appState, IServiceProvider serviceProvider)
         {
             if (Program.AppHost != null)
             {
-                AppState = Program.AppHost.Services.GetRequiredService<AppStateService>();
+                AppState = appState;
                 
                 MenuItems = new ObservableCollection<MenuItems>
                 {
-                    new MenuItems("S",  MaterialIconKind.Settings, new SettingsView(), Position.Left), // Explorer
+                    new MenuItems("S",  MaterialIconKind.Settings, serviceProvider.GetRequiredService<SettingsViewModel>(), Position.Left), // Explorer
                     // new MenuItems("B", "Agents", "Left"), // Agents
                     // new MenuItems("C️", "Workflows", "Left"), // Workflows
                     // new MenuItems("D", "Knowledge", "Left"), // Knowledge

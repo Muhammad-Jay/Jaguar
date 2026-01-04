@@ -34,7 +34,7 @@
                            VerticalContentAlignment="Center"
                            HorizontalContentAlignment="Center"
                            CommandParameter="{Binding}"
-                           Command="{Binding #Root.((panel:WorkflowSidebarPanelViewModel)DataContext).SelectMenuItemCommand}"
+                           Command="{Binding #Root.((panel:WorkflowSidebarPanelViewModel)DataContext).SelectedMenuChangeCommand}"
                            >
                            <Button.Styles>
                                <Style Selector="Button[IsPointerOver=True]">

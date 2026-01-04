@@ -4,15 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
              xmlns:panels="clr-namespace:Jaguar.Desktop.CustomViews.Panels"
-             xmlns:views="clr-namespace:Jaguar.Desktop.Views"
              xmlns:manuBars="clr-namespace:Jaguar.Desktop.CustomViews.ManuBars"
              xmlns:dialog="clr-namespace:Jaguar.Desktop.CustomViews.Dialog"
              x:DataType="viewModels:WorkflowViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Jaguar.Desktop.Views.WorkflowView">
-    <Design.DataContext>
-        <viewModels:WorkflowViewModel/>
-    </Design.DataContext>
     
     <Grid Background="{StaticResource MainBg}"  Margin="0,0,0, 0">
    
@@ -36,14 +32,13 @@
                 
                
    
-                <ContentControl>
-                    <views:CanvasView/>
-                </ContentControl>
+                <TransitioningContentControl Content="{Binding Content}"/>
             </Panel>
             
             <dialog:DialogView 
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
+                DataContext="{Binding DialogVm}"
                 ZIndex="60"/>
             
             <Grid
@@ -62,7 +57,29 @@
                         CornerRadius="6"
                         Template="{StaticResource GlassPanelTemplate}">
                         
-                        <manuBars:RightMenuBarView/>
+                       <StackPanel 
+                           VerticalAlignment="Stretch"
+                           HorizontalAlignment="Stretch"
+                           Spacing="10"
+                           Orientation="Vertical">
+                           
+                           <Button 
+                               HorizontalAlignment="Stretch" 
+                               Height="20"
+                               Background="DarkCyan"
+                               CornerRadius="3"
+                               Classes="MenuBtn" 
+                               Margin="2, 5, 2, 5"
+                               FontSize="10" 
+                               Command="{Binding TogglePanelCommand}"
+                               FontWeight="Regular"
+                               Foreground="DarkGray"
+                           >
+                        
+                           </Button>
+                           
+                           <manuBars:RightMenuBarView  DataContext="{Binding RightBarMenuVm}"/>
+                       </StackPanel>
                     </ContentControl>
                 </Border>
                 
@@ -81,6 +98,6 @@
             </Grid>
         </Grid>
         
-        <panels:WorkflowSidebarPanel IsVisible="{Binding AppState.IsPanelOpen}" ZIndex="50" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <panels:WorkflowSidebarPanel DataContext="{Binding WorkflowSidebarVm}" IsVisible="{Binding AppState.IsPanelOpen}" ZIndex="50" HorizontalAlignment="Right" VerticalAlignment="Center"/>
     </Grid>
 </UserControl>

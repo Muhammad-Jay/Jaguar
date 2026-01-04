@@ -4,7 +4,7 @@
        <Panel>
            <Border CornerRadius="{TemplateBinding CornerRadius}" BoxShadow="0 10 30 0 #80000000" >
                <Border.Effect>
-                   <BlurEffect Radius="20"/>
+                   <BlurEffect Radius="70"/>
                </Border.Effect>
            </Border>
 
@@ -151,6 +151,77 @@
          
                 <ContentPresenter Content="{TemplateBinding Content}"
                                   ContentTemplate="{TemplateBinding ContentTemplate}"/>
+            </Border>
+        </Panel>
+    </ControlTemplate>
+    
+    <ControlTemplate x:Key="BorderedTemplate" TargetType="ContentControl">
+        <Panel>
+            <Border
+                Background="{TemplateBinding Background}"
+                Padding="{TemplateBinding Padding}"
+                CornerRadius="{TemplateBinding CornerRadius}"
+                ClipToBounds="{TemplateBinding ClipToBounds}"
+                Width="{TemplateBinding Width}"
+                Height="{TemplateBinding Height}"
+                VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                >
+                
+                <ContentPresenter 
+                    Content="{TemplateBinding Content}"
+                    ContentTemplate="{TemplateBinding ContentTemplate}"/>
+            </Border>
+        </Panel>
+    </ControlTemplate>
+    
+    <ControlTemplate x:Key="DefaultBorderedTemplate" TargetType="ContentControl">
+        <Panel>
+            <Border
+                Background="{StaticResource MainBg}"
+                Padding="8"
+                CornerRadius="10"
+                ClipToBounds="True"
+                Width="{TemplateBinding Width}"
+                Height="{TemplateBinding Height}"
+                VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+            >
+                
+                <ContentPresenter 
+                    Content="{TemplateBinding Content}"
+                    ContentTemplate="{TemplateBinding ContentTemplate}"/>
+            </Border>
+        </Panel>
+    </ControlTemplate>
+    
+    <ControlTemplate x:Key="DefaultContextMenuTemplate" TargetType="ContentControl">
+        <Panel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Border
+                Background="{StaticResource MainBg}"
+                Padding="10"
+                CornerRadius="10"
+                ClipToBounds="True"
+                Margin="0"
+                VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+            >
+                
+               <ScrollViewer
+                   ClipToBounds="True"
+                   CornerRadius="5"
+                   Margin="0"
+                   Padding="4"
+                   IsHitTestVisible="False"
+                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                   ScrollViewer.VerticalScrollBarVisibility="Auto"
+                   VerticalAlignment="Stretch"
+                   HorizontalAlignment="Stretch">
+                  
+                   <ContentPresenter 
+                       Content="{TemplateBinding Content}"
+                       ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                   
+               </ScrollViewer>
             </Border>
         </Panel>
     </ControlTemplate>

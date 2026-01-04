@@ -3,6 +3,12 @@
              xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              xmlns:contents="clr-namespace:Jaguar.Desktop.CustomViews.Dialog.Contents"
              xmlns:contents1="clr-namespace:Jaguar.Desktop.ViewModels.Dialog.Contents"
+             xmlns:templates="clr-namespace:Jaguar.Desktop.CustomViews.Templates"
+             xmlns:templates1="clr-namespace:Jaguar.Desktop.ViewModels.Templates"
+             xmlns:menuItemViewModel="clr-namespace:Jaguar.Desktop.ViewModels.MenuItemViewModel"
+             xmlns:menuItemView="clr-namespace:Jaguar.Desktop.CustomViews.MenuItemView"
+             xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
+             xmlns:views="clr-namespace:Jaguar.Desktop.Views"
              x:Class="Jaguar.Desktop.App"
              RequestedThemeVariant="Dark">
     
@@ -12,11 +18,12 @@
                 <ResourceInclude Source="/CustomViews/ContextMenus/OrchestratorResources.axaml"/>
                 <ResourceInclude Source="/CustomViews/ContextMenus/CanvasContextMenu.axaml"/>
                 <ResourceInclude Source="avares://Nodify/Theme.axaml" />
+                <ResourceInclude Source="/Resources/NodeResources.axaml"/>
                 <ResourceInclude Source="/Styles/GlassTheme.axaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
         
-        <Color x:Key="Neutral900">#171717</Color>
+        <Color x:Key="Neutral900">#141414</Color>
         <Color x:Key="Neutral800">#262626</Color>
         <Color x:Key="JaguarCyan">#00FFFF</Color>
 
@@ -51,11 +58,50 @@
             <Setter Property="Background" Value="#3300C8FF"/>
         </Style>
         
+        <Style Selector="ContextMenu">
+            <Setter Property="Background" Value="{StaticResource Neutral900}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#3E3E3E"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="CornerRadius" Value="8"/>
+        </Style>
+        
+        <Style Selector="MenuItem:pointerover /template/ ContentPresenter#PART_HeaderPresenter">
+            <Setter Property="Background" Value="#2A2A2A" /> <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <Style Selector="MenuItem:selected /template/ ContentPresenter#PART_HeaderPresenter">
+            <Setter Property="Background" Value="#333333" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+    
+        <Style Selector="Separator">
+            <Setter Property="Background" Value="#2A2A2A"/>
+            <Setter Property="Height" Value="1"/>
+            <Setter Property="Margin" Value="0,2"/>
+        </Style>
+        
     </Application.Styles>
     
     <Application.DataTemplates>
+        <DataTemplate DataType="viewModels:CanvasViewModel">
+            <views:CanvasView/>
+        </DataTemplate>
+        
+        <DataTemplate DataType="viewModels:WorkflowViewModel">
+            <views:WorkflowView/>
+        </DataTemplate>
+        
         <DataTemplate DataType="contents1:OrchestratorDialogPromptViewModel">
             <contents:OrchestratorDialogPromptView/>
+        </DataTemplate>
+        
+        <DataTemplate DataType="templates1:AgentTemplatesViewModel">
+            <templates:AgentTemplatesView/>
+        </DataTemplate>
+        
+        <DataTemplate DataType="menuItemViewModel:SettingsViewModel">
+            <menuItemView:SettingsView/>
         </DataTemplate>
     </Application.DataTemplates>
 </Application>

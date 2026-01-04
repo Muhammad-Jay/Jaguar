@@ -12,7 +12,5 @@ public partial class TopMenuBarView : UserControl
     public TopMenuBarView()
     {
         InitializeComponent();
-
-        DataContext = new TopBarMenuViewModel();
     }
 }

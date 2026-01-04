@@ -9,7 +9,5 @@ public partial class OrchestratorDialogPromptView : UserControl
     public OrchestratorDialogPromptView()
     {
         InitializeComponent();
-
-        DataContext = new OrchestratorDialogPromptViewModel();
     }
 }

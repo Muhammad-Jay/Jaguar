@@ -19,7 +19,7 @@ namespace Jaguar.Desktop.Services
                 var template = node.Type switch
                 {
                     NodeType.Orchestrator => OrchestratorLayout,
-                    NodeType.Pm => PmLayout,
+                    NodeType.ProjectManager => PmLayout,
                     _ => RegularAgentLayout
                 };
                 

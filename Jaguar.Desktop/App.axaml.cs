@@ -1,3 +1,4 @@
+using System;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
@@ -16,15 +17,20 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        Console.WriteLine("--> Avalonia Framework Init Started");
+        
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             if (Program.AppHost != null)
             {
+                Console.WriteLine("--> Attempting to resolve MainWindow from DI...");
                 var mainWindow = Program.AppHost.Services.GetRequiredService<MainWindow>();
+                var mainVm = Program.AppHost.Services.GetRequiredService<MainWindowViewModel>();
+                
+                mainWindow.DataContext = mainVm;
+                desktop.MainWindow = mainWindow;
             
-                mainWindow.DataContext = Program.AppHost.Services.GetRequiredService<MainWindowViewModel>();
-            
-                desktop.MainWindow = new MainWindow();
+                Console.WriteLine("--> MainWindow Resolved successfully!");
             }
         }
 

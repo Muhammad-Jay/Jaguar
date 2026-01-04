@@ -2,12 +2,14 @@
 using System;
 using Jaguar.Core.Abstractions;
 using Jaguar.Core.Services;
-using Jaguar.Desktop.Abstractions;
 using Jaguar.Desktop.Services.AppState;
-using Jaguar.Desktop.Services.Workflow;
 using Jaguar.Desktop.ViewModels;
+using Jaguar.Desktop.ViewModels.Dialog;
+using Jaguar.Desktop.ViewModels.Dialog.Contents;
 using Jaguar.Desktop.ViewModels.MenuItemViewModel;
+using Jaguar.Desktop.ViewModels.Menus;
 using Jaguar.Desktop.ViewModels.Panel;
+using Jaguar.Desktop.ViewModels.Templates;
 using Jaguar.Desktop.Views;
 using Jaguar.LLM.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,23 +28,37 @@ class Program
     {
         try
         {
-            // Create the Generic Host
             AppHost = Host.CreateDefaultBuilder(args)
                 .ConfigureServices((context, services) =>
                 {
                     services.Configure<Jaguar.Core.Models.GeminiConfig>(
                         context.Configuration.GetSection("GeminiConfig"));
-                    services.AddTransient<MainWindowViewModel>(); 
-                    services.AddTransient<WorkflowViewModel>();
-                    services.AddSingleton<WorkflowSidebarPanelViewModel>();
-                    services.AddSingleton<MainWindow>();
-                    services.AddSingleton<IWorkflowState, WorkflowState>();
-                    services.AddTransient<IAiProvider, LlmProvider>(); 
-                    services.AddSingleton<Orchestrator>();
-                    services.AddSingleton<AppStateService>();
-                    services.AddSingleton<SettingsViewModel>();
-                    services.AddSingleton<CanvasViewModel>();
 
+                    // --- CORE SERVICES ---
+                    services.AddSingleton<AppStateService>();
+                    services.AddTransient<IAiProvider, LlmProvider>();
+                    services.AddSingleton<Orchestrator>();
+                    
+                    // --- VIEW MODELS ---
+                    services.AddSingleton<CanvasViewModel>();
+                    
+                    services.AddTransient<WorkflowViewModel>();
+
+                    services.AddTransient<MainWindowViewModel>();
+
+                    // --- WINDOWS ---
+                    services.AddSingleton<MainWindow>();
+                    
+                    // --- Additional View Models ---
+                    services.AddTransient<TopBarMenuViewModel>();
+                    services.AddTransient<BottomBarMenuViewModel>();
+                    services.AddTransient<LeftBarMenuViewModel>();
+                    services.AddTransient<RightBarMenuViewModel>();
+                    services.AddTransient<AgentTemplatesViewModel>();
+                    services.AddTransient<OrchestratorDialogPromptViewModel>();
+                    services.AddTransient<SettingsViewModel>();
+                    services.AddTransient<WorkflowSidebarPanelViewModel>();
+                    services.AddTransient<DialogViewModel>();
                 })
                 .Build();
 

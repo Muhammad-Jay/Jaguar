@@ -9,7 +9,5 @@ public partial class PanelTabMenuView : UserControl
     public PanelTabMenuView()
     {
         InitializeComponent();
-
-        DataContext = new WorkflowSidebarPanelViewModel();
     }
 }

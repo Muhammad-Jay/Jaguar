@@ -3,17 +3,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModel="clr-namespace:Jaguar.Desktop.Models"
+             xmlns:nodify="clr-namespace:Nodify;assembly=Nodify"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="viewModel:ConnectorViewModel"
              x:Class="Jaguar.Desktop.CustomViews.Connector.ConnectorView">
     <!-- ReSharper disable once InconsistentNaming -->
-    <Ellipse
+    <nodify:Connector
         Name="PART_connectorDot"
         Width="10"
         Height="10"
-        Fill="White">
-        <Ellipse.RenderTransform>
-            
-        </Ellipse.RenderTransform>
-    </Ellipse>
+        Background="White"
+        Anchor="{Binding Anchor.Position, Mode=TwoWay}"
+        IsConnected="{Binding IsConnected}"
+        >
+       
+    </nodify:Connector>
 </UserControl>

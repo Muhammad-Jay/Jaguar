@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -14,19 +15,19 @@ namespace Jaguar.Desktop.ViewModels.Menus
 {
     public partial class  RightBarMenuViewModel: ViewModelBase
     {
+        private readonly IServiceProvider _serviceProvider;
         [ObservableProperty] private AppStateService? _appState;
-        public ObservableCollection<MenuItems> MenuItems {get; set;}
+        public ObservableCollection<MenuItems> MenuItems {get;}
 
-        public RightBarMenuViewModel()
+        public RightBarMenuViewModel(AppStateService appState, IServiceProvider serviceProvider)
         {
-            if (Program.AppHost != null)
-            {
-                AppState = Program.AppHost.Services.GetRequiredService<AppStateService>();
-            }
+            _serviceProvider = serviceProvider;
+            AppState = appState;
+            Console.WriteLine($"Menu Init: AppState is {(appState != null ? "Active" : "Null")}");
             MenuItems = new ObservableCollection<MenuItems>()
             {
-                new MenuItems(" ",  MaterialIconKind.Settings, new AgentTemplatesView(), Position.Right), // Explorer
-                // new MenuItems("B", "Explorer", "Right"), // Agents
+                new MenuItems(" ",  MaterialIconKind.Home, serviceProvider.GetRequiredService<AgentTemplatesViewModel>(), Position.Right), // Explorer
+                new MenuItems(" ",  MaterialIconKind.Settings, serviceProvider.GetRequiredService<SettingsViewModel>(), Position.Right), // Agents
                 // new MenuItems("C️", "Workflows", "Right"), // Workflows
                 // new MenuItems("D", "Knowledge", "Right"), // Knowledge
             };
@@ -34,5 +35,17 @@ namespace Jaguar.Desktop.ViewModels.Menus
         
         [RelayCommand]
         public void TogglePanel () =>  AppState.IsPanelOpen = !AppState.IsPanelOpen;
+        
+        [RelayCommand]
+        public void OnSelectedMenuChange(MenuItems? item)
+        {
+            if (item == null) throw new ArgumentNullException(nameof(item));
+            if (AppState != null && Program.AppHost != null)
+            {
+               
+                AppState.CurrentView = item.ViewModel;
+                AppState.RequestPanel(item.ViewModel, item.Position);
+            }
+        }
     }
 }

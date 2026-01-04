@@ -8,9 +8,9 @@ namespace Jaguar.Desktop.ViewModels
         [ObservableProperty] private ViewModelBase _content;
         [ObservableProperty] private bool _isRightPanelOpen = true;
         
-        public MainWindowViewModel()
+        public MainWindowViewModel(WorkflowViewModel workflow)
         {
-            Content = new WorkflowViewModel();
+            Content = workflow;
         }
     }
 }

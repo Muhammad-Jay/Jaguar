@@ -5,19 +5,45 @@
              xmlns:models="clr-namespace:Jaguar.Desktop.Models"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="models:FlowNode"
+             Name="RegularAgent"
+             ContextMenu="{StaticResource OrchestratorContextMenu}"
              x:Class="Jaguar.Desktop.CustomViews.Nodes.Agents.RegularAgentNodeView">
-    <Border
-        Width="100"
-        Height="100"
-        Name="RegularNode"
-        CornerRadius="10"
-        Background="#1E1F20"
-        BorderThickness="2"
-        ClipToBounds="True"
+    
+    <Panel
+        Width="210"
+        Height="120"
+        Background="Transparent"
         >
-        <Border.Effect>
-            <DropShadowEffect Color="#1E1F20" Opacity="0.3"></DropShadowEffect>
-        </Border.Effect>
         
-    </Border>
+        <ContentControl
+            Template="{StaticResource  DefaultNodeAnchor}"
+            />
+        
+        <Border
+            Width="120"
+            Height="120"
+            Name="RegularNode"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            CornerRadius="10"
+            Background="#1E1F20"
+            BorderThickness="2"
+            Padding="20"
+            BorderBrush="{StaticResource JaguarSurface}"
+            ClipToBounds="False"
+        >
+            <Border.Effect>
+                <DropShadowEffect Color="#262626" Opacity="0.3"></DropShadowEffect>
+            </Border.Effect>
+            
+            <Button
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                CornerRadius="7"
+                BorderThickness="1"
+                BorderBrush="{StaticResource JaguarSurface}">
+                
+            </Button>
+        </Border>
+    </Panel>
 </UserControl>

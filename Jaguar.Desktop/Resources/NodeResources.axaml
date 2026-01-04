@@ -1,0 +1,106 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+                    xmlns:models="clr-namespace:Jaguar.Desktop.Models"
+                    x:DataType="models:FlowNode">
+    
+    <ControlTemplate x:Key="NodeAnchors" TargetType="ContentControl">
+        
+        <Panel
+            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+            VerticalAlignment="{TemplateBinding VerticalAlignment}"
+            Name="Panel">
+            
+            <Panel.Styles>
+                <Styles>
+                    <Style Selector="Panel#Panel">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Width" Value="35"/>
+                        <Setter Property="Height" Value="35"/>
+            
+                        <Style Selector="^ Border#Border">
+                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                            <Setter Property="VerticalAlignment" Value="Stretch"/>
+                            <Setter Property="Background" Value="{StaticResource MainBg}"/>
+                            <Setter Property="CornerRadius" Value="4"/>
+                            <Setter Property="Padding" Value="4"/>
+                            <Setter Property="ClipToBounds" Value="True"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="BorderBrush" Value="Gray"/>
+                            
+                            <Style Selector="^[IsPointerOver=True]">
+                                <Setter Property="BorderBrush" Value="Cyan"/>
+                            </Style>
+                                
+                            <Style Selector="^[IsFocused=True]">
+                                <Setter Property="BorderBrush" Value="Cyan"/>
+                            </Style>
+                
+                            <Style Selector="^ Button">
+                                <Style Selector="^[IsPointerOver=True]">
+                                    <Setter Property="Background" Value="{StaticResource JaguarSurface}"/>
+                                </Style>
+                                
+                                <Style Selector="^[IsPressed=True]">
+                                    <Setter Property="Background" Value="DimGray"/>
+                                </Style>
+                            </Style>
+                        </Style>
+                    </Style>
+                </Styles>
+            </Panel.Styles>
+            
+            <Border IsHitTestVisible="True" Name="Border">
+                
+                <Button
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    VerticalContentAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    Content="+"
+                    FontSize="9"
+                    Foreground="White"
+                    Command="{Binding  OpenAgentDialogCommand}"
+                    />
+            </Border>
+        </Panel>
+    </ControlTemplate>
+    
+    <ControlTemplate x:Key="DefaultNodeAnchor" TargetType="ContentControl">
+        
+        <Panel
+            Name="AnchorPanel"
+            ClipToBounds="False"
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Stretch">
+            
+            <Panel.Styles>
+                <Style Selector="Panel#AnchorPanel">
+                    <Setter Property="Background" Value="Transparent"/>
+                    
+                    <Style Selector="^ Border#BorderLine">
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        <Setter Property="VerticalAlignment" Value="Stretch"/>
+                        <Setter Property="Height" Value="2"/>
+                        <Setter Property="Background" Value="DimGray"/>
+                    </Style>
+                </Style>
+            </Panel.Styles>
+            
+            <Border
+                Name="BorderLine"
+                />
+            
+            <ContentControl
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                Template="{StaticResource  NodeAnchors}"/>
+        
+            <ContentControl
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                Template="{StaticResource  NodeAnchors}"/>
+
+        </Panel>
+    </ControlTemplate>
+</ResourceDictionary>

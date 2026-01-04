@@ -22,7 +22,7 @@
            VerticalAlignment="Center"
            HorizontalAlignment="Center"
            CornerRadius="15"
-           Background="Transparent"
+           Background="{StaticResource Neutral900}"
            BorderThickness="2"
            BorderBrush="{StaticResource JaguarSurface}"
            ClipToBounds="True"
@@ -71,7 +71,7 @@
                 Background="Transparent"
                 HorizontalAlignment="Stretch">
                 
-                <TransitioningContentControl Content="{Binding CurrentView}"/>
+                <TransitioningContentControl Content="{Binding AppState.CurrentDialogView}"/>
                 
             </Border>
             

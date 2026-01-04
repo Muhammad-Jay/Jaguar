@@ -1,120 +1,156 @@
 using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using Avalonia;
+using Avalonia.Threading;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Jaguar.Desktop.Models;
+using Jaguar.Desktop.Services.AppState;
+using Jaguar.Desktop.ViewModels.Dialog.Contents;
+using Jaguar.Desktop.ViewModels.Templates;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Jaguar.Desktop.ViewModels;
 
-public partial class CanvasViewModel : ViewModelBase
+public partial class CanvasViewModel : ViewModelBase,
+    IRecipient<RequestDialogMessage>,
+    IRecipient<RequestDeleteNodeMessage>,
+    IRecipient<RequestOpenPromptDialog>,
+    IRecipient<RequestAddNodeMessage>
 {
+    private readonly IServiceProvider _serviceProvider;
+    [ObservableProperty] private AppStateService? _appState;
+
     public ObservableCollection<FlowNode> Nodes { get; } = new();
     public ObservableCollection<ConnectionViewModel> Connections { get; } = new();
-       
-    public CanvasViewModel()
+    public ObservableCollection<FlowNode> SelectedNodes { get; } = new();
+
+    [ObservableProperty] private FlowNode? _selectedNode;
+    [ObservableProperty] private FlowNode? _addNodeParent;
+    
+
+    public CanvasViewModel(IServiceProvider serviceProvider)
+    {
+        
+        AppState = serviceProvider.GetRequiredService<AppStateService>();
+        _serviceProvider = serviceProvider;
+        
+        WeakReferenceMessenger.Default.RegisterAll(this);
+        // Initial Seed Data
+        SetupInitialNodes();
+    }
+
+    private void SetupInitialNodes()
     {
         var orches = new FlowNode
         {
-            Title = "Node 3",
+            Title = "Orchestrator",
             Location = new Point(400, 400),
-            Type = NodeType.Orchestrator
+            Type = NodeType.Orchestrator,
         };
 
         var output = new ConnectorViewModel(orches, "Output");
         orches.Connectors.Add(output);
-        
-        var Kernel = new FlowNode
+
+        var kernel = new FlowNode
         {
-            Title = "Node 3",
-            Location = new Point(400, 400),
-            Type = NodeType.Agent
+            Title = "Kernel Agent",
+            Location = new Point(100, 200),
+            Type = NodeType.Agent,
         };
-        var input = new ConnectorViewModel(Kernel, "Input");
-        Kernel.Connectors.Add(input);
-        
+        var input = new ConnectorViewModel(kernel, "Input");
+        kernel.Connectors.Add(input);
+
         Nodes.Add(orches);
-        Nodes.Add(Kernel);
-        
+        Nodes.Add(kernel);
 
         var connection = new ConnectionViewModel(output.Anchor, input.Anchor);
-        
         Connections.Add(connection);
+
+        output.IsConnected = true;
+        input.IsConnected = true;
     }
-    
-    // public void CreateLink(FlowNode sourceNode, FlowNode targetNode)
-    // {
-    //     // Find the Output port of the source (Orchestrator)
-    //     var sourcePort = sourceNode.Connectors.FirstOrDefault(c => c.Type == ConnectorType.Output);
-    //
-    //     // Find the Input port of the target (Agent)
-    //     var targetPort = targetNode.Connectors.FirstOrDefault(c => c.Type == ConnectorType.Input);
-    //
-    //     if (sourcePort != null && targetPort != null)
-    //     {
-    //         var connection = new ConnectionViewModel
-    //         {
-    //             Source = sourcePort,
-    //             Target = targetPort 
-    //         };
-    //
-    //         Connections.Add(connection);
-    //     }
-    // }
-    
-    public void AddNode(FlowNode node)
+
+
+
+    [RelayCommand]
+    public void AddNodeAtLocation(FlowNode node)
     {
-        Nodes.Add(new FlowNode 
-        { 
-            Title = node.Title, 
-            Location = new Point(100, 100),
-            Type = node.Type
+        Dispatcher.UIThread.Post(() =>
+        {
+            var newNode = new FlowNode
+            {
+                Title = "New Agent",
+                Location = node.Location,
+                Type = node.Type,
+            };
+            Nodes.Add(newNode);
         });
     }
-        
-        
-        // Inside Milestone 1
-    //     AddChild(milestone1, new FlowNode { Title = "Database Agent", Type = NodeType.Agent, X = 50, Y = 100 });
-    //     AddChild(milestone1, new FlowNode { Title = "Auth Service", Type = NodeType.Agent, X = 250, Y = 100 });
-    //
-    //     // Inside Milestone 2
-    //     AddChild(milestone2, new FlowNode { Title = "UI Layout", Type = NodeType.Agent, X = 50, Y = 100 });
-    //     AddChild(milestone2, new FlowNode { Title = "Theme Manager", Type = NodeType.Agent, X = 250, Y = 100 });
-    //
-    //     // 4. Attach Milestones to Root
-    //     AddChild(RootNode, milestone1);
-    //     AddChild(RootNode, milestone2);
-    //
-    //     // 5. Initialize Scope
-    //     CurrentScope = RootNode;
-    // }
-    //
-    // // Helper to ensure Parent/Child relationship is linked both ways
-    // private void AddChild(FlowNode parent, FlowNode child)
-    // {
-    //     child.Parent = parent; // Crucial for NavigateUp()
-    //     parent.Children.Add(child);
-    // }
-    //
-    // public void NavigateDown(FlowNode node)
-    // {
-    //     Console.WriteLine($"navigeting to child: {node.Title}");
-    //     if (node.Children.Any())
-    //     {
-    //         CurrentScope = node;
-    //     }
-    // }
-    //
-    // public void NavigateUp()
-    // {
-    //     if (CurrentScope.Parent != null)
-    //     {
-    //         Console.WriteLine("Navigating to parent.");
-    //         CurrentScope = CurrentScope.Parent;
-    //         return;
-    //     }
-    //
-    //     Console.WriteLine("No Parent to Navigate to.");
-    // }
     
+    public void Receive(RequestDialogMessage message)
+    {
+        if (AppState != null)
+        {
+            AddNodeParent = message.ParentNode;
+            AppState.IsAgentDialogOpen = true;
+            AppState.CurrentDialogView = _serviceProvider.GetRequiredService<AgentTemplatesViewModel>();
+        }
+
+        Console.WriteLine(AddNodeParent?.Type);
+    }
+    
+    public void Receive(RequestAddNodeMessage message)
+    {
+        if (AppState != null && AddNodeParent != null)
+        {
+            Dispatcher.UIThread.Post(() =>
+            {
+                var newNode = new FlowNode
+                {
+                    Title = message.NodeToAdd.Title,
+                    Location = AddNodeParent.Location,
+                    Type = message.NodeToAdd.Type,
+                };
+                Nodes.Add(newNode);
+            });
+        }
+        else
+        {
+            Dispatcher.UIThread.Post(() =>
+            {
+                var newNode = new FlowNode
+                {
+                    Title = message.NodeToAdd.Title,
+                    Location = message.NodeToAdd.Location,
+                    Type = message.NodeToAdd.Type,
+                };
+                Nodes.Add(newNode);
+            });
+        }
+    }
+    
+    public void Receive(RequestDeleteNodeMessage message)
+    {
+        Nodes.Remove(message.NodeToDelete);
+    }
+
+    public void Receive(RequestOpenPromptDialog message)
+    {
+        if (AppState != null)
+        {
+            AppState.IsAgentDialogOpen = true;
+            AppState.CurrentDialogView = _serviceProvider.GetRequiredService<OrchestratorDialogPromptViewModel>();
+        }
+    }
+    
+    [RelayCommand]
+    public void ToggleAgentDialog()
+    {
+        if(AppState != null)
+        {
+            AppState.IsAgentDialogOpen = !AppState.IsAgentDialogOpen;   
+        }
+    }
 }

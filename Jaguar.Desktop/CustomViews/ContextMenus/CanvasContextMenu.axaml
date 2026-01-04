@@ -10,6 +10,7 @@
         MaxHeight="500"
         Background="Transparent"
         CornerRadius="10"
+        ClipToBounds="True"
         >
       
         <ContextMenu.Styles>
@@ -22,36 +23,21 @@
             </Style>
 
             <Style Selector="MenuItem[IsPointerOver=True]">
-                <Setter Property="TextBlock.Foreground" Value="Cyan"/>
+                <Setter Property="TextBlock.Foreground" Value="White"/>
+                <Setter Property="Background" Value="{StaticResource JaguarSurface}"/>
             </Style>
         </ContextMenu.Styles>
 
        <ContentControl
-           VerticalAlignment="Stretch"
-           Width="310"
-           BorderThickness="1"
-           BorderBrush="{StaticResource Neutral800Brush}"
-           CornerRadius="10"
-           Padding="10"
-           ClipToBounds="True"
-           Template="{StaticResource WorkflowGlassPanelTemplate}">
+           Template="{StaticResource DefaultContextMenuTemplate}">
            
-           
-           <ScrollViewer 
-               ClipToBounds="True"
-               IsHitTestVisible="False"
-               ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-               ScrollViewer.VerticalScrollBarVisibility="Auto"
-               VerticalAlignment="Stretch"
-               HorizontalAlignment="Stretch">
-               
-               <StackPanel Orientation="Vertical" Spacing="5">
-                    <MenuItem 
+           <StackPanel Spacing="5" Orientation="Vertical">
+                           <MenuItem 
             CornerRadius="5"
             Padding="6"
             HorizontalAlignment="Stretch"
             FontSize="10"
-            Background="{StaticResource MainBg}"
+            Background="Transparent"
             Header="Add Research Agent">
             <MenuItem.Icon><avalonia:MaterialIcon Kind="SearchWeb" Foreground="Cyan"/></MenuItem.Icon>
         </MenuItem>
@@ -61,7 +47,7 @@
             Padding="6"
             HorizontalAlignment="Stretch"
             FontSize="10"
-            Background="{StaticResource MainBg}"
+            Background="Transparent"
             Header="Add Utility Agent">
             <MenuItem.Icon><avalonia:MaterialIcon Kind="Tools" /></MenuItem.Icon>
         </MenuItem>
@@ -71,42 +57,50 @@
             Padding="6"
             HorizontalAlignment="Stretch"
             FontSize="10"
-            Background="{StaticResource MainBg}"
+            Background="Transparent"
             Header="Clear Canvas">
             <MenuItem.Icon><avalonia:MaterialIcon Kind="DeleteVariant" Foreground="Red"/></MenuItem.Icon>
         </MenuItem>
         
-        <MenuItem 
-            CornerRadius="5"
-            Padding="6"
-            HorizontalAlignment="Stretch"
-            FontSize="10"
-            Background="{StaticResource MainBg}"
-            Header="Add Research Agent">
-            <MenuItem.Icon><avalonia:MaterialIcon Kind="SearchWeb" Foreground="Cyan"/></MenuItem.Icon>
-        </MenuItem>
+       <MenuItem
+           CornerRadius="5"
+           Padding="6"
+           HorizontalAlignment="Stretch"
+           FontSize="10"
+           Background="Transparent"
+           Header="Add Research"
+           >
+           <MenuItem 
+               CornerRadius="5"
+               Padding="6"
+               HorizontalAlignment="Stretch"
+               FontSize="10"
+               Background="Transparent"
+               Header="Add Research Agent">
+               <MenuItem.Icon><avalonia:MaterialIcon Kind="SearchWeb" Foreground="Cyan"/></MenuItem.Icon>
+           </MenuItem>
         
-        <MenuItem 
-            CornerRadius="5"
-            Padding="6"
-            HorizontalAlignment="Stretch"
-            FontSize="10"
-            Background="{StaticResource MainBg}"
-            Header="Add Utility Agent">
-            <MenuItem.Icon><avalonia:MaterialIcon Kind="Tools" /></MenuItem.Icon>
-        </MenuItem>
+           <MenuItem 
+               CornerRadius="5"
+               Padding="6"
+               HorizontalAlignment="Stretch"
+               FontSize="10"
+               Background="Transparent"
+               Header="Add Utility Agent">
+               <MenuItem.Icon><avalonia:MaterialIcon Kind="Tools" /></MenuItem.Icon>
+           </MenuItem>
+       </MenuItem>
         <Separator />
         <MenuItem 
             CornerRadius="5"
             Padding="6"
             HorizontalAlignment="Stretch"
             FontSize="10"
-            Background="{StaticResource MainBg}"
+            Background="Transparent"
             Header="Clear Canvas">
             <MenuItem.Icon><avalonia:MaterialIcon Kind="DeleteVariant" Foreground="Red"/></MenuItem.Icon>
         </MenuItem>
-               </StackPanel>
-           </ScrollViewer>
+           </StackPanel>
        </ContentControl>
         
     </ContextMenu>

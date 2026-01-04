@@ -8,6 +8,5 @@ public partial class LeftMenuBarView : UserControl
     public LeftMenuBarView()
     {
         InitializeComponent();
-        DataContext = new LeftBarMenuViewModel();
     }
 }

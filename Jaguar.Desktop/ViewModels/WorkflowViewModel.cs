@@ -2,12 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Avalonia.Controls;
+using Avalonia.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Jaguar.Core.Models;
 using Jaguar.Core.Services;
 using Jaguar.Desktop.Models;
 using Jaguar.Desktop.Services.AppState;
+using Jaguar.Desktop.ViewModels.Dialog;
+using Jaguar.Desktop.ViewModels.Menus;
+using Jaguar.Desktop.ViewModels.Panel;
+using Jaguar.Desktop.ViewModels.Templates;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Jaguar.Desktop.ViewModels
@@ -19,8 +25,23 @@ namespace Jaguar.Desktop.ViewModels
         
         [ObservableProperty] private Orchestrator? _workFlowOrchestrator;
         [ObservableProperty] private AppStateService? _appState;
+        [ObservableProperty] private ViewModelBase? _content;
         [ObservableProperty] private OrchestratorAnalysis? _analysis;
         [ObservableProperty] private bool _isOverlayVisible;
+        
+        [ObservableProperty] private DialogViewModel _dialogVm;
+        [ObservableProperty] private WorkflowSidebarPanelViewModel _workflowSidebarVm;
+        [ObservableProperty] private RightBarMenuViewModel _rightBarMenuVm;
+        
+        public WorkflowViewModel(Orchestrator orchestrator, CanvasViewModel canvas, IServiceProvider serviceProvider)
+        {
+            AppState = serviceProvider.GetRequiredService<AppStateService>();
+            DialogVm = serviceProvider.GetRequiredService<DialogViewModel>();
+            WorkflowSidebarVm = serviceProvider.GetRequiredService<WorkflowSidebarPanelViewModel>();
+            RightBarMenuVm = serviceProvider.GetRequiredService<RightBarMenuViewModel>();
+            _workFlowOrchestrator = orchestrator;
+            Content = canvas;
+        }
         
         [RelayCommand] 
         public void ToggleOverlay()
@@ -28,24 +49,8 @@ namespace Jaguar.Desktop.ViewModels
             IsOverlayVisible = !IsOverlayVisible;
         }
         
-        public WorkflowViewModel()
-        {
-            if (Program.AppHost != null)
-            {
-                AppState = Program.AppHost.Services.GetRequiredService<AppStateService>();
-                
-                WorkFlowOrchestrator = Program.AppHost.Services.GetRequiredService<Orchestrator>();
-            }
-        }
-        
         [RelayCommand]
-        public void ToggleAgentDialog()
-        {
-            if(AppState != null)
-            {
-                AppState.IsAgentDialogOpen = !AppState.IsAgentDialogOpen;   
-            }
-        }
+        public void TogglePanel () =>  AppState.IsPanelOpen = !AppState.IsPanelOpen;
         
         
         // [RelayCommand]

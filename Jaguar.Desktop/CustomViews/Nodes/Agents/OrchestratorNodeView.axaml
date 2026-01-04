@@ -3,29 +3,38 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:models="clr-namespace:Jaguar.Desktop.Models"
+             xmlns:connector="clr-namespace:Jaguar.Desktop.CustomViews.Connector"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="models:FlowNode"
+             ContextMenu="{StaticResource OrchestratorContextMenu}"
              x:Class="Jaguar.Desktop.CustomViews.Nodes.Agents.OrchestratorNodeView">
     
-    <UserControl.Styles>
-        <Style Selector="ContextMenu.JaguarMenu MenuItem[IsPointerOver=True] /template/ ContentPresenter#PART_HeaderPresenter">
-            <Setter Property="Background" Value="{StaticResource CyanHoverGradient}"/>
-        </Style>
-    </UserControl.Styles>
-    
-             <Border
-                 Name="OrchestratorNode"
-                 Width="150"
-                 Height="150"
+            <Panel
+                Width="260"
+                Height="170"
+                Name="OrchestratorNode"
+                Background="#01000000"
+                >
+                
+                <ContentControl
+                    Template="{StaticResource  DefaultNodeAnchor}"
+                />
+                
+                 <Border
+                 Width="170"
+                 Height="170"
+                 VerticalAlignment="Center"
+                 HorizontalAlignment="Center"
                  Background="#01000000"
+                 Tag="{Binding IsSelected}"
                  BorderThickness="2"
                  BorderBrush="{StaticResource MainBg}"
-                 CornerRadius="75"
+                 CornerRadius="85"
                  PointerPressed="OnPointerPressed"
                  >
                  
                  <Border.Styles>
-                     <Style Selector="Border#OrchestratorNode[IsPointerOver=True]">
+                     <Style Selector="Border#OrchestratorNode[Tag=true]">
                          <Setter Property="BorderBrush" Value="Cyan"/>
                      </Style>
                  </Border.Styles>
@@ -37,11 +46,11 @@
                  </Border.Transitions>
                  
                  <Border
-                     Width="150"
-                     Height="150"
+                     Width="170"
+                     Height="170"
                      Padding="20"
                      Background="{StaticResource MainBg}"
-                     CornerRadius="75"
+                     CornerRadius="85"
                  >
                      
                      <Border 
@@ -49,12 +58,44 @@
                          HorizontalAlignment="Stretch"
                          BorderThickness="5"
                          BorderBrush="DimGray"
+                         Tag="{Binding IsSelected}"
                          Background="{StaticResource JaguarSurface}"
-                         CornerRadius="60"
+                         CornerRadius="65"
                          >
+                         
+                         <Border.Styles>
+                             <Style Selector="Border#OrchestratorNode[Tag=true]">
+                                 <Setter Property="Background" Value="Cyan"/>
+                             </Style>
+                         </Border.Styles>
                       
+                         <Panel HorizontalAlignment="Stretch">
+                             <ItemsControl
+                                 ItemsSource="{Binding Input}"
+                                 HorizontalAlignment="Left"
+                                 Margin="-10,0,0,0">
+                                 <ItemsControl.ItemTemplate>
+                                     <DataTemplate>
+                                         <connector:ConnectorView/>
+                                     </DataTemplate>
+                                 </ItemsControl.ItemTemplate>
+                             </ItemsControl>
+                             
+                             <ItemsControl
+                                 ItemsSource="{Binding Input}"
+                                 HorizontalAlignment="Left"
+                                 Margin="-10,0,0,0">
+                                 <ItemsControl.ItemTemplate>
+                                     <DataTemplate>
+                                         <connector:ConnectorView/>
+                                     </DataTemplate>
+                                 </ItemsControl.ItemTemplate>
+                             </ItemsControl>
+                         </Panel>
+                         
                      </Border>
                  </Border>
              </Border>
+            </Panel>
     
 </UserControl>

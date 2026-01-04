@@ -8,6 +8,5 @@ public partial class WorkflowSidebarPanel : UserControl
     public WorkflowSidebarPanel()
     {
         InitializeComponent();
-        DataContext = new WorkflowSidebarPanelViewModel();
     }
 }

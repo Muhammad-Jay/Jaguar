@@ -9,9 +9,5 @@ public partial class WorkflowView : UserControl
     public WorkflowView()
     {
         InitializeComponent();
-        if (Program.AppHost != null)
-        {
-            DataContext = Program.AppHost.Services.GetRequiredService<WorkflowViewModel>();
-        }
     }
 }

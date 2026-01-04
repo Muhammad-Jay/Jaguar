@@ -11,6 +11,7 @@
    <Border
        Width="350"
        VerticalAlignment="Stretch" 
+       IsVisible="{Binding AppState.IsPanelOpen}"
        Background="Transparent"
        BorderThickness="2"
        CornerRadius="16"

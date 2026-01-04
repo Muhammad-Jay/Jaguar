@@ -1,9 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
-using Avalonia.Controls;
-using Avalonia.Input;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Jaguar.Desktop.Constants.Nodes;
 using Jaguar.Desktop.Models;
 using Jaguar.Desktop.Models.Templates;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,26 +10,25 @@ namespace Jaguar.Desktop.ViewModels.Templates;
 
 public partial class AgentTemplatesViewModel : ViewModelBase
 {
-    [ObservableProperty]
-    private ObservableCollection<FlowNode> _availableTemplates;
+    public ObservableCollection<FlowNode> AvailableTemplates { get; }
     
-    [ObservableProperty]
-    private CanvasViewModel? _canvasVm;
-
-    public AgentTemplatesViewModel()
+    private readonly IServiceProvider _serviceProvider;
+    
+    public AgentTemplatesViewModel(IServiceProvider serviceProvider)
     {
-        _availableTemplates = new ObservableCollection<FlowNode>(AgentTemplates.GetAvailableAgents());
-        if (Program.AppHost != null)
-        {
-            CanvasVm = Program.AppHost.Services.GetRequiredService<CanvasViewModel>();
-        }
+        _serviceProvider = serviceProvider;
+        
+        // Initialize templates from your static helper
+        AvailableTemplates = new ObservableCollection<FlowNode>(NodeCatalog.DefaultAgentTemplates);
+        Console.WriteLine(AvailableTemplates.Count);
     }
 
     [RelayCommand]
     public void OnItemClick(FlowNode item)
     {
-        if(CanvasVm == null) return;
-        Console.WriteLine($"{item.Type} Node Added to the Workflow.");
-        CanvasVm.AddNode(item);
+        var canvasVm = _serviceProvider.GetRequiredService<CanvasViewModel>();
+        
+        Console.WriteLine($"{item.Type} Node Added. Count: {canvasVm.Nodes.Count}");
+        canvasVm.AddNodeAtLocation(item);
     }
 }
