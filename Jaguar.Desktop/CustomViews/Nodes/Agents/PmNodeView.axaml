@@ -2,27 +2,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:models="clr-namespace:Jaguar.Desktop.Models"
+             xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
+             xmlns:connector="clr-namespace:Jaguar.Desktop.CustomViews.Connector"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:DataType="models:FlowNode"
+             x:DataType="viewModels:FlowNodeViewModel"
+             ContextMenu="{DynamicResource OrchestratorContextMenu}"
              x:Class="Jaguar.Desktop.CustomViews.Nodes.Agents.PmNodeView">
-    <Border Name="PmNode"
-            Width="130"
+    
+    <Border
+        Height="130"
+        Width="250"
+        PointerPressed="OnPointerPressed"
+        Background="Transparent">
+        
+        <Border Name="PmNode"
+            Width="200"
             Height="130"
-            CornerRadius="65"
-            BorderThickness="2"
-            Background="{StaticResource MainBg}"
-            ClipToBounds="False"
-            ToolTip.Tip="{Binding Type}">
+            CornerRadius="20"
+            BorderThickness="3"
+            Background="Transparent"
+            ClipToBounds="True"
+           >
 
         <Border.Styles>
             <Style Selector="Border#PmNode">
-                <Setter Property="BorderBrush" Value="#444746"/>
+                <Setter Property="BorderBrush" Value="{StaticResource MainBg}"/>
                 <Setter Property="BoxShadow" Value="0 0 0 0 Transparent"/>
             </Style>
             <Style Selector="Border#PmNode[IsPointerOver=True]">
                 <Setter Property="BorderBrush" Value="Cyan"/>
-                <Setter Property="BoxShadow" Value="0 0 15 2 Cyan"/>
+             
             </Style>
         </Border.Styles>
 
@@ -32,57 +41,106 @@
                 <BrushTransition Property="BorderBrush" Duration="0:0:0.2"/>
             </Transitions>
         </Border.Transitions>
-
-        <Grid>
-            <Border Margin="12"
-                    BorderBrush="Cyan"
-                    BorderThickness="1.5"
-                    CornerRadius="60"
-                    Background="{StaticResource JaguarSurface}">
+        
+        <Panel HorizontalAlignment="Stretch" Background="Transparent" VerticalAlignment="Stretch">
+        
+        <Panel
+            Name="AnchorPanel"
+            ClipToBounds="False"
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Stretch">
             
-                <Border Margin="10"
-                        BorderBrush="Cyan"
-                        BorderThickness="1"
-                        CornerRadius="50"
-                        Background="#212121">
+            <Panel.Styles>
+                <Style Selector="Panel#AnchorPanel">
+                    <Setter Property="Background" Value="Transparent"/>
+                    
+                    <Style Selector="^ Border#BorderLine">
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        <Setter Property="VerticalAlignment" Value="Stretch"/>
+                        <Setter Property="Height" Value="2"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                    </Style>
+                </Style>
+            </Panel.Styles>
+            
+            <Border
+                Name="BorderLine"
+                />
+            
+            <ContentControl
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                x:Name="InputAnchorControl"
+                Template="{StaticResource  NodeAnchors}">
+                
+                <ItemsControl
+                    ItemsSource="{Binding Inputs}"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="0,0,0,0">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <connector:ConnectorView />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                
+            </ContentControl>
+        
+            <ContentControl
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                x:Name="OutputAnchorControl"
+                Template="{StaticResource  NodeAnchors}">
+                
+                <ItemsControl
+                    ItemsSource="{Binding Outputs}"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="0,0,0,0">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <connector:ConnectorView />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                
+            </ContentControl>
 
-                    <Button HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            Margin="0"
-                            CornerRadius="40"
-                            Background="Transparent"
-                            BorderBrush="Yellow"
-                            BorderThickness="3">
-                        <Button.Styles>
-                            <Style Selector="Button:pointerover /template/ ContentPresenter">
-                                <Setter Property="Background" Value="#333333"/>
-                            </Style>
-                        </Button.Styles>
-                        
-                        <Button.Flyout>
-                            <Flyout Placement="Bottom" OverlayDismissEventPassThrough="True">
-                                <Border Background="Transparent" 
-                                        Padding="0" 
-                                        CornerRadius="10" 
-                                        BorderThickness="0"
-                                        Width="350">
-                                    <StackPanel Spacing="10">
-                                        <TextBlock Text="Agent Configuration" Foreground="Cyan" FontWeight="Bold"/>
-                                        <TextBox Text="{Binding Title}" 
-                                                 AcceptsReturn="True" 
-                                                 HorizontalAlignment="Stretch"
-                                                 CornerRadius="7"
-                                                 BorderThickness="0"
-                                                 Background="{StaticResource MainBg}"
-                                                 Height="150" 
-                                                 Watermark="Type your logic here..." />
-                                       </StackPanel>
-                                </Border>
-                            </Flyout>
-                        </Button.Flyout>
-                    </Button>
-                </Border>
+        </Panel>
+        
+            <Border
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Background="{StaticResource MainBg}"
+                CornerRadius="15"
+                Margin="20">
+        
+                <Border.Styles>
+                    <Style Selector="Border">
+                        <Setter Property="BorderBrush" Value="{StaticResource MainBg}"/>
+                        <Setter Property="BoxShadow" Value="0 0 0 0 Transparent"/>
+                    </Style>
+                    <Style Selector="Border[IsPointerOver=True]">
+                        <Setter Property="BorderBrush" Value="Cyan"/>
+                    </Style>
+                    <Style Selector="Border[IsVisible=False]">
+                        <Setter Property="Opacity" Value="0"/>
+                    </Style>
+                    <Style Selector="Border[IsVisible=True]">
+                        <Setter Property="Opacity" Value="1"/>
+                    </Style>
+                </Border.Styles>
+        
+                <Border.Transitions>
+                    <Transitions>
+                        <BoxShadowsTransition Property="BoxShadow" Duration="0:0:0.2"/>
+                        <BrushTransition Property="BorderBrush" Duration="0:0:0.2"/>
+                    </Transitions>
+                </Border.Transitions>
+        
             </Border>
-        </Grid>
+        </Panel>
+    </Border>
     </Border>
 </UserControl>

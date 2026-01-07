@@ -1,10 +1,12 @@
 
+using Jaguar.Desktop.ViewModels;
+
 namespace Jaguar.Desktop.Models;
 
-public record RequestDialogMessage(FlowNode ParentNode);
+public record RequestDialogMessage(FlowNodeViewModel ParentNode);
 
-public record RequestDeleteNodeMessage(FlowNode NodeToDelete);
+public record RequestDeleteNodeMessage(FlowNodeViewModel NodeToDelete);
 
-public record RequestOpenPromptDialog(FlowNode NodeToOpen);
+public record RequestOpenPromptDialog(FlowNodeViewModel NodeToOpen);
 
-public record RequestAddNodeMessage(FlowNode NodeToAdd);
+public record RequestAddNodeMessage(FlowNodeViewModel NodeToAdd);

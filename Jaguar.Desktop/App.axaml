@@ -9,6 +9,7 @@
              xmlns:menuItemView="clr-namespace:Jaguar.Desktop.CustomViews.MenuItemView"
              xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
              xmlns:views="clr-namespace:Jaguar.Desktop.Views"
+             xmlns:semi="https://irihi.tech/semi"
              x:Class="Jaguar.Desktop.App"
              RequestedThemeVariant="Dark">
     
@@ -27,6 +28,7 @@
         <Color x:Key="Neutral800">#262626</Color>
         <Color x:Key="JaguarCyan">#00FFFF</Color>
 
+        <SolidColorBrush x:Key="SemiColorBackground0">#141414</SolidColorBrush>
         <SolidColorBrush x:Key="Neutral900Brush" Color="{StaticResource Neutral900}"/>
         <SolidColorBrush x:Key="Neutral800Brush" Color="{StaticResource Neutral800}"/>
         
@@ -47,24 +49,40 @@
     </Application.Resources>
     
     <Application.Styles>
-    
+        <FluentTheme/>
         <avalonia:MaterialIconStyles />
-        <FluentTheme />
+        <!-- <semi:SemiTheme Locale="en-US" /> -->
+        
+        <!-- <StyleInclude Source="avares://Semi.Avalonia.DataGrid/Index.axaml" /> -->
       
         <StyleInclude Source="Styles/GlobalStyles.axaml"/>
         <StyleInclude Source="Styles/CanvasStyles.axaml"/>
+        
+        <!-- <Style Selector="Path"> -->
+        <!--     <Setter Property="Transitions"> -->
+        <!--         <Transitions> -->
+        <!--             <DoubleTransition Property="Opacity" Duration="0:0:0.3"/> -->
+        <!--         </Transitions> -->
+        <!--     </Setter> -->
+        <!-- </Style> -->
+        <!-- -->
+        <!-- <Style Selector="Path[IsPointerOver=True]"> -->
+        <!--     <Setter Property="Stroke" Value="#00E5FF"/> -->
+        <!--     <Setter Property="StrokeThickness" Value="3"/> -->
+        <!-- </Style> -->
+
         
         <Style Selector="ScrollBar /template/ Thumb">
             <Setter Property="Background" Value="#3300C8FF"/>
         </Style>
         
-        <Style Selector="ContextMenu">
-            <Setter Property="Background" Value="{StaticResource Neutral900}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="BorderBrush" Value="#3E3E3E"/>
-            <Setter Property="Padding" Value="8"/>
-            <Setter Property="CornerRadius" Value="8"/>
-        </Style>
+        <!-- <Style Selector="ContextMenu"> -->
+        <!--     <Setter Property="Background" Value="{StaticResource Neutral900}"/> -->
+        <!--     <Setter Property="BorderThickness" Value="1"/> -->
+        <!--     <Setter Property="BorderBrush" Value="#3E3E3E"/> -->
+        <!--     <Setter Property="Padding" Value="8"/> -->
+        <!--     <Setter Property="CornerRadius" Value="8"/> -->
+        <!-- </Style> -->
         
         <Style Selector="MenuItem:pointerover /template/ ContentPresenter#PART_HeaderPresenter">
             <Setter Property="Background" Value="#2A2A2A" /> <Setter Property="Foreground" Value="White" />

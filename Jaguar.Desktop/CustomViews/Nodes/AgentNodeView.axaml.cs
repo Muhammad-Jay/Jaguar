@@ -19,20 +19,19 @@ public partial class AgentNodeView : UserControl
     
     public void OnDoubleTapped(object sender, TappedEventArgs e)
     {
-        if (this.DataContext is FlowNode node)
+        if (this.DataContext is FlowNodeViewModel node)
         {
-            // 1. Check if the node has children
-            if (node.Children.Any())
-            {
-                if (Program.AppHost != null)
-                {
-                    // 2. Get your ViewModel from the Service Provider
-                    var canvasVM = Program.AppHost.Services.GetRequiredService<CanvasViewModel>();
-                
-                    // 3. Trigger the navigation
-                    // canvasVM.NavigateDown(node);
-                }
-            }
+            // if (node.Children.Any())
+            // {
+            //     if (Program.AppHost != null)
+            //     {
+            //         // 2. Get your ViewModel from the Service Provider
+            //         var canvasVM = Program.AppHost.Services.GetRequiredService<CanvasViewModel>();
+            //     
+            //         // 3. Trigger the navigation
+            //         // canvasVM.NavigateDown(node);
+            //     }
+            // }
         }
     }
 }

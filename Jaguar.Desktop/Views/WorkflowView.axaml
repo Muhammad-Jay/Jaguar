@@ -98,6 +98,6 @@
             </Grid>
         </Grid>
         
-        <panels:WorkflowSidebarPanel DataContext="{Binding WorkflowSidebarVm}" IsVisible="{Binding AppState.IsPanelOpen}" ZIndex="50" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <panels:WorkflowSidebarPanel DataContext="{Binding WorkflowSidebarVm}" IsVisible="{Binding AppState.IsPanelOpen}" ZIndex="50" HorizontalAlignment="Right" />
     </Grid>
 </UserControl>

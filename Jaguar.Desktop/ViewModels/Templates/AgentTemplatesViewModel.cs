@@ -1,34 +1,52 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using CommunityToolkit.Mvvm.Input;
-using Jaguar.Desktop.Constants.Nodes;
-using Jaguar.Desktop.Models;
-using Jaguar.Desktop.Models.Templates;
-using Microsoft.Extensions.DependencyInjection;
+using Jaguar.Core.Abstractions;
+using Jaguar.Core.Constants;
+using Jaguar.Core.Models.Templates;
+using Jaguar.Desktop.Services.Events.Ui;
 
 namespace Jaguar.Desktop.ViewModels.Templates;
 
 public partial class AgentTemplatesViewModel : ViewModelBase
 {
-    public ObservableCollection<FlowNode> AvailableTemplates { get; }
+    private readonly IAgentTemplateRepository _agentRepository;
+    private readonly IEventAggregator _eventAggregator;
+    public ObservableCollection<AgentTemplate> AvailableTemplates { get; }
     
     private readonly IServiceProvider _serviceProvider;
     
-    public AgentTemplatesViewModel(IServiceProvider serviceProvider)
+    public AgentTemplatesViewModel(IServiceProvider serviceProvider, IAgentTemplateRepository agentTemplateRepository, IEventAggregator eventAggregator)
     {
+        _agentRepository = agentTemplateRepository;
+        _eventAggregator = eventAggregator;
         _serviceProvider = serviceProvider;
         
+        
         // Initialize templates from your static helper
-        AvailableTemplates = new ObservableCollection<FlowNode>(NodeCatalog.DefaultAgentTemplates);
-        Console.WriteLine(AvailableTemplates.Count);
+        var templates = _agentRepository.GetAll().GetAwaiter().GetResult();
+        AvailableTemplates = new ObservableCollection<AgentTemplate>(templates.AsEnumerable());
+    }
+
+    private void SeedTemplates()
+    {
+        var defaultTemplates = AgentTemplates.DefaultAgentTemplates;
+
+        foreach (var template in defaultTemplates)
+        {
+            _agentRepository.Update(template);
+
+            Console.WriteLine($"--- Agent Template {template.Id} - {template.Type} added. ---");
+        }
     }
 
     [RelayCommand]
-    public void OnItemClick(FlowNode item)
+    public void AddTemplate(AgentTemplate newTemplate)
     {
-        var canvasVm = _serviceProvider.GetRequiredService<CanvasViewModel>();
-        
-        Console.WriteLine($"{item.Type} Node Added. Count: {canvasVm.Nodes.Count}");
-        canvasVm.AddNodeAtLocation(item);
+        _agentRepository.Add(newTemplate);
     }
+    
+    [RelayCommand]
+    private void AddNode(string id) => _eventAggregator.Publish(new AddNodeEvent(id));
 }

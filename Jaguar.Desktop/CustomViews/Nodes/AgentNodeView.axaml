@@ -3,9 +3,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:DataType="models:FlowNode"
-             xmlns:models="clr-namespace:Jaguar.Desktop.Models"
+             x:DataType="viewModels:FlowNodeViewModel"
              xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
              x:Class="Jaguar.Desktop.CustomViews.Nodes.AgentNodeView"
              >
 

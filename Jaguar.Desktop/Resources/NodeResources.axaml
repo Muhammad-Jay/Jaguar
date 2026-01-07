@@ -1,8 +1,8 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
-                    xmlns:models="clr-namespace:Jaguar.Desktop.Models"
-                    x:DataType="models:FlowNode">
+                    xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
+                    xmlns:connector="clr-namespace:Jaguar.Desktop.CustomViews.Connector"
+                    x:DataType="viewModels:FlowNodeViewModel">
     
     <ControlTemplate x:Key="NodeAnchors" TargetType="ContentControl">
         
@@ -15,17 +15,17 @@
                 <Styles>
                     <Style Selector="Panel#Panel">
                         <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Width" Value="35"/>
-                        <Setter Property="Height" Value="35"/>
+                        <Setter Property="Width" Value="25"/>
+                        <Setter Property="Height" Value="25"/>
             
                         <Style Selector="^ Border#Border">
                             <Setter Property="HorizontalAlignment" Value="Stretch"/>
                             <Setter Property="VerticalAlignment" Value="Stretch"/>
-                            <Setter Property="Background" Value="{StaticResource MainBg}"/>
-                            <Setter Property="CornerRadius" Value="4"/>
-                            <Setter Property="Padding" Value="4"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="CornerRadius" Value="5"/>
+                            <Setter Property="Padding" Value="3"/>
                             <Setter Property="ClipToBounds" Value="True"/>
-                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="BorderThickness" Value="0"/>
                             <Setter Property="BorderBrush" Value="Gray"/>
                             
                             <Style Selector="^[IsPointerOver=True]">
@@ -38,11 +38,11 @@
                 
                             <Style Selector="^ Button">
                                 <Style Selector="^[IsPointerOver=True]">
-                                    <Setter Property="Background" Value="{StaticResource JaguarSurface}"/>
+                                    <Setter Property="Background" Value="Transparent"/>
                                 </Style>
                                 
                                 <Style Selector="^[IsPressed=True]">
-                                    <Setter Property="Background" Value="DimGray"/>
+                                    <Setter Property="Background" Value="Transparent"/>
                                 </Style>
                             </Style>
                         </Style>
@@ -57,16 +57,20 @@
                     VerticalAlignment="Stretch"
                     VerticalContentAlignment="Stretch"
                     HorizontalContentAlignment="Stretch"
-                    Content="+"
                     FontSize="9"
-                    Foreground="White"
-                    Command="{Binding  OpenAgentDialogCommand}"
-                    />
+                    Foreground="Transparent"
+                    Command="{Binding  OpenAgentTemplateCommand}"
+                    >
+                    <ContentPresenter
+                        Content="{TemplateBinding Content}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                        />
+                </Button>
             </Border>
         </Panel>
     </ControlTemplate>
     
-    <ControlTemplate x:Key="DefaultNodeAnchor" TargetType="ContentControl">
+    <ControlTemplate x:Key="DefaultNodeAnchor" x:DataType="viewModels:FlowNodeViewModel" TargetType="ContentControl">
         
         <Panel
             Name="AnchorPanel"
@@ -82,7 +86,7 @@
                         <Setter Property="HorizontalAlignment" Value="Stretch"/>
                         <Setter Property="VerticalAlignment" Value="Stretch"/>
                         <Setter Property="Height" Value="2"/>
-                        <Setter Property="Background" Value="DimGray"/>
+                        <Setter Property="Background" Value="Transparent"/>
                     </Style>
                 </Style>
             </Panel.Styles>
@@ -94,12 +98,42 @@
             <ContentControl
                 VerticalAlignment="Center"
                 HorizontalAlignment="Left"
-                Template="{StaticResource  NodeAnchors}"/>
+                x:Name="InputAnchorControl"
+                Template="{StaticResource  NodeAnchors}">
+                
+                <ItemsControl
+                    ItemsSource="{Binding Inputs}"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="0,0,0,0">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <connector:ConnectorView />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                
+            </ContentControl>
         
             <ContentControl
                 VerticalAlignment="Center"
                 HorizontalAlignment="Right"
-                Template="{StaticResource  NodeAnchors}"/>
+                x:Name="OutputAnchorControl"
+                Template="{StaticResource  NodeAnchors}">
+                
+                <ItemsControl
+                    ItemsSource="{Binding Outputs}"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="0,0,0,0">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <connector:ConnectorView />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                
+            </ContentControl>
 
         </Panel>
     </ControlTemplate>

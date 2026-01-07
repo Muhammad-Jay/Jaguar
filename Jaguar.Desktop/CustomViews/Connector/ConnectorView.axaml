@@ -13,6 +13,7 @@
         Width="10"
         Height="10"
         Background="White"
+        Cursor="Hand"
         Anchor="{Binding Anchor.Position, Mode=TwoWay}"
         IsConnected="{Binding IsConnected}"
         >

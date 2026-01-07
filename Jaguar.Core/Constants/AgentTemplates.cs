@@ -1,14 +1,14 @@
-using System.Collections.Generic;
-using Jaguar.Desktop.Models;
+using Jaguar.Core.Models.Graph;
+using Jaguar.Core.Models.Templates;
 
-namespace Jaguar.Desktop.Constants.Nodes;
+namespace Jaguar.Core.Constants;
 
-public static class NodeCatalog
+public static class AgentTemplates
 {
-    public static readonly List<FlowNode> DefaultAgentTemplates = new()
+    public static readonly List<AgentTemplate> DefaultAgentTemplates = new()
     {
       
-        new FlowNode
+        new AgentTemplate
         {
             Title = "Orchestrator",
             Type = NodeType.Orchestrator,
@@ -45,7 +45,7 @@ public static class NodeCatalog
             """
         },
 
-        new FlowNode
+        new AgentTemplate
         {
             Title = "Project Manager",
             Type = NodeType.ProjectManager,
@@ -72,7 +72,7 @@ public static class NodeCatalog
             """
         },
         
-        new FlowNode
+        new AgentTemplate
         {
             Title = "Intent",
             Type = NodeType.Intent,
@@ -90,7 +90,7 @@ public static class NodeCatalog
             """
         },
 
-        new FlowNode
+        new AgentTemplate
         {
             Title = "Goal",
             Type = NodeType.Goal,
@@ -107,7 +107,7 @@ public static class NodeCatalog
             """
         },
 
-        new FlowNode
+        new AgentTemplate
         {
             Title = "Plan",
             Type = NodeType.Plan,
@@ -126,7 +126,7 @@ public static class NodeCatalog
             """
         },
         
-        new FlowNode
+        new AgentTemplate
         {
             Title = "Reasoning",
             Type = NodeType.Reasoning,
@@ -143,7 +143,7 @@ public static class NodeCatalog
             """
         },
 
-        new FlowNode
+        new AgentTemplate
         {
             Title = "Hypothesis",
             Type = NodeType.Hypothesis,
@@ -159,7 +159,7 @@ public static class NodeCatalog
             """
         },
 
-        new FlowNode
+        new AgentTemplate
         {
             Title = "Constraint",
             Type = NodeType.Constraint,
@@ -175,7 +175,7 @@ public static class NodeCatalog
             """
         },
         
-        new FlowNode
+        new AgentTemplate
         {
             Title = "Simulation",
             Type = NodeType.Simulation,
@@ -191,7 +191,7 @@ public static class NodeCatalog
             """
         },
 
-        new FlowNode
+        new AgentTemplate
         {
             Title = "Scenario",
             Type = NodeType.Scenario,
@@ -205,7 +205,7 @@ public static class NodeCatalog
             """
         },
 
-        new FlowNode
+        new AgentTemplate
         {
             Title = "Risk",
             Type = NodeType.Risk,
@@ -220,7 +220,7 @@ public static class NodeCatalog
             """
         },
         
-        new FlowNode
+        new AgentTemplate
         {
             Title = "Agent",
             Type = NodeType.Agent,
@@ -236,7 +236,7 @@ public static class NodeCatalog
             """
         },
 
-        new FlowNode
+        new AgentTemplate
         {
             Title = "Task",
             Type = NodeType.Task,
@@ -252,7 +252,7 @@ public static class NodeCatalog
             """
         },
 
-        new FlowNode
+        new AgentTemplate
         {
             Title = "Tool",
             Type = NodeType.Tool,
@@ -266,7 +266,7 @@ public static class NodeCatalog
             """
         },
         
-        new FlowNode
+        new AgentTemplate
         {
             Title = "Evaluation",
             Type = NodeType.Evaluation,
@@ -282,7 +282,7 @@ public static class NodeCatalog
             """
         },
 
-        new FlowNode
+        new AgentTemplate
         {
             Title = "Reflection",
             Type = NodeType.Reflection,
@@ -298,7 +298,7 @@ public static class NodeCatalog
             """
         },
 
-        new FlowNode
+        new AgentTemplate
         {
             Title = "Decision",
             Type = NodeType.Decision,
@@ -314,7 +314,7 @@ public static class NodeCatalog
             """
         },
         
-        new FlowNode
+        new AgentTemplate
         {
             Title = "Memory",
             Type = NodeType.Memory,
@@ -328,7 +328,7 @@ public static class NodeCatalog
             """
         },
 
-        new FlowNode
+        new AgentTemplate
         {
             Title = "Belief",
             Type = NodeType.Belief,
@@ -342,7 +342,7 @@ public static class NodeCatalog
             """
         },
 
-        new FlowNode
+        new AgentTemplate
         {
             Title = "Knowledge",
             Type = NodeType.Knowledge,

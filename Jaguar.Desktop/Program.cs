@@ -1,8 +1,11 @@
 ﻿using Avalonia;
 using System;
 using Jaguar.Core.Abstractions;
+using Jaguar.Core.Models.Graph;
+using Jaguar.Core.Models.Templates;
 using Jaguar.Core.Services;
 using Jaguar.Desktop.Services.AppState;
+using Jaguar.Desktop.Services.Events;
 using Jaguar.Desktop.ViewModels;
 using Jaguar.Desktop.ViewModels.Dialog;
 using Jaguar.Desktop.ViewModels.Dialog.Contents;
@@ -35,12 +38,17 @@ class Program
                         context.Configuration.GetSection("GeminiConfig"));
 
                     // --- CORE SERVICES ---
+                    services.AddSingleton<IAgentTemplateRepository, AgentTemplateRepository>();
                     services.AddSingleton<AppStateService>();
+                    services.AddSingleton<IEventAggregator, EventAggregator>();
+                    services.AddSingleton<IGraphService, GraphService>();
                     services.AddTransient<IAiProvider, LlmProvider>();
                     services.AddSingleton<Orchestrator>();
                     
                     // --- VIEW MODELS ---
                     services.AddSingleton<CanvasViewModel>();
+                    
+                    services.AddSingleton<FlowNodeViewModelFactory>();
                     
                     services.AddTransient<WorkflowViewModel>();
 
@@ -81,5 +89,5 @@ class Program
                 RenderingMode = new[] { X11RenderingMode.Glx, X11RenderingMode.Software }
             })
             .WithInterFont()
-            .LogToTrace(Avalonia.Logging.LogEventLevel.Debug);
+            .LogToTrace();
 }

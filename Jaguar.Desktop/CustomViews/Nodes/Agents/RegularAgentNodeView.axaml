@@ -2,22 +2,85 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:models="clr-namespace:Jaguar.Desktop.Models"
+             xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
+             xmlns:connector="clr-namespace:Jaguar.Desktop.CustomViews.Connector"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:DataType="models:FlowNode"
+             x:DataType="viewModels:FlowNodeViewModel"
              Name="RegularAgent"
-             ContextMenu="{StaticResource OrchestratorContextMenu}"
+             ContextMenu="{DynamicResource OrchestratorContextMenu}"
              x:Class="Jaguar.Desktop.CustomViews.Nodes.Agents.RegularAgentNodeView">
     
     <Panel
-        Width="210"
+        Width="170"
         Height="120"
+        PointerPressed="OnPointerPressed"
         Background="Transparent"
         >
         
-        <ContentControl
-            Template="{StaticResource  DefaultNodeAnchor}"
-            />
+        <Panel
+            Name="AnchorPanel"
+            ClipToBounds="False"
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Stretch">
+            
+            <Panel.Styles>
+                <Style Selector="Panel#AnchorPanel">
+                    <Setter Property="Background" Value="Transparent"/>
+                    
+                    <Style Selector="^ Border#BorderLine">
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        <Setter Property="VerticalAlignment" Value="Stretch"/>
+                        <Setter Property="Height" Value="2"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                    </Style>
+                </Style>
+            </Panel.Styles>
+            
+            <Border
+                Name="BorderLine"
+                />
+            
+            <ContentControl
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                x:Name="InputAnchorControl"
+                Template="{StaticResource  NodeAnchors}">
+                
+                <ItemsControl
+                    ItemsSource="{Binding Inputs}"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="0,0,0,0">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <connector:ConnectorView />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                
+            </ContentControl>
+        
+            <ContentControl
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                x:Name="OutputAnchorControl"
+                Template="{StaticResource  NodeAnchors}">
+                
+                <ItemsControl
+                    ItemsSource="{Binding Outputs}"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="0,0,0,0">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <connector:ConnectorView />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                
+            </ContentControl>
+
+        </Panel>
         
         <Border
             Width="120"

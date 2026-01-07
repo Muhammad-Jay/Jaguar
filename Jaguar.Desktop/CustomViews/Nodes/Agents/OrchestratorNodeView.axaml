@@ -2,24 +2,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:models="clr-namespace:Jaguar.Desktop.Models"
              xmlns:connector="clr-namespace:Jaguar.Desktop.CustomViews.Connector"
+             xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:DataType="models:FlowNode"
-             ContextMenu="{StaticResource OrchestratorContextMenu}"
+             x:DataType="viewModels:FlowNodeViewModel"
+             ContextMenu="{DynamicResource OrchestratorContextMenu}"
              x:Class="Jaguar.Desktop.CustomViews.Nodes.Agents.OrchestratorNodeView">
     
             <Panel
-                Width="260"
+                Width="220"
                 Height="170"
                 Name="OrchestratorNode"
                 Background="#01000000"
                 >
                 
-                <ContentControl
-                    Template="{StaticResource  DefaultNodeAnchor}"
-                />
-                
+                <Border x:Name="InputAnchorControl"
+                        Width="10"
+                        Height="10"
+                        Background="White"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Margin="-5,0,0,0"/>
+
+                <!-- OUTPUT -->
+                <Border x:Name="OutputAnchorControl"
+                        Width="10"
+                        Height="10"
+                        Background="White"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Margin="0,0,-5,0"/>
                  <Border
                  Width="170"
                  Height="170"
@@ -68,30 +80,6 @@
                                  <Setter Property="Background" Value="Cyan"/>
                              </Style>
                          </Border.Styles>
-                      
-                         <Panel HorizontalAlignment="Stretch">
-                             <ItemsControl
-                                 ItemsSource="{Binding Input}"
-                                 HorizontalAlignment="Left"
-                                 Margin="-10,0,0,0">
-                                 <ItemsControl.ItemTemplate>
-                                     <DataTemplate>
-                                         <connector:ConnectorView/>
-                                     </DataTemplate>
-                                 </ItemsControl.ItemTemplate>
-                             </ItemsControl>
-                             
-                             <ItemsControl
-                                 ItemsSource="{Binding Input}"
-                                 HorizontalAlignment="Left"
-                                 Margin="-10,0,0,0">
-                                 <ItemsControl.ItemTemplate>
-                                     <DataTemplate>
-                                         <connector:ConnectorView/>
-                                     </DataTemplate>
-                                 </ItemsControl.ItemTemplate>
-                             </ItemsControl>
-                         </Panel>
                          
                      </Border>
                  </Border>

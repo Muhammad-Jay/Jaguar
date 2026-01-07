@@ -1,5 +1,4 @@
 using CommunityToolkit.Mvvm.ComponentModel;
-using Jaguar.Core.Services;
 
 namespace Jaguar.Desktop.ViewModels
 {

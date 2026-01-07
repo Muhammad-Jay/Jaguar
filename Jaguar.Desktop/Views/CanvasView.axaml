@@ -5,20 +5,21 @@
              xmlns:models="clr-namespace:Jaguar.Desktop.Models"
              xmlns:services="clr-namespace:Jaguar.Desktop.Services"
              xmlns:agents="clr-namespace:Jaguar.Desktop.CustomViews.Nodes.Agents"
+             xmlns:connector="clr-namespace:Jaguar.Desktop.CustomViews.Connector"
              x:DataType="vm:CanvasViewModel"
              x:Class="Jaguar.Desktop.Views.CanvasView">
     
     <UserControl.Resources>
         
-        <DataTemplate x:Key="RegularAgentTemplate" DataType="models:FlowNode">
+        <DataTemplate x:Key="RegularAgentTemplate" DataType="vm:FlowNodeViewModel">
             <agents:RegularAgentNodeView/>
         </DataTemplate>
 
-        <DataTemplate x:Key="OrchestratorTemplate" DataType="models:FlowNode">
+        <DataTemplate x:Key="OrchestratorTemplate" DataType="vm:FlowNodeViewModel">
             <agents:OrchestratorNodeView/>
         </DataTemplate>
         
-        <DataTemplate x:Key="PmTemplate" DataType="models:FlowNode">
+        <DataTemplate x:Key="PmTemplate" DataType="vm:FlowNodeViewModel">
             <agents:PmNodeView/>
         </DataTemplate>
         
@@ -88,12 +89,12 @@
                     <Setter Property="Padding" Value="10" />
                 </Style>
                 
-                <Style Selector="nodify|ItemContainer" x:DataType="models:FlowNode">
+                <Style Selector="nodify|ItemContainer" x:DataType="vm:FlowNodeViewModel">
                     <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
-                    <Setter Property="Location" Value="{Binding Location, Mode=TwoWay}" />
+                    <!-- <Setter Property="Location" Value="{Binding Location, Mode=TwoWay}" /> -->
                 </Style>
                 
-                <Style Selector="nodify|ItemContainer[IsSelected=True]" x:DataType="models:FlowNode">
+                <Style Selector="nodify|ItemContainer[IsSelected=True]" x:DataType="vm:FlowNodeViewModel">
                     <Setter Property="ZIndex" Value="50" />
                 </Style>
             </nodify:NodifyEditor.Styles>
@@ -104,13 +105,14 @@
             
             <nodify:NodifyEditor.ConnectionTemplate>
                 <DataTemplate x:DataType="models:ConnectionViewModel">
-                   <nodify:StepConnection
-                       Stroke="White"
-                       StrokeThickness="2"
-                       Source="{Binding SourceAnchor.Position}"
-                       Target="{Binding TargetAnchor.Position}"/>
+                    <connector:BezierConnection
+                        Source="{Binding Source.Position}"
+                        Target="{Binding Target.Position}"
+                        Stroke="White"
+                        StrokeThickness="2" />
                 </DataTemplate>
             </nodify:NodifyEditor.ConnectionTemplate>
+
         
         </nodify:NodifyEditor>
     </Grid>

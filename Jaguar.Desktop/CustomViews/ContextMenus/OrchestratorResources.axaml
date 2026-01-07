@@ -1,27 +1,91 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
-                    xmlns:models="clr-namespace:Jaguar.Desktop.Models"
                     x:DataType="viewModels:CanvasViewModel">
 
-    <ContextMenu x:Key="OrchestratorContextMenu" x:DataType="models:FlowNode">
+    <!-- Your Orchestrator Context Menu -->
+    <ContextMenu ClipToBounds="True" x:Key="OrchestratorContextMenu" x:DataType="viewModels:FlowNodeViewModel">
+
+          <!-- Glassmorphism ContextMenu Style -->
+    <Style Selector="ContextMenu#OrchestratorContextMenu">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect BlurRadius="20" Color="#40000000"/>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border CornerRadius="{TemplateBinding CornerRadius}"
+                            Background="#30FFFFFF">
+                        <!-- Frosted Glass with blur -->
+                        <Border.Effect>
+                            <BlurEffect Radius="15"/>
+                        </Border.Effect>
+
+                        <StackPanel Spacing="10" IsItemsHost="True" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- MenuItem Glassmorphism + Hover Animation -->
+    <Style Selector="MenuItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+        <Setter Property="Margin" Value="0,0,0,5"/>
+        <Setter Property="Foreground" Value="{StaticResource JaguarTextPrimary}"/>
+        <Setter Property="Padding" Value="8,6"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border Background="{StaticResource Neutral900}"
+                            CornerRadius="12">
+                        <ContentPresenter VerticalAlignment="Center"
+                                          Margin="{TemplateBinding Padding}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style Selector="^[IsPointerOver=True]">
+            <Setter Property="Background" Value="{StaticResource MainBg}"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Style>
+
+    <!-- Separator Style -->
+    <Style Selector="Separator">
+        <Setter Property="Height" Value="1"/>
+        <Setter Property="Margin" Value="4,2"/>
+        <Setter Property="Background" Value="#40FFFFFF"/>
+    </Style>
+        
         <MenuItem Header="Execution">
-            <MenuItem Header="Run from here" 
-                      Command="{Binding OpenAgentDialogCommand}"
-                      InputGesture="Ctrl+Enter">
-            </MenuItem>
+            <MenuItem Header="Run from here" InputGesture="Ctrl+Enter"/>
             <MenuItem Header="Debug Node" />
         </MenuItem>
-
+        
         <Separator/>
-
-        <MenuItem Header="View Prompt Template" Command="{Binding OpenPromptEditorCommand}"/>
+        
+        <MenuItem Header="View Prompt Template" Command="{Binding OpenAgentTemplateCommand}"/>
         <MenuItem Header="Manage Knowledge Base" />
-    
+        
         <Separator/>
-
-        <MenuItem Header="Copy ID"  Foreground="Gray"/>
+        
+        <MenuItem Header="Copy ID" Foreground="Gray"/>
         <MenuItem Header="Duplicate" />
-        <MenuItem Header="Delete" Command="{Binding DeleteSelfCommand}" Foreground="#FF5555"/>
+        <MenuItem Header="Delete" Foreground="#FF5555"/>
+          
     </ContextMenu>
+
 </ResourceDictionary>

@@ -22,16 +22,16 @@ public partial class ConnectorView : UserControl
 
     private void OnDataContextChanged(object? sender, EventArgs e)
     {
-        if (DataContext is ConnectorViewModel vm && vm.ParentNode != null)
-        {
-            vm.ParentNode.PropertyChanged += (s, args) =>
-            {
-                if (args.PropertyName == "Location")
-                {
-                    UpdateAnchorPosition();;
-                }
-            };
-        }
+        // if (DataContext is ConnectorViewModel vm && vm.ParentNode != null)
+        // {
+        //     // vm.ParentNode.PropertyChanged += (s, args) =>
+        //     // {
+        //     //     if (args.PropertyName == "Location")
+        //     //     {
+        //     //         UpdateAnchorPosition();;
+        //     //     }
+        //     // };
+        // }
     }
 
     private void UpdateAnchorPosition()

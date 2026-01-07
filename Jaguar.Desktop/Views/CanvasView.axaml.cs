@@ -1,6 +1,5 @@
+using System;
 using Avalonia.Controls;
-using Avalonia;
-using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Jaguar.Desktop.Views
 {
@@ -9,7 +8,7 @@ namespace Jaguar.Desktop.Views
         public CanvasView()
         {
             InitializeComponent();
+            Console.WriteLine("CanvasView loaded");
         }
-        
     }
 }

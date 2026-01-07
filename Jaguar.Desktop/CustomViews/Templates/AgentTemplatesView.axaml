@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels.Templates"
-             xmlns:models="clr-namespace:Jaguar.Desktop.Models"
+             xmlns:templates="clr-namespace:Jaguar.Core.Models.Templates;assembly=Jaguar.Core"
              x:DataType="viewModels:AgentTemplatesViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Jaguar.Desktop.CustomViews.Templates.AgentTemplatesView"
@@ -18,7 +18,7 @@
             </ItemsControl.ItemsPanel>
             
             <ItemsControl.ItemTemplate>
-                <DataTemplate x:DataType="models:FlowNode">
+                <DataTemplate x:DataType="templates:AgentTemplate">
                 <Border Margin="7,0,7,0" 
                         Padding="7" 
                         Background="{StaticResource MainBg}" 
@@ -44,7 +44,8 @@
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Stretch"
                         CornerRadius="5"
-                        Command="{Binding AddNodeCommand}"
+                        CommandParameter="{Binding Id}"
+                        Command="{Binding $parent[ItemsControl].((viewModels:AgentTemplatesViewModel)DataContext).AddNodeCommand}"
                         Background="{StaticResource JaguarBorder}"
                         >
                         

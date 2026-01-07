@@ -5,6 +5,13 @@
     <explicitIncludes>
       <Path>Jaguar.Desktop</Path>
     </explicitIncludes>
-    <explicitExcludes />
+    <explicitExcludes>
+      <Path>Jaguar.Api/obj</Path>
+      <Path>Jaguar.Cli/obj</Path>
+      <Path>Jaguar.Core/obj</Path>
+      <Path>Jaguar.Desktop/bin</Path>
+      <Path>Jaguar.Desktop/obj</Path>
+      <Path>Jaguar.LLM/obj</Path>
+    </explicitExcludes>
   </component>
 </project>
