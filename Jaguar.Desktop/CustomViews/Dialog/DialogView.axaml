@@ -10,8 +10,8 @@
    
    <Panel
        IsVisible="{Binding AppState.IsAgentDialogOpen}"
-       Width="600"
-       Height="500"
+       Width="{Binding AppState.DialogWidth}"
+       Height="{Binding AppState.DialogHeight}"
        Background="Transparent"
        ZIndex="70"
        ClipToBounds="True">
@@ -22,7 +22,7 @@
            VerticalAlignment="Center"
            HorizontalAlignment="Center"
            CornerRadius="15"
-           Background="{StaticResource Neutral900}"
+           Background="{StaticResource MainBg}"
            BorderThickness="2"
            BorderBrush="{StaticResource JaguarSurface}"
            ClipToBounds="True"
@@ -78,13 +78,13 @@
             <Border
                 Grid.Row="2"
                 HorizontalAlignment="Stretch"
-                Height="20"
-                Padding="5">
+                Height="27"
+                Padding="3">
                 
                 <Button
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right"
-                    CornerRadius="10"
+                    CornerRadius="5"
                     Padding="3"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Center"

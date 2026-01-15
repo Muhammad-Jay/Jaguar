@@ -22,9 +22,11 @@ public partial class AgentTemplatesViewModel : ViewModelBase
         _agentRepository = agentTemplateRepository;
         _eventAggregator = eventAggregator;
         _serviceProvider = serviceProvider;
+
+        // Seed Template to DB.
+        // SeedTemplates();
         
-        
-        // Initialize templates from your static helper
+        // Initialize templates from static helper
         var templates = _agentRepository.GetAll().GetAwaiter().GetResult();
         AvailableTemplates = new ObservableCollection<AgentTemplate>(templates.AsEnumerable());
     }

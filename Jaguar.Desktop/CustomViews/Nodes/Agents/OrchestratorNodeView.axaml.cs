@@ -1,94 +1,125 @@
 using System;
+using System.Diagnostics;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
-using Avalonia.Threading;
 using Avalonia.VisualTree;
-using Jaguar.Desktop.Models;
+using Jaguar.Desktop.CustomViews.Controls;
 using Jaguar.Desktop.ViewModels;
-using Nodify;
+using Jaguar.Desktop.Views;
+using ReactiveUI;
 
 namespace Jaguar.Desktop.CustomViews.Nodes.Agents;
 
 public partial class OrchestratorNodeView : UserControl
 {
-    private bool _anchorUpdateQueued;
+    private Point _dragStart;
+    private Point _nodeStart;
+    private bool _isDragging;
+
     public OrchestratorNodeView()
     {
         InitializeComponent();
+    }
+    
+    private void OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        if (DataContext is not FlowNodeViewModel vm) return;
+
+        var canvasVm = this.FindAncestorOfType<CanvasView>()?.DataContext as CanvasViewModel;
+        if (canvasVm == null) return;
+
+        // Check if Ctrl or Shift is held for multi-select
+        bool isMulti = e.KeyModifiers.HasFlag(KeyModifiers.Control) ||
+                       e.KeyModifiers.HasFlag(KeyModifiers.Shift);
+
+        canvasVm.SetSelection(vm, isMulti);
+
+        var graphPanel = this.GetVisualAncestors().OfType<GraphPanel>().FirstOrDefault();
+        if (graphPanel == null) return;
+
+        _isDragging = true;
         
-        this.AttachedToVisualTree += (_, __) =>
-        {
-            QueueAnchorUpdate();
+        _dragStart = e.GetPosition(graphPanel);
+        _nodeStart = vm.Location;
 
-            var editor = this.FindAncestorOfType<Nodify.NodifyEditor>();
-            if (editor != null)
-                editor.ViewportUpdated += (_, __) => QueueAnchorUpdate();
-        };
-        Console.WriteLine("RegularAgentNodeView created");
+        // e.Pointer.Capture(this);
+        e.Handled = true;
+        
+        UpdatePopupPosition();
     }
     
-    private void QueueAnchorUpdate()
+    private void OnPointerMoved(object? sender, PointerEventArgs e)
     {
-        if (!IsVisible || !this.IsAttachedToVisualTree())
-            return;
+        if (!_isDragging || DataContext is not FlowNodeViewModel vm) return;
 
-        Dispatcher.UIThread.Post(UpdateAnchors, DispatcherPriority.Render);
-    }
-    
-    private void OnPointerPressed(object sender, PointerPressedEventArgs e)
-    {
-        if (e.GetCurrentPoint(this).Properties.IsRightButtonPressed)
+        var graphPanel = this.GetVisualAncestors().OfType<GraphPanel>().FirstOrDefault();
+        if (graphPanel == null) return;
+
+        var currentMousePos = e.GetPosition(graphPanel);
+        var delta = currentMousePos - _dragStart;
+
+        var canvasVm = this.FindAncestorOfType<CanvasView>()?.DataContext as CanvasViewModel;
+
+        if (vm.IsSelected && canvasVm?.SelectedNodes.Count > 1)
         {
-            this.ContextMenu?.Open(this);
-            e.Handled = true; 
+            foreach (var selectedNode in canvasVm.SelectedNodes)
+            {
+                selectedNode.Location = new Point(
+                    selectedNode.Location.X + delta.X,
+                    selectedNode.Location.Y + delta.Y);
+            }
+            _dragStart = currentMousePos; // Update start for the next delta
         }
+        else
+        {
+            // Normal single-node drag
+            vm.Location = new Point(_nodeStart.X + delta.X, _nodeStart.Y + delta.Y);
+        }
+
+        // Tell the panel it needs to re-arrange its children immediately
+        graphPanel.InvalidateArrange();
+        UpdatePopupPosition();
     }
-    
-    private void UpdateAnchors()
+
+    private void OnPointerReleased(object? sender, PointerReleasedEventArgs e)
     {
-        if (DataContext is not FlowNodeViewModel vm)
-            return;
+        if (!_isDragging) return;
+        
+        _isDragging = false;
+        // e.Pointer.Capture(null);
+        e.Handled = true;
 
-        var editor = this.FindAncestorOfType<Nodify.NodifyEditor>();
-        if (editor == null)
-            return;
-
-        foreach (var input in vm.Inputs)
-            UpdateAnchor(input.Anchor, InputAnchorControl, editor);
-
-        foreach (var output in vm.Outputs)
-            UpdateAnchor(output.Anchor, OutputAnchorControl, editor);
+        UpdatePopupPosition();
     }
 
-    private static void UpdateAnchor(
-        Anchor anchor,
-        Control anchorControl,
-        Nodify.NodifyEditor editor)
+    // private void PointerOver(object? sender, PointerEventArgs e)
+    // {
+    //     
+    // }
+
+    private void UpdatePopupPosition()
     {
-        if (!anchorControl.IsVisible)
-            return;
-    
-        if (anchorControl.Bounds.Width <= 0 ||
-            anchorControl.Bounds.Height <= 0)
-            return;
-    
-        var presenter = editor.Presenter;
-        if (presenter == null)
-            return;
-    
-        var transform = anchorControl.TransformToVisual(presenter);
-        if (transform == null)
-            return;
-    
-        var center = new Point(
-            anchorControl.Bounds.Width / 2,
-            anchorControl.Bounds.Height / 2);
-    
-        var newPos = transform.Value.Transform(center);
-    
-        if (anchor.Position != newPos)
-            anchor.Position = newPos;
+        // if (NodeMenuPopup.IsOpen)
+        // {
+        //     var point = this.PointToScreen(new Point(
+        //         this.Bounds.X, this.Bounds.Y
+        //     ));
+        //
+        //     NodeMenuPopup.HorizontalOffset = point.X;
+        //     NodeMenuPopup.VerticalOffset = point.Y;
+        // }
     }
+    
+    // private void OnPointerPressed(object sender, PointerPressedEventArgs e)
+    // {
+    //     if (e.GetCurrentPoint(this).Properties.IsRightButtonPressed)
+    //     {
+    //         this.ContextMenu?.Open(this);
+    //         e.Handled = true; 
+    //     }
+    // }
 }

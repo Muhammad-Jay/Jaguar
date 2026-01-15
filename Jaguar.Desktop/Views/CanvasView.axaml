@@ -6,21 +6,27 @@
              xmlns:services="clr-namespace:Jaguar.Desktop.Services"
              xmlns:agents="clr-namespace:Jaguar.Desktop.CustomViews.Nodes.Agents"
              xmlns:connector="clr-namespace:Jaguar.Desktop.CustomViews.Connector"
+             xmlns:avalonia="clr-namespace:Nodify.Avalonia;assembly=Nodify.Avalonia"
+             xmlns:controls="clr-namespace:Jaguar.Desktop.CustomViews.Controls"
+             UseLayoutRounding="False"
              x:DataType="vm:CanvasViewModel"
              x:Class="Jaguar.Desktop.Views.CanvasView">
     
+    <UserControl.KeyBindings>
+        <KeyBinding Gesture="Ctrl+T"  Command="{Binding OpenOrchestratorDialogCommand}"/>
+    </UserControl.KeyBindings>
+    
     <UserControl.Resources>
-        
         <DataTemplate x:Key="RegularAgentTemplate" DataType="vm:FlowNodeViewModel">
-            <agents:RegularAgentNodeView/>
+                <agents:RegularAgentNodeView/>
         </DataTemplate>
 
         <DataTemplate x:Key="OrchestratorTemplate" DataType="vm:FlowNodeViewModel">
-            <agents:OrchestratorNodeView/>
+                <agents:OrchestratorNodeView/>
         </DataTemplate>
         
         <DataTemplate x:Key="PmTemplate" DataType="vm:FlowNodeViewModel">
-            <agents:PmNodeView/>
+                <agents:PmNodeView/>
         </DataTemplate>
         
         <services:NodeTemplateSelector 
@@ -31,89 +37,80 @@
         />
     </UserControl.Resources>
     
-    <Grid
-        VerticalAlignment="Stretch"
-        HorizontalAlignment="Stretch"
-        Background="Transparent">
-        <!-- <StackPanel Orientation="Vertical" Spacing="5"  ZIndex="100"> -->
-        <!--     <TextBlock Text="{Binding Connections[0].SourceAnchor.Position, StringFormat='Source: {0}'}" Foreground="White"/> -->
-        <!--     <TextBlock Text="{Binding SelectedNodes.Count, StringFormat='Nodes: {0}'}" Foreground="White"/> -->
-        <!-- </StackPanel> -->
-        <nodify:NodifyEditor 
-            Background="Transparent"
-            ItemsSource="{Binding Nodes}"
-            Connections="{Binding Connections}"
-            SelectedItems="{Binding SelectedNodes}"
-            SelectedItem="{Binding SelectedNode}"
-            CanSelectMultipleItems="True"
-            AutoScrollToSelectedItem="True"
-            ItemTemplate="{StaticResource MyNodeSelector}"
-            GridCellSize="40">
-            
-            <nodify:NodifyEditor.SelectionRectangleStyle>
-                <ControlTheme TargetType="Rectangle">
-                    <Setter Property="Stroke" Value="Transparent" />
-                    <Setter Property="Fill" Value="Transparent" />
-                    <Setter Property="ClipToBounds" Value="False"/>
-                </ControlTheme>
-            </nodify:NodifyEditor.SelectionRectangleStyle>
-        
-            <nodify:NodifyEditor.Styles>
-                <Style Selector="nodify|ItemContainer[IsSelected=True] Border#RegularNode">
-                    <Setter Property="BorderBrush" Value="Cyan" />
-                    <Setter Property="BorderThickness" Value="2" />
-                </Style>
-                <Style Selector="nodify|ItemContainer[IsSelected=True] Border#PmNode">
-                    <Setter Property="BorderBrush" Value="Cyan" />
-                    <Setter Property="BorderThickness" Value="2" />
-                    <Setter Property="BoxShadow" Value="0 0 15 2 Cyan" />
-                </Style>
-                <Style Selector="nodify|ItemContainer[IsSelected=True] Border#OrchestratorNode">
-                    <Setter Property="BorderBrush" Value="Cyan" />
-                    <Setter Property="BorderThickness" Value="2" />
-                    <Setter Property="CornerRadius" Value="75"/>
-                </Style>
-                
-                <Style Selector="nodify|ItemContainer[IsSelected=True]">
-                    <Setter Property="Background" Value="Transparent" />
-                    <Setter Property="BorderBrush" Value="Transparent"/>
-                    <Setter Property="BorderThickness" Value="1" />
-                </Style>
-                
-                <Style Selector="nodify|ItemContainer">
-                    <Setter Property="ContextMenu" Value="{x:Null}"/>
-                    <Setter Property="Background" Value="Transparent" />
-                    <Setter Property="BorderBrush" Value="Transparent" />
-                    <Setter Property="ClipToBounds" Value="False"/>
-                    <Setter Property="BorderThickness" Value="0" />
-                    <Setter Property="Padding" Value="10" />
-                </Style>
-                
-                <Style Selector="nodify|ItemContainer" x:DataType="vm:FlowNodeViewModel">
-                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
-                    <!-- <Setter Property="Location" Value="{Binding Location, Mode=TwoWay}" /> -->
-                </Style>
-                
-                <Style Selector="nodify|ItemContainer[IsSelected=True]" x:DataType="vm:FlowNodeViewModel">
-                    <Setter Property="ZIndex" Value="50" />
-                </Style>
-            </nodify:NodifyEditor.Styles>
-            
-            <nodify:NodifyEditor.ContextMenu>
-                <StaticResource ResourceKey="CanvasContextMenu"/>
-            </nodify:NodifyEditor.ContextMenu>
-            
-            <nodify:NodifyEditor.ConnectionTemplate>
-                <DataTemplate x:DataType="models:ConnectionViewModel">
-                    <connector:BezierConnection
-                        Source="{Binding Source.Position}"
-                        Target="{Binding Target.Position}"
-                        Stroke="White"
-                        StrokeThickness="2" />
-                </DataTemplate>
-            </nodify:NodifyEditor.ConnectionTemplate>
+    
+  <Grid>
+
+     <ZoomBorder 
+         Name="ZoomHost"
+         Focusable="True"
+         EnablePan="True"
+         EnableZoom="True"
+         MinZoomX="0.50"
+         MinZoomY="0.50"
+         MaxZoomY="2.0"
+         MaxZoomX="2.0"
+         Stretch="Fill"
+         EnableAnimations="True"
+         ClipToBounds="True"
+         VerticalAlignment="Stretch"
+         HorizontalAlignment="Stretch"
+         ZoomSpeed="1.2"
+         MajorGridInterval="5"
+         GridBrush="#3A3A3A"
+         >
+       
+         <!-- WORLD SPACE -->
+         <controls:GraphPanel
+             ClipToBounds="False"
+             Name="WorldCanvas"> 
+             
+             <!-- <controls:GraphPanel.ContextMenu> -->
+             <!--     <StaticResource ResourceKey="CanvasContextMenu"/> -->
+             <!-- </controls:GraphPanel.ContextMenu> -->
+
+             <ItemsControl ClipToBounds="False" ItemsSource="{Binding Connections}">
+                  <ItemsControl.ItemsPanel>
+                     <ItemsPanelTemplate>
+                          <Grid ClipToBounds="False" />    
+                     </ItemsPanelTemplate>
+                  </ItemsControl.ItemsPanel>
+           
+                 <ItemsControl.ItemTemplate>
+                     <DataTemplate x:DataType="vm:ConnectionViewModel">
+                         <connector:BezierConnection
+                             Source="{Binding Source.Position}"
+                             Target="{Binding Target.Position}"
+                             Stroke="White"
+                             StrokeThickness="2"/>
+                     </DataTemplate>
+                 </ItemsControl.ItemTemplate>
+             </ItemsControl>
+
+         
+             
+             <ItemsControl ClipToBounds="False" ItemsSource="{Binding Nodes}">
+                 <ItemsControl.ItemsPanel>
+                     <ItemsPanelTemplate>
+                         <controls:GraphPanel ClipToBounds="False" />
+                     </ItemsPanelTemplate>
+                 </ItemsControl.ItemsPanel>
+                 
+                 <ItemsControl.ItemTemplate>
+                     <DataTemplate x:DataType="vm:FlowNodeViewModel">
+                         <ContentControl
+                             Width="{Binding Size.Width}"
+                             Height="{Binding Size.Height}"
+                             ClipToBounds="False"
+                             Content="{Binding}"
+                             ContentTemplate="{StaticResource MyNodeSelector}"/>
+                     </DataTemplate>
+                 </ItemsControl.ItemTemplate>
+             </ItemsControl>
 
         
-        </nodify:NodifyEditor>
-    </Grid>
+         </controls:GraphPanel>
+    </ZoomBorder>
+      
+  </Grid>
+    
 </UserControl>

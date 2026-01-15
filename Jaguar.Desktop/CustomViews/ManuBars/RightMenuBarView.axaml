@@ -30,9 +30,7 @@
                 <DataTemplate>
                     <Button 
                         HorizontalAlignment="Stretch" 
-                        Height="20"
-                        Background="DarkCyan"
-                        CornerRadius="3"
+                        Height="18"
                         Classes="MenuBtn" 
                         FontSize="10" 
                         CommandParameter="{Binding}"

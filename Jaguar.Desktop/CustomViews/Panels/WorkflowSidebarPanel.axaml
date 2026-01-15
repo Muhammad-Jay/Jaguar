@@ -11,12 +11,10 @@
    <Border
        Width="350"
        VerticalAlignment="Stretch" 
-       IsVisible="{Binding AppState.IsPanelOpen}"
        Background="Transparent"
        BorderThickness="2"
        CornerRadius="16"
        ClipToBounds="True"
-       Margin="0,20,45,20"
        BorderBrush="{StaticResource JaguarSurface}">
        
        <ContentControl Template="{StaticResource WorkflowGlassPanelTemplate}"

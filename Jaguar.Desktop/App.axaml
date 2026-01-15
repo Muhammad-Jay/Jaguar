@@ -9,7 +9,6 @@
              xmlns:menuItemView="clr-namespace:Jaguar.Desktop.CustomViews.MenuItemView"
              xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
              xmlns:views="clr-namespace:Jaguar.Desktop.Views"
-             xmlns:semi="https://irihi.tech/semi"
              x:Class="Jaguar.Desktop.App"
              RequestedThemeVariant="Dark">
     
@@ -18,7 +17,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceInclude Source="/CustomViews/ContextMenus/OrchestratorResources.axaml"/>
                 <ResourceInclude Source="/CustomViews/ContextMenus/CanvasContextMenu.axaml"/>
-                <ResourceInclude Source="avares://Nodify/Theme.axaml" />
+               
                 <ResourceInclude Source="/Resources/NodeResources.axaml"/>
                 <ResourceInclude Source="/Styles/GlassTheme.axaml"/>
             </ResourceDictionary.MergedDictionaries>
@@ -50,39 +49,17 @@
     
     <Application.Styles>
         <FluentTheme/>
-        <avalonia:MaterialIconStyles />
-        <!-- <semi:SemiTheme Locale="en-US" /> -->
         
-        <!-- <StyleInclude Source="avares://Semi.Avalonia.DataGrid/Index.axaml" /> -->
+        <avalonia:MaterialIconStyles />
       
+        <StyleInclude Source="avares://Nodify.Avalonia/Themes/Controls.xaml"/>
+        
         <StyleInclude Source="Styles/GlobalStyles.axaml"/>
         <StyleInclude Source="Styles/CanvasStyles.axaml"/>
-        
-        <!-- <Style Selector="Path"> -->
-        <!--     <Setter Property="Transitions"> -->
-        <!--         <Transitions> -->
-        <!--             <DoubleTransition Property="Opacity" Duration="0:0:0.3"/> -->
-        <!--         </Transitions> -->
-        <!--     </Setter> -->
-        <!-- </Style> -->
-        <!-- -->
-        <!-- <Style Selector="Path[IsPointerOver=True]"> -->
-        <!--     <Setter Property="Stroke" Value="#00E5FF"/> -->
-        <!--     <Setter Property="StrokeThickness" Value="3"/> -->
-        <!-- </Style> -->
-
         
         <Style Selector="ScrollBar /template/ Thumb">
             <Setter Property="Background" Value="#3300C8FF"/>
         </Style>
-        
-        <!-- <Style Selector="ContextMenu"> -->
-        <!--     <Setter Property="Background" Value="{StaticResource Neutral900}"/> -->
-        <!--     <Setter Property="BorderThickness" Value="1"/> -->
-        <!--     <Setter Property="BorderBrush" Value="#3E3E3E"/> -->
-        <!--     <Setter Property="Padding" Value="8"/> -->
-        <!--     <Setter Property="CornerRadius" Value="8"/> -->
-        <!-- </Style> -->
         
         <Style Selector="MenuItem:pointerover /template/ ContentPresenter#PART_HeaderPresenter">
             <Setter Property="Background" Value="#2A2A2A" /> <Setter Property="Foreground" Value="White" />
@@ -102,22 +79,27 @@
     </Application.Styles>
     
     <Application.DataTemplates>
+        <DataTemplate  DataType="viewModels:SplashScreenViewModel">
+            <views:SplashScreenView/>
+        </DataTemplate>
+        <DataTemplate DataType="viewModels:ProjectsViewModel">
+            <views:ProjectsView/>
+        </DataTemplate>
+        <DataTemplate  DataType="viewModels:ProjectDashboardViewModel">
+            <views:ProjectDashboardView/>
+        </DataTemplate>
         <DataTemplate DataType="viewModels:CanvasViewModel">
             <views:CanvasView/>
         </DataTemplate>
-        
-        <DataTemplate DataType="viewModels:WorkflowViewModel">
+        <DataTemplate  DataType="viewModels:WorkflowViewModel">
             <views:WorkflowView/>
         </DataTemplate>
-        
         <DataTemplate DataType="contents1:OrchestratorDialogPromptViewModel">
             <contents:OrchestratorDialogPromptView/>
         </DataTemplate>
-        
         <DataTemplate DataType="templates1:AgentTemplatesViewModel">
             <templates:AgentTemplatesView/>
         </DataTemplate>
-        
         <DataTemplate DataType="menuItemViewModel:SettingsViewModel">
             <menuItemView:SettingsView/>
         </DataTemplate>

@@ -9,20 +9,31 @@
              ContextMenu="{DynamicResource OrchestratorContextMenu}"
              x:Class="Jaguar.Desktop.CustomViews.Nodes.Agents.PmNodeView">
     
-    <Border
-        Height="130"
-        Width="250"
+    <Grid
         PointerPressed="OnPointerPressed"
+        PointerMoved="OnPointerMoved"
+        PointerReleased="OnPointerReleased"
+        Tag="{Binding IsSelected}"
+        Width="{Binding Size.Width}"
+        Height="{Binding Size.Height}"
+        ClipToBounds="False"
         Background="Transparent">
         
+        <Grid.Styles>
+            <Style Selector="Grid[Tag=true]">
+                <Setter Property="ZIndex" Value="100"/>
+            </Style>
+        </Grid.Styles>
+        
         <Border Name="PmNode"
-            Width="200"
-            Height="130"
-            CornerRadius="20"
-            BorderThickness="3"
-            Background="Transparent"
-            ClipToBounds="True"
-           >
+                Width="200"
+                Height="130"
+                CornerRadius="20"
+                Tag="{Binding IsSelected}"
+                BorderThickness="3"
+                Background="Transparent"
+                ClipToBounds="True"
+        >
 
         <Border.Styles>
             <Style Selector="Border#PmNode">
@@ -31,7 +42,9 @@
             </Style>
             <Style Selector="Border#PmNode[IsPointerOver=True]">
                 <Setter Property="BorderBrush" Value="Cyan"/>
-             
+            </Style>
+            <Style Selector="Border#PmNode[Tag=true]">
+                <Setter Property="BorderBrush" Value="Cyan"/>
             </Style>
         </Border.Styles>
 
@@ -142,5 +155,15 @@
             </Border>
         </Panel>
     </Border>
-    </Border>
+        
+        <ContentControl
+            IsVisible="{Binding IsSelected}"
+            Template="{StaticResource NodeFloatingMenu}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Width="250"
+            Height="40"
+            ZIndex="50"
+            Margin="0,-30,0,0"/>
+    </Grid>
 </UserControl>

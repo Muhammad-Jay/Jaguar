@@ -9,59 +9,128 @@
              ContextMenu="{DynamicResource OrchestratorContextMenu}"
              x:Class="Jaguar.Desktop.CustomViews.Nodes.Agents.OrchestratorNodeView">
     
-            <Panel
-                Width="220"
-                Height="170"
-                Name="OrchestratorNode"
-                Background="#01000000"
+            <Grid
+                PointerPressed="OnPointerPressed"
+                PointerMoved="OnPointerMoved"
+                PointerReleased="OnPointerReleased"
+                Tag="{Binding IsSelected}"
+                Width="{Binding Size.Width}"
+                Height="{Binding Size.Height}"
+                Background="Transparent"
+                ClipToBounds="False"
                 >
                 
-                <Border x:Name="InputAnchorControl"
-                        Width="10"
-                        Height="10"
-                        Background="White"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        Margin="-5,0,0,0"/>
+                <Grid.Styles>
+                    <Style Selector="Grid[Tag=true]">
+                        <Setter Property="ZIndex" Value="100"/>
+                    </Style>
+                </Grid.Styles>
+                
+                <Panel
+                    Name="AnchorPanel"
+                    ClipToBounds="False"
+                    HorizontalAlignment="Stretch" 
+                    VerticalAlignment="Stretch">
+            
+            <Panel.Styles>
+                <Style Selector="Panel#AnchorPanel">
+                    <Setter Property="Background" Value="Transparent"/>
+                    
+                    <Style Selector="^ Border#BorderLine">
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        <Setter Property="VerticalAlignment" Value="Stretch"/>
+                        <Setter Property="Height" Value="2"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                    </Style>
+                </Style>
+            </Panel.Styles>
+            
+            <Border
+                Name="BorderLine"
+                />
+            
+            <ContentControl
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                x:Name="InputAnchorControl"
+                Template="{StaticResource  NodeAnchors}">
+                
+                <ItemsControl
+                    ItemsSource="{Binding Inputs}"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="0,0,0,0">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <connector:ConnectorView />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                
+            </ContentControl>
+        
+            <ContentControl
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                x:Name="OutputAnchorControl"
+                Template="{StaticResource  NodeAnchors}">
+                
+                <ItemsControl
+                    ItemsSource="{Binding Outputs}"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="0,0,0,0">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <connector:ConnectorView />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                
+            </ContentControl>
 
-                <!-- OUTPUT -->
-                <Border x:Name="OutputAnchorControl"
-                        Width="10"
-                        Height="10"
-                        Background="White"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Center"
-                        Margin="0,0,-5,0"/>
+        </Panel>
+                
                  <Border
+                    Name="OrchestratorNode"
                  Width="170"
                  Height="170"
                  VerticalAlignment="Center"
                  HorizontalAlignment="Center"
-                 Background="#01000000"
+                 Background="Transparent"
                  Tag="{Binding IsSelected}"
-                 BorderThickness="2"
+                 BorderThickness="4"
                  BorderBrush="{StaticResource MainBg}"
                  CornerRadius="85"
-                 PointerPressed="OnPointerPressed"
+               
                  >
-                 
-                 <Border.Styles>
-                     <Style Selector="Border#OrchestratorNode[Tag=true]">
-                         <Setter Property="BorderBrush" Value="Cyan"/>
-                     </Style>
-                 </Border.Styles>
-        
-                 <Border.Transitions>
-                     <Transitions>
-                         <BrushTransition Property="BorderBrush" Duration="0:0:0.2"/>
-                     </Transitions>
-                 </Border.Transitions>
+            
+                     <Border.Styles>
+                         <Style Selector="Border">
+                             <Setter Property="BorderBrush" Value="{StaticResource MainBg}"/>
+                             <Setter Property="BoxShadow" Value="0 0 0 0 Transparent"/>
+                         </Style>
+                         <Style Selector="Border[IsPointerOver=True]">
+                             <Setter Property="BorderBrush" Value="Cyan"/>
+                         </Style>
+                         <Style Selector="Border[Tag=true]">
+                             <Setter Property="BorderBrush" Value="Cyan"/>
+                         </Style>
+                     </Border.Styles>
+
+                     <Border.Transitions>
+                         <Transitions>
+                             <BoxShadowsTransition Property="BoxShadow" Duration="0:0:0.2"/>
+                             <BrushTransition Property="BorderBrush" Duration="0:0:0.2"/>
+                         </Transitions>
+                     </Border.Transitions>
+
                  
                  <Border
                      Width="170"
                      Height="170"
                      Padding="20"
-                     Background="{StaticResource MainBg}"
+                     Background="Transparent"
                      CornerRadius="85"
                  >
                      
@@ -69,11 +138,10 @@
                          VerticalAlignment="Stretch"
                          HorizontalAlignment="Stretch"
                          BorderThickness="5"
-                         BorderBrush="DimGray"
                          Tag="{Binding IsSelected}"
-                         Background="{StaticResource JaguarSurface}"
+                         Background="{StaticResource MainBg}"
                          CornerRadius="65"
-                         >
+                     >
                          
                          <Border.Styles>
                              <Style Selector="Border#OrchestratorNode[Tag=true]">
@@ -84,6 +152,44 @@
                      </Border>
                  </Border>
              </Border>
-            </Panel>
+                
+                <!-- <Popup -->
+                <!--     x:Name="NodeMenuPopup" -->
+                <!--     Width="250" -->
+                <!--     Height="40" -->
+                <!--     ZIndex="40" -->
+                <!--     Margin="0,-50,0,0" -->
+                <!--     IsOpen="{Binding IsSelected}" -->
+                <!--     Placement="Top"> -->
+                <!-- -->
+                <!--     ~1~ <ContentControl @1@ -->
+                <!--     ~1~     Template="{StaticResource NodeFloatingMenu}" @1@ -->
+                <!--     ~1~     HorizontalAlignment="Center" @1@ -->
+                <!--     ~1~     VerticalAlignment="Top" @1@ -->
+                <!--     ~1~     Width="250" @1@ -->
+                <!--     ~1~     Height="40" @1@ -->
+                <!--     ~1~     ZIndex="50" @1@ -->
+                <!--     ~1~     Margin="0,-30,0,0"/> @1@ -->
+                <!--      -->
+                <!--     <Border  -->
+                <!--         Width="250" -->
+                <!--         Height="40" -->
+                <!--         BorderThickness="5" -->
+                <!--         Tag="{Binding IsSelected}" -->
+                <!--         Background="{StaticResource MainBg}" -->
+                <!--         CornerRadius="65" -->
+                <!--     > -->
+                <!--           -->
+                <!--         <Border.Styles> -->
+                <!--             <Style Selector="Border#OrchestratorNode[Tag=true]"> -->
+                <!--                 <Setter Property="Background" Value="Cyan"/> -->
+                <!--             </Style> -->
+                <!--         </Border.Styles> -->
+                <!--           -->
+                <!--     </Border> -->
+                <!-- -->
+                <!-- </Popup> -->
+                
+            </Grid>
     
 </UserControl>

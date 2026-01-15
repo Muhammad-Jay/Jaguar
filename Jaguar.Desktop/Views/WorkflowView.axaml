@@ -12,14 +12,8 @@
     
     <Grid Background="{StaticResource MainBg}"  Margin="0,0,0, 0">
    
-        <Border  VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,0,0"
-                Width="15" Height="245" Background="#2A2A2A" CornerRadius="10"
-                ZIndex="10"/>
-   
         <Grid Margin="8, 0, 8,8">
-            <Border HorizontalAlignment="Center" VerticalAlignment="Top"
-                    Width="500" Height="20" Background="#2A2A2A" CornerRadius="10" Margin="0,-5,0,0" />
-   
+            
             <Panel>
                 <Path 
                     Fill="{StaticResource CanvasBg}"
@@ -30,9 +24,8 @@
                    
                 </Path>
                 
-               
-   
                 <TransitioningContentControl Content="{Binding Content}"/>
+              
             </Panel>
             
             <dialog:DialogView 
@@ -41,15 +34,63 @@
                 DataContext="{Binding DialogVm}"
                 ZIndex="60"/>
             
+            <!-- Left menus -->
+            <Grid
+                HorizontalAlignment="Left"
+                VerticalAlignment="Stretch"
+                Width="25"
+                Margin="8,0,0,0">
+                <Border HorizontalAlignment="Left" VerticalAlignment="Top"
+                        BorderThickness="1"
+                        BorderBrush="{StaticResource JaguarSurface}"
+                        Height="200" Width="25" Background="Transparent" CornerRadius="6" Margin="0, 10,0,0" >
+                    
+                    <ContentControl
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        CornerRadius="6"
+                        Template="{StaticResource GlassPanelTemplate}">
+                        
+                        <StackPanel 
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch"
+                            Spacing="10"
+                            Orientation="Vertical">
+                           
+                            <Button 
+                                HorizontalAlignment="Stretch" 
+                                Height="18"
+                                Classes="MenuBtn" 
+                                Margin="2, 5, 2, 5"
+                                FontSize="10" 
+                                Command="{Binding ToggleLeftPanelCommand}"
+                                FontWeight="Regular"
+                                Foreground="DarkGray"
+                            >
+                        
+                            </Button>
+                           
+                            <manuBars:LeftMenuBarView  DataContext="{Binding  LeftBarMenuVm}"/>
+                        </StackPanel>
+                    </ContentControl>
+                </Border>
+            </Grid>
+            
+            <!-- Top menus -->
+            <Border HorizontalAlignment="Center" VerticalAlignment="Top"
+                    Width="500" Height="20" Background="#2A2A2A" CornerRadius="10" Margin="0,-5,0,0" />
+
+            
+            <!-- Right menus -->
             <Grid
                 HorizontalAlignment="Right"
                 VerticalAlignment="Stretch"
-                Width="22"
+                Width="25"
                 Margin="0,0,8,0">
                 <Border HorizontalAlignment="Right" VerticalAlignment="Top"
                         BorderThickness="1"
                         BorderBrush="{StaticResource JaguarSurface}"
-                        Height="300" Width="22" Background="Transparent" CornerRadius="6" Margin="0, 10,0,0" >
+                        Height="300" Width="25" Background="Transparent" CornerRadius="6" Margin="0, 10,0,0" >
                     
                     <ContentControl
                         VerticalAlignment="Stretch"
@@ -65,13 +106,11 @@
                            
                            <Button 
                                HorizontalAlignment="Stretch" 
-                               Height="20"
-                               Background="DarkCyan"
-                               CornerRadius="3"
+                               Height="18"
                                Classes="MenuBtn" 
                                Margin="2, 5, 2, 5"
                                FontSize="10" 
-                               Command="{Binding TogglePanelCommand}"
+                               Command="{Binding ToggleRightPanelCommand}"
                                FontWeight="Regular"
                                Foreground="DarkGray"
                            >
@@ -86,7 +125,7 @@
                 <Border HorizontalAlignment="Right" VerticalAlignment="Bottom"
                         BorderThickness="1"
                         BorderBrush="{StaticResource JaguarSurface}"
-                        Height="100" Width="22" Background="Transparent" CornerRadius="6" Margin="0, 10,0,10" >
+                        Height="100" Width="25" Background="Transparent" CornerRadius="6" Margin="0, 10,0,10" >
                     <ContentControl 
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Stretch"
@@ -98,6 +137,27 @@
             </Grid>
         </Grid>
         
-        <panels:WorkflowSidebarPanel DataContext="{Binding WorkflowSidebarVm}" IsVisible="{Binding AppState.IsPanelOpen}" ZIndex="50" HorizontalAlignment="Right" />
+        <panels:WorkflowSidebarPanel 
+            DataContext="{Binding WorkflowSidebarVm}" 
+            IsVisible="{Binding AppState.IsTopPanelOpen}" 
+            ZIndex="50" HorizontalAlignment="Center" 
+            Margin="0,50,0,0"
+            VerticalAlignment="Top" />
+        
+        <panels:WorkflowSidebarPanel 
+            DataContext="{Binding WorkflowSidebarVm}" 
+            IsVisible="{Binding AppState.IsLeftPanelOpen}"
+            ZIndex="50" 
+            Margin="50,20,0,20"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"/>
+        
+        <panels:WorkflowSidebarPanel 
+            DataContext="{Binding WorkflowSidebarVm}" 
+            IsVisible="{Binding AppState.IsRightPanelOpen}"
+            ZIndex="50"
+            Margin="0,20,50,20"
+            HorizontalAlignment="Right" 
+            VerticalAlignment="Top"/>
     </Grid>
 </UserControl>

@@ -2,13 +2,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewModel="clr-namespace:Jaguar.Desktop.Models"
-             xmlns:nodify="clr-namespace:Nodify;assembly=Nodify"
+             xmlns:connections="clr-namespace:Nodify.Avalonia.Connections;assembly=Nodify.Avalonia"
+             xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:DataType="viewModel:ConnectorViewModel"
+             x:DataType="viewModels:ConnectorViewModel"
              x:Class="Jaguar.Desktop.CustomViews.Connector.ConnectorView">
     <!-- ReSharper disable once InconsistentNaming -->
-    <nodify:Connector
+    <connections:Connector
         Name="PART_connectorDot"
         Width="10"
         Height="10"
@@ -18,5 +18,5 @@
         IsConnected="{Binding IsConnected}"
         >
        
-    </nodify:Connector>
+    </connections:Connector>
 </UserControl>

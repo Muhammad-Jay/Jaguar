@@ -31,6 +31,9 @@
         <entry key="Jaguar.Desktop/ViewModels/Panels/PanelWrapper.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/Views/CanvasView.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/Views/MainWindow.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/Views/ProjectDashboardView.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/Views/ProjectsView.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/Views/SplashScreenView.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/Views/WorkflowView.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
       </map>
     </option>

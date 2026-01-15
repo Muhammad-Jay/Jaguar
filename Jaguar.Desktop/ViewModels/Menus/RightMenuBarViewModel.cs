@@ -34,7 +34,7 @@ namespace Jaguar.Desktop.ViewModels.Menus
         }
         
         [RelayCommand]
-        public void TogglePanel () =>  AppState.IsPanelOpen = !AppState.IsPanelOpen;
+        public void TogglePanel () =>  AppState.IsRightPanelOpen = !AppState.IsRightPanelOpen;
         
         [RelayCommand]
         public void OnSelectedMenuChange(MenuItems? item)

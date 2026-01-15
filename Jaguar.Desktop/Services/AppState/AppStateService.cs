@@ -2,8 +2,10 @@ using System;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Jaguar.Core.Abstractions;
+using Jaguar.Core.Models;
 using Jaguar.Desktop.Abstractions;
 using Jaguar.Desktop.CustomViews.Templates;
+using Jaguar.Desktop.Models;
 using Jaguar.Desktop.Models.Ui;
 using Jaguar.Desktop.Services.Events.Ui;
 using Jaguar.Desktop.ViewModels.Dialog.Contents;
@@ -16,14 +18,25 @@ namespace Jaguar.Desktop.Services.AppState
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly IEventAggregator _events;
+
+        [ObservableProperty] private Project? _currentProject;
+        [ObservableProperty] private AppScreen _currentScreen;
         
         [ObservableProperty] private object? _currentView;
         [ObservableProperty] private object? _currentDialogView;
         [ObservableProperty] private PanelRequest? _activePanel;
-        [ObservableProperty] private bool _isPanelOpen = true;
+        [ObservableProperty] private bool _isRightPanelOpen = true;
+        [ObservableProperty] private bool _isLeftPanelOpen = false;
+        [ObservableProperty] private bool _isTopPanelOpen = false;
+        
 
         // Workflow Dialogs States
+        private readonly double _defaultDialogWidth = 600;
+        private readonly double _defaultDialogHeight = 500;
+        
         [ObservableProperty] private bool _isAgentDialogOpen;
+        [ObservableProperty] private double _dialogWidth;
+        [ObservableProperty] private double _dialogHeight;
         
         public AppStateService(IServiceProvider serviceProvider, IEventAggregator eventAggregator)
         {
@@ -42,8 +55,12 @@ namespace Jaguar.Desktop.Services.AppState
                     CurrentView = _serviceProvider.GetRequiredService<AgentTemplatesViewModel>();
                     CurrentDialogView = new OrchestratorDialogPromptViewModel();
                     ActivePanel = new PanelRequest { ViewModel = CurrentView, Position = Position.Left};
-                    IsPanelOpen = false;
+                    IsRightPanelOpen = false;
+                    IsLeftPanelOpen = true;
+                    IsTopPanelOpen = false;
                     IsAgentDialogOpen = false;
+                    DialogWidth = _defaultDialogWidth;
+                    DialogHeight = _defaultDialogHeight;
                 }
             }
             catch (Exception ex)
@@ -54,16 +71,14 @@ namespace Jaguar.Desktop.Services.AppState
         
         private void SubscribeToEvents()
         {
-            _events.Subscribe<OpenAgentTemplateDialogEvent>(_ =>
-            {
-                CurrentDialogView = _serviceProvider.GetRequiredService<OrchestratorDialogPromptViewModel>();
-                IsAgentDialogOpen = true;
-            });
+            _events.Subscribe<OpenAgentTemplateDialogEvent>(_ => OpenOrchestratorDialog());
 
             _events.Subscribe<CloseDialogEvent>(_ =>
             {
                 CurrentDialogView = null;
                 IsAgentDialogOpen = false;
+                DialogWidth = _defaultDialogWidth;
+                DialogHeight = _defaultDialogHeight;
             });
 
             _events.Subscribe<OpenPanelEvent>(e =>
@@ -77,20 +92,36 @@ namespace Jaguar.Desktop.Services.AppState
         {
             if (ActivePanel?.ViewModel == vm)
             {
-                IsPanelOpen = false;
-                ActivePanel = null;
+                switch (pos)
+                {
+                    case Position.Right:
+                        IsRightPanelOpen = false;
+                        ActivePanel = null;
+                        break;
+                    default:
+                        return;
+                        break;
+                }
             }
             else
             {
                 ActivePanel = new PanelRequest { ViewModel = vm, Position = pos, Size = size };
-                IsPanelOpen = true;
+                IsRightPanelOpen = true;
             }
         }
+
+        public void OpenOrchestratorDialog()
+        {
+            DialogWidth = 900;
+            DialogHeight = 700;
+            CurrentDialogView = _serviceProvider.GetRequiredService<OrchestratorDialogPromptViewModel>();
+            IsAgentDialogOpen = true;
+        }
    
-        public void ClosePanel () =>  IsPanelOpen = false;
+        public void ClosePanel () =>  IsRightPanelOpen = false;
         
         [RelayCommand]
-        public void TogglePanel () =>  IsPanelOpen = !IsPanelOpen;
+        public void TogglePanel () =>  IsRightPanelOpen = !IsRightPanelOpen;
         
     }
 }

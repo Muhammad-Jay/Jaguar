@@ -137,4 +137,82 @@
 
         </Panel>
     </ControlTemplate>
+    
+    <ControlTemplate TargetType="ContentControl" x:Key="NodeFloatingMenu" x:DataType="viewModels:FlowNodeViewModel">
+        <Border 
+            Width="250"
+            Height="40"
+            CornerRadius="5"
+            BorderThickness="1"
+            Margin="{TemplateBinding Margin}"
+            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+            VerticalAlignment="{TemplateBinding VerticalAlignment}"
+            BorderBrush="{StaticResource JaguarSurface}"
+            >
+            
+            <ContentControl
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Width="250"
+                BorderThickness="1"
+                CornerRadius="5"
+                BorderBrush="{StaticResource Neutral800Brush}"
+                Template="{DynamicResource GlassPanelTemplate}">
+                
+                <ScrollViewer
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center"
+                    Padding="5"
+                    Background="Transparent">
+                    
+                    <StackPanel
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Spacing="5">
+                    
+                        <Button
+                            VerticalAlignment="Stretch"
+                            Width="30"
+                            CornerRadius="4"
+                            Background="{StaticResource MainBg}"/>
+                    
+                        <Button
+                            VerticalAlignment="Stretch"
+                            Width="30"
+                            CornerRadius="4"
+                            Background="{StaticResource MainBg}"/>
+                    
+                        <Button
+                            VerticalAlignment="Stretch"
+                            Width="30"
+                            CornerRadius="4"
+                            Background="{StaticResource MainBg}"/>
+                    
+                        <Button
+                            VerticalAlignment="Stretch"
+                            Width="30"
+                            CornerRadius="4"
+                            Background="{StaticResource MainBg}"/>
+                    
+                        <Button
+                            VerticalAlignment="Stretch"
+                            Width="30"
+                            CornerRadius="4"
+                            Background="{StaticResource MainBg}"/>
+                    
+                        <Button
+                            VerticalAlignment="Stretch"
+                            Width="30"
+                            CornerRadius="4"
+                            Background="{StaticResource MainBg}"/>
+                    
+                    </StackPanel>
+                </ScrollViewer>
+                
+            </ContentControl>
+            
+        </Border>
+    </ControlTemplate>
 </ResourceDictionary>

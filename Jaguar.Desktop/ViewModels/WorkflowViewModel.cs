@@ -32,6 +32,7 @@ namespace Jaguar.Desktop.ViewModels
         [ObservableProperty] private DialogViewModel _dialogVm;
         [ObservableProperty] private WorkflowSidebarPanelViewModel _workflowSidebarVm;
         [ObservableProperty] private RightBarMenuViewModel _rightBarMenuVm;
+        [ObservableProperty] private LeftBarMenuViewModel _leftBarMenuVm;
         
         public WorkflowViewModel(Orchestrator orchestrator, CanvasViewModel canvas, IServiceProvider serviceProvider)
         {
@@ -39,6 +40,7 @@ namespace Jaguar.Desktop.ViewModels
             DialogVm = serviceProvider.GetRequiredService<DialogViewModel>();
             WorkflowSidebarVm = serviceProvider.GetRequiredService<WorkflowSidebarPanelViewModel>();
             RightBarMenuVm = serviceProvider.GetRequiredService<RightBarMenuViewModel>();
+            LeftBarMenuVm = serviceProvider.GetRequiredService<LeftBarMenuViewModel>();
             _workFlowOrchestrator = orchestrator;
             Content = canvas;
         }
@@ -50,7 +52,11 @@ namespace Jaguar.Desktop.ViewModels
         }
         
         [RelayCommand]
-        public void TogglePanel () =>  AppState.IsPanelOpen = !AppState.IsPanelOpen;
+        public void ToggleRightPanel () =>  AppState.IsRightPanelOpen = !AppState.IsRightPanelOpen;
+        
+        [RelayCommand]
+        public void ToggleLeftPanel () =>  AppState.IsLeftPanelOpen = !AppState.IsLeftPanelOpen;
+        
         
         
         // [RelayCommand]

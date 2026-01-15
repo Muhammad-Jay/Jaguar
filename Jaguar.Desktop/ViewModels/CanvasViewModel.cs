@@ -27,16 +27,19 @@ public partial class CanvasViewModel : ViewModelBase
     private readonly IServiceProvider _serviceProvider;
     [ObservableProperty] private AppStateService? _appState;
 
-    private FlowNodeViewModel _orchetratorNode;
+    private FlowNodeViewModel? _orchetratorNode;
     public ObservableCollection<FlowNodeViewModel> Nodes { get; } = new();
+    public ObservableCollection<NodeOverlayViewModel> NodeOverlays { get; } = new();
     public ObservableCollection<ConnectionViewModel> Connections { get; } = new();
     public ObservableCollection<FlowNodeViewModel> SelectedNodes { get; } = new();
 
     [ObservableProperty] private FlowNodeViewModel? _selectedNode;
     [ObservableProperty] private FlowNodeViewModel? _addNodeParent;
-    
 
-    public CanvasViewModel(IServiceProvider serviceProvider, IGraphService graphService, IEventAggregator eventAggregator, IAgentTemplateRepository agentRepository, FlowNodeViewModelFactory flowNodeViewModelFactory)
+
+    public CanvasViewModel(IServiceProvider serviceProvider, IGraphService graphService,
+        IEventAggregator eventAggregator, IAgentTemplateRepository agentRepository,
+        FlowNodeViewModelFactory flowNodeViewModelFactory)
     {
         _graph = graphService;
         _event = eventAggregator;
@@ -45,12 +48,14 @@ public partial class CanvasViewModel : ViewModelBase
         _serviceProvider = serviceProvider;
         AppState = serviceProvider.GetRequiredService<AppStateService>();
         _serviceProvider = serviceProvider;
-        
+
         // Initial Seed Data
         SetupInitialNodes();
 
         // Events
         SubscribeToEvents();
+
+        Console.WriteLine(Nodes.Count);
     }
 
     private void SetupInitialNodes()
@@ -58,21 +63,26 @@ public partial class CanvasViewModel : ViewModelBase
         _orchetratorNode = CreateNode(
             "Orchestrator",
             NodeType.Orchestrator,
-            new Point(100, 100));
+            new Point(200, 200));
 
         var kernel = CreateNode(
             "Kernel Agent",
-            NodeType.Agent,
-            new Point(400, 100));
+            NodeType.ProjectManager,
+            new Point(400, 300));
+
+        var from = _orchetratorNode.Outputs.FirstOrDefault();
+        var to = kernel.Inputs.FirstOrDefault();
+
+        if (from == null || to == null) return;
 
         Connect(
-            _orchetratorNode.Outputs.First(),
-            kernel.Inputs.First());
+            from, to
+        );
     }
 
     private void SubscribeToEvents()
     {
-        _event.Subscribe<AddNodeEvent>(e => AddAndConnectNode(_orchetratorNode, e.Id));
+        _event.Subscribe<AddNodeEvent>(e => AddAndConnectNode(_orchetratorNode!, e.Id));
     }
 
     private void AddAndConnectNode(FlowNodeViewModel fromNode, string id)
@@ -81,20 +91,29 @@ public partial class CanvasViewModel : ViewModelBase
 
         if (template != null)
         {
-            var pointX = fromNode.Location.X + 150;
-            var pointY = fromNode.Location.Y + 150;
-            
+            var pointX = fromNode.Location.X + 400;
+            var pointY = fromNode.Location.Y + 550;
+
             var newNode = CreateNode(
                 template.Title,
                 template.Type,
                 new Point(pointX, pointY));
 
-            Connect(
-                fromNode.Outputs.First(),
-                newNode.Inputs.First());
+            newNode.UpdateAnchors();
+            fromNode.UpdateAnchors();
+
+            var from = fromNode.Outputs.FirstOrDefault();
+            var to = newNode.Inputs.FirstOrDefault();
+
+            if (from == null || to == null) return;
+
+            Connect(from, to);
+
+            // Final UI push
+            OnPropertyChanged(nameof(Connections));
         }
     }
-    
+
     private FlowNodeViewModel CreateNode(
         string title,
         NodeType type,
@@ -112,10 +131,7 @@ public partial class CanvasViewModel : ViewModelBase
         ConnectorViewModel from,
         ConnectorViewModel to)
     {
-        _graph.Connect(from.NodeId, to.NodeId);
-        
-        UpdateAnchorPosition(from);
-        UpdateAnchorPosition(to);
+        // _graph.Connect(from.Anchor.Domain.Id, to.Anchor.Node.Domain.Id);
 
         var connection = new ConnectionViewModel(
             from.Anchor,
@@ -128,27 +144,45 @@ public partial class CanvasViewModel : ViewModelBase
         to.IsConnected = true;
     }
 
-
-    private void UpdateAnchorPosition(ConnectorViewModel connector)
+    public void SetSelection(FlowNodeViewModel node, bool isMultiple)
     {
-        var node = Nodes.First(n => n.Domain.Id == connector.NodeId);
+        if (!isMultiple)
+        {
+            // Clear previous selection
+            foreach (var n in SelectedNodes) n.IsSelected = false;
+            SelectedNodes.Clear();
+        }
 
-        // Basic layout (simple & stable)
-        var x = connector.Direction == PortDirection.Output
-            ? node.Location.X + 180   // right side of node
-            : node.Location.X;        // left side of node
-
-        var y = node.Location.Y + 40; // vertical center-ish
-
-        connector.Anchor.Position = new Point(x, y);
+        if (!SelectedNodes.Contains(node))
+        {
+            node.IsSelected = true;
+            SelectedNodes.Add(node);
+        }
     }
-    
+
+    public void SyncOverlays()
+    {
+        NodeOverlays.Clear();
+
+        foreach (var node in SelectedNodes)
+        {
+            NodeOverlays.Add(new NodeOverlayViewModel(node));
+        }
+    }
+
+
     [RelayCommand]
     public void ToggleAgentDialog()
     {
-        if(AppState != null)
+        if (AppState != null)
         {
-            AppState.IsAgentDialogOpen = !AppState.IsAgentDialogOpen;   
+            AppState.IsAgentDialogOpen = !AppState.IsAgentDialogOpen;
         }
+    }
+
+    [RelayCommand]
+    public void OpenOrchestratorDialog()
+    { 
+        AppState?.OpenOrchestratorDialog();
     }
 }

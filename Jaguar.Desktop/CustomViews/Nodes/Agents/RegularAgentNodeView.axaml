@@ -10,10 +10,13 @@
              ContextMenu="{DynamicResource OrchestratorContextMenu}"
              x:Class="Jaguar.Desktop.CustomViews.Nodes.Agents.RegularAgentNodeView">
     
-    <Panel
-        Width="170"
-        Height="120"
+    <Grid
         PointerPressed="OnPointerPressed"
+        PointerMoved="OnPointerMoved"
+        PointerReleased="OnPointerReleased"
+        Width="{Binding Size.Width}"
+        Height="{Binding Size.Height}"
+        ClipToBounds="False"
         Background="Transparent"
         >
         
@@ -86,7 +89,7 @@
             Width="120"
             Height="120"
             Name="RegularNode"
-            VerticalAlignment="Center"
+            VerticalAlignment="Bottom"
             HorizontalAlignment="Center"
             CornerRadius="10"
             Background="#1E1F20"
@@ -99,14 +102,31 @@
                 <DropShadowEffect Color="#262626" Opacity="0.3"></DropShadowEffect>
             </Border.Effect>
             
-            <Button
+            <Border
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 CornerRadius="7"
                 BorderThickness="1"
                 BorderBrush="{StaticResource JaguarSurface}">
                 
-            </Button>
+            </Border>
         </Border>
-    </Panel>
+        
+        <Popup
+            Width="250"
+            Height="40"
+            IsOpen="{Binding IsSelected}"
+            Placement="Top">
+            
+            <ContentControl
+                Template="{StaticResource NodeFloatingMenu}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Width="250"
+                Height="40"
+                ZIndex="50"
+                Margin="0,-30,0,0"/>
+            
+        </Popup>
+    </Grid>
 </UserControl>

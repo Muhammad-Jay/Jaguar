@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using Avalonia;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -21,6 +22,14 @@ public partial class FlowNodeViewModel : ObservableObject
     [ObservableProperty] private bool _isSelected;
     [ObservableProperty] private Point _location;
     
+    public Size Size => Type switch
+    {
+        NodeType.Orchestrator => new Size(220, 170),
+        NodeType.ProjectManager => new Size(250, 130),
+        NodeType.Agent => new Size(170, 120),
+        _ => new Size(250, 130)
+    };
+    
     public ObservableCollection<ConnectorViewModel> Inputs { get; } = new();
     public ObservableCollection<ConnectorViewModel> Outputs { get; } = new();
 
@@ -31,8 +40,35 @@ public partial class FlowNodeViewModel : ObservableObject
         Domain = node;
         Location = new Point(200, 200);
         
-        Inputs.Add(new ConnectorViewModel(node.Id, "In", PortDirection.Input));
-        Outputs.Add(new ConnectorViewModel(node.Id, "Out", PortDirection.Output));
+        Inputs.Add( new ConnectorViewModel(PortDirection.Input));
+        Outputs.Add(new ConnectorViewModel(PortDirection.Output));
+        
+        UpdateAnchors();
+
+        PropertyChanged += OnPropertyChanged;
+    }
+    
+    
+    private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(Location))
+        {
+            UpdateAnchors();
+        }
+    }
+
+    partial void OnLocationChanged(Point value)
+    {
+        UpdateAnchors();
+    }
+
+    public void UpdateAnchors()
+    {
+        foreach (var i in Inputs)
+            i.Anchor.Update(Location, Size);
+
+        foreach (var o in Outputs)
+            o.Anchor.Update(Location, Size);
     }
 
     // Bindable Projections

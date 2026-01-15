@@ -5,7 +5,8 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.VisualTree;
 using Jaguar.Desktop.Models;
-using Nodify;
+using Jaguar.Desktop.ViewModels;
+using Nodify.Avalonia;
 
 namespace Jaguar.Desktop.CustomViews.Connector;
 

@@ -15,7 +15,7 @@
         Margin="20"
         CornerRadius="12"
         BoxShadow="0 10 20 0 #40000000"
-        IsVisible="{Binding AppState.IsPanelOpen}"
+        IsVisible="{Binding AppState.IsRightPanelOpen}"
         Width="{Binding AppState.ActivePanel.Size}"
         Padding="30"
     >
