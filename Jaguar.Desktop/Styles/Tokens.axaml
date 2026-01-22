@@ -1,0 +1,203 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+     <!-- ================= -->
+    <!-- BACKGROUNDS -->
+    <!-- ================= -->
+    
+    <Color x:Key="JaguarBackgroundVoid">#0B0E11</Color> <!-- window / app root -->
+    <Color x:Key="JaguarBackgroundSurface">#11161C</Color> <!-- pages, panels -->
+    <Color x:Key="JaguarBackgroundSurfaceRaised">#161C23</Color> <!-- cards, nodes -->
+    <Color x:Key="JaguarBackgroundSurfaceHighlight">#1A2129</Color> <!-- subtle elevation -->
+    <Color x:Key="JaguarBackgroundCanvas">#0D1217</Color> <!-- graph / canvas -->
+    
+    
+    <!-- ================= -->
+    <!-- GLASS / OVERLAYS -->
+    <!-- ================= -->
+    
+    <Color x:Key="JaguarGlassBase">#A612161C</Color> <!-- menus, inspectors -->
+    <Color x:Key="JaguarGlassEdgeHighlight">#14CFA45D</Color> <!-- glass edge -->
+    <Color x:Key="JaguarGlassBorder">#2AFFFFFF</Color> <!-- optional outline -->
+    
+    
+    <!-- ================= -->
+    <!-- ACCENT (AMBER) -->
+    <!-- ================= -->
+    
+    <Color x:Key="JaguarAccentPrimary">#CFA45D</Color> <!-- primary actions -->
+    <Color x:Key="JaguarAccentStrong">#E2B76A</Color> <!-- progress / active -->
+    <Color x:Key="JaguarAccentMuted">#9C814E</Color> <!-- secondary accent -->
+    <Color x:Key="JaguarAccentGlow">#40CFA45D</Color> <!-- shadows / glow -->
+    
+    
+    <!-- ================= -->
+    <!-- TEXT -->
+    <!-- ================= -->
+    
+    <Color x:Key="JaguarTextPrimary">#E6E9ED</Color> <!-- main content -->
+    <Color x:Key="JaguarTextSecondary">#B6BCC6</Color> <!-- labels -->
+    <Color x:Key="JaguarTextMuted">#7E8693</Color> <!-- placeholders -->
+    <Color x:Key="JaguarTextDisabled">#5A616C</Color> <!-- disabled -->
+    <Color x:Key="JaguarTextAccent">#CFA45D</Color> <!-- selected / links -->
+    <Color x:Key="JaguarTextOnAccent">#1A1A1A</Color> <!-- text on amber -->
+    
+    
+    <!-- ================= -->
+    <!-- ICONS / LINES -->
+    <!-- ================= -->
+    
+    <Color x:Key="JaguarIconPrimary">#B6BCC6</Color> <!-- default icons -->
+    <Color x:Key="JaguarIconMuted">#7E8693</Color> <!-- secondary icons -->
+    <Color x:Key="JaguarIconAccent">#CFA45D</Color> <!-- highlighted icons -->
+    <Color x:Key="JaguarDivider">#24FFFFFF</Color> <!-- separators -->
+    
+    
+    <!-- ================= -->
+    <!-- INTERACTION STATES -->
+    <!-- ================= -->
+    
+    <Color x:Key="JaguarStateHover">#1EFFFFFF</Color> <!-- hover -->
+    <Color x:Key="JaguarStateActive">#2ACFA45D</Color> <!-- pressed -->
+    <Color x:Key="JaguarStateSelected">#33CFA45D</Color> <!-- selection -->
+    <Color x:Key="JaguarStateFocus">#80CFA45D</Color> <!-- focus ring -->
+    
+    
+    <!-- ================= -->
+    <!-- STATUS -->
+    <!-- ================= -->
+    
+    <Color x:Key="JaguarStatusSuccess">#4CAF7D</Color> <!-- success -->
+    <Color x:Key="JaguarStatusWarning">#E2B76A</Color> <!-- warning -->
+    <Color x:Key="JaguarStatusError">#D96C6C</Color> <!-- error -->
+    <Color x:Key="JaguarStatusInfo">#6FA3D1</Color> <!-- info -->
+     
+     
+     <!-- Root window background -->
+     <SolidColorBrush x:Key="JaguarBackgroundVoidBrush"
+                      Color="{StaticResource JaguarBackgroundVoid}" />
+
+     <!-- Main page / panel background -->
+     <SolidColorBrush x:Key="JaguarBackgroundSurfaceBrush"
+                      Color="{StaticResource JaguarBackgroundSurface}" />
+
+     <!-- Raised cards, nodes, inspectors -->
+     <SolidColorBrush x:Key="JaguarBackgroundSurfaceRaisedBrush"
+                      Color="{StaticResource JaguarBackgroundSurfaceRaised}" />
+
+     <!-- Graph / workflow canvas -->
+     <SolidColorBrush x:Key="JaguarBackgroundCanvasBrush"
+                      Color="{StaticResource JaguarBackgroundCanvas}" />
+
+     
+     <!-- Subtle elevation for cards / panels -->
+     <LinearGradientBrush x:Key="JaguarSurfaceElevationBrush"
+                          StartPoint="0,0"
+                          EndPoint="0,1">
+         <GradientStop Color="{StaticResource JaguarBackgroundSurfaceHighlight}" Offset="0"/>
+         <GradientStop Color="{StaticResource JaguarBackgroundSurfaceRaised}" Offset="1"/>
+     </LinearGradientBrush>
+
+     
+     <!-- Base glass surface -->
+     <SolidColorBrush x:Key="JaguarGlassBaseBrush"
+                      Color="{StaticResource JaguarGlassBase}" />
+
+     <!-- Glass border -->
+     <SolidColorBrush x:Key="JaguarGlassBorderBrush"
+                      Color="{StaticResource JaguarGlassBorder}" />
+
+     <!-- Edge highlight (top or left only) -->
+     <SolidColorBrush x:Key="JaguarGlassEdgeHighlightBrush"
+                      Color="{StaticResource JaguarGlassEdgeHighlight}" />
+
+     
+     <!-- Primary readable text -->
+     <SolidColorBrush x:Key="JaguarTextPrimaryBrush"
+                      Color="{StaticResource JaguarTextPrimary}" />
+
+     <!-- Secondary labels / metadata -->
+     <SolidColorBrush x:Key="JaguarTextSecondaryBrush"
+                      Color="{StaticResource JaguarTextSecondary}" />
+
+     <!-- Muted / placeholder text -->
+     <SolidColorBrush x:Key="JaguarTextMutedBrush"
+                      Color="{StaticResource JaguarTextMuted}" />
+
+     <!-- Disabled text -->
+     <SolidColorBrush x:Key="JaguarTextDisabledBrush"
+                      Color="{StaticResource JaguarTextDisabled}" />
+
+     <!-- Accent text (links, selection) -->
+     <SolidColorBrush x:Key="JaguarTextAccentBrush"
+                      Color="{StaticResource JaguarTextAccent}" />
+
+     <!-- Text on amber backgrounds -->
+     <SolidColorBrush x:Key="JaguarTextOnAccentBrush"
+                      Color="{StaticResource JaguarTextOnAccent}" />
+
+     
+     <!-- Primary action background -->
+     <SolidColorBrush x:Key="JaguarAccentPrimaryBrush"
+                      Color="{StaticResource JaguarAccentPrimary}" />
+
+     <!-- Strong / active accent -->
+     <SolidColorBrush x:Key="JaguarAccentStrongBrush"
+                      Color="{StaticResource JaguarAccentStrong}" />
+
+     <!-- Muted accent (icons, subtle highlights) -->
+     <SolidColorBrush x:Key="JaguarAccentMutedBrush"
+                      Color="{StaticResource JaguarAccentMuted}" />
+
+     <!-- Glow / shadow accent -->
+     <SolidColorBrush x:Key="JaguarAccentGlowBrush"
+                      Color="{StaticResource JaguarAccentGlow}" />
+
+     
+     <!-- Hover overlay -->
+     <SolidColorBrush x:Key="JaguarStateHoverBrush"
+                      Color="{StaticResource JaguarStateHover}" />
+
+     <!-- Pressed / active overlay -->
+     <SolidColorBrush x:Key="JaguarStateActiveBrush"
+                      Color="{StaticResource JaguarStateActive}" />
+
+     <!-- Selected item background -->
+     <SolidColorBrush x:Key="JaguarStateSelectedBrush"
+                      Color="{StaticResource JaguarStateSelected}" />
+
+     <!-- Focus ring -->
+     <SolidColorBrush x:Key="JaguarStateFocusBrush"
+                      Color="{StaticResource JaguarStateFocus}" />
+
+     
+     <!-- Default icon -->
+     <SolidColorBrush x:Key="JaguarIconPrimaryBrush"
+                      Color="{StaticResource JaguarIconPrimary}" />
+
+     <!-- Muted icon -->
+     <SolidColorBrush x:Key="JaguarIconMutedBrush"
+                      Color="{StaticResource JaguarIconMuted}" />
+
+     <!-- Accent icon -->
+     <SolidColorBrush x:Key="JaguarIconAccentBrush"
+                      Color="{StaticResource JaguarIconAccent}" />
+
+     <!-- Divider / separators -->
+     <SolidColorBrush x:Key="JaguarDividerBrush"
+                      Color="{StaticResource JaguarDivider}" />
+
+     
+     <SolidColorBrush x:Key="JaguarStatusSuccessBrush"
+                      Color="{StaticResource JaguarStatusSuccess}" />
+
+     <SolidColorBrush x:Key="JaguarStatusWarningBrush"
+                      Color="{StaticResource JaguarStatusWarning}" />
+
+     <SolidColorBrush x:Key="JaguarStatusErrorBrush"
+                      Color="{StaticResource JaguarStatusError}" />
+
+     <SolidColorBrush x:Key="JaguarStatusInfoBrush"
+                      Color="{StaticResource JaguarStatusInfo}" />
+
+</ResourceDictionary>

@@ -14,14 +14,16 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        
+        this.WindowState = WindowState.Maximized;
         this.TransparencyLevelHint = new[] { WindowTransparencyLevel.AcrylicBlur, WindowTransparencyLevel.None };
+        this.CornerRadius = new CornerRadius(this.WindowState == WindowState.Maximized ? 0 : 20);
+        this.ClipToBounds = true;
+        
         if (Program.AppHost != null)
         {
             // This gets the ViewModel and injects that orchestrator into it automatically
             DataContext = Program.AppHost.Services.GetRequiredService<MainWindowViewModel>();
-            this.Padding = new Thickness(
-                this.WindowState == WindowState.Maximized ? 8 : 0
-            );
         }
     }
     

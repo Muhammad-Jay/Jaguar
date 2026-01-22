@@ -1,0 +1,99 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
+             xmlns:models="clr-namespace:Jaguar.Desktop.Models"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="viewModels:ToolPanelViewModel"
+             x:Class="Jaguar.Desktop.CustomViews.ToolPanel.ToolPanelView">
+    
+    <Border
+        Name="ToolPanelBorder"
+        Tag="{Binding Orientation}"
+        Background="Transparent">
+        
+        <Border.Styles>
+            <Style Selector="Border#ToolPanelBorder">
+                <Style Selector="^[Tag=Horizontal]">
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="Height" Value="30"/>
+                </Style>
+                <Style Selector="^[Tag=Vertical]">
+                    <Setter Property="VerticalAlignment" Value="Stretch"/>
+                    <Setter Property="Width" Value="35"/>
+                </Style>
+            </Style>
+        </Border.Styles>
+        
+        <ScrollViewer
+            HorizontalScrollBarVisibility="Hidden" 
+            VerticalScrollBarVisibility="Hidden"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            Padding="4"
+        >
+            
+            <ItemsControl
+                ItemsSource="{Binding Items}">
+                
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Spacing="7" Orientation="{Binding StackPanelOrientation}"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="models:ToolMenuItem">
+                        <Border
+                            Name="ToolItemBorder"
+                            Tag="{Binding IsVertical}"
+                            Background="Transparent"
+                            ToolTip.Tip="{Binding Text}"
+                            CornerRadius="4">
+                            
+                            <Border.Styles>
+                                <Style Selector="Border#ToolItemBorder[Tag=true]">
+                                    <Setter Property="Margin" Value="0,4,0,0"/>
+                                </Style>
+                            </Border.Styles>
+                            
+                            <Button
+                                Padding="5,3"
+                                CornerRadius="4"
+                                VerticalAlignment="Stretch"
+                                HorizontalAlignment="Stretch"
+                                VerticalContentAlignment="Center"
+                                HorizontalContentAlignment="Center"
+                                Classes="btn-ghost">
+                                
+                               <StackPanel Orientation="Horizontal" Spacing="7">
+                                   <avalonia:MaterialIcon
+                                       Name="MenuIcon"
+                                       Kind="{Binding IconKind}"
+                                       Width="14"
+                                       Height="14"
+                                       FontWeight="Light"
+                                       Foreground="{StaticResource JaguarBrushSecondary}"/>
+                                   
+                                   <TextBlock 
+                                       Name="MenuText"
+                                       IsVisible="{Binding !IsVertical}"
+                                       Text="{Binding Text}"
+                                       FontWeight="Light"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Foreground="{StaticResource JaguarBrushSecondary}"
+                                       Classes="text-xs"/>
+                               </StackPanel>
+                                
+                 </Button>
+                            
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Border>
+</UserControl>

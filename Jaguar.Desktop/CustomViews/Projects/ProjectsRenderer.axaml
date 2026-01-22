@@ -1,0 +1,112 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
+             xmlns:templates="clr-namespace:Jaguar.Core.Models;assembly=Jaguar.Core"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="viewModels:ProjectsViewModel"
+             x:Class="Jaguar.Desktop.CustomViews.Projects.ProjectsRenderer">
+    
+    <Border
+        CornerRadius="20"
+        Width="450"
+        Background="Black"
+        Padding="15"
+        ClipToBounds="True"
+        Margin="0, 30,0,0"
+        VerticalAlignment="Stretch">
+        
+        <ScrollViewer
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            ClipToBounds="True"
+            CornerRadius="15"
+            Background="Transparent"
+            VerticalScrollBarVisibility="Auto"
+            HorizontalScrollBarVisibility="Disabled">
+               
+               <ItemsControl ItemsSource="{Binding  AppState.Projects}">
+                   
+                   <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Background="Transparent" Spacing="15"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            
+            <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="templates:Project">
+                    
+                    <Border Margin="0" 
+                            Padding="8" 
+                            Background="{StaticResource Neutral900}" 
+                            BorderThickness="2"
+                            BorderBrush="{StaticResource Neutral800}"
+                            CornerRadius="10"
+                            ClipToBounds="True"
+                            Cursor="Hand">
+                        
+                        <Border.Transitions>
+                            <Transitions>
+                                <BrushTransition Property="BorderBrush" Duration="0:0:0.4"/>
+                            </Transitions>
+                        </Border.Transitions>
+        
+                        <Border.Styles>
+                            <Style Selector="Border[IsPointerOver=True]">
+                                <Setter Property="BorderBrush" Value="{StaticResource Turquoise.700}"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Style>
+                            <Style Selector="Border[IsPointerOver=False]">
+                                <Setter Property="BorderBrush" Value="{StaticResource  MainBg}"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Style>
+                        </Border.Styles>
+                        
+                    <Button
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Classes="btn-ghost"
+                        CornerRadius="7"
+                        CommandParameter="{Binding}"
+                        Command="{Binding $parent[UserControl].((viewModels:ProjectsViewModel)DataContext).ProjectClickedCommand}"
+                        Background="Transparent"
+                        >
+                        
+                        <Button.Styles>
+                            <Style Selector="Button[IsPointerOver=True]">
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Style>
+                            <Style Selector="Button:pressed">
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Style>
+                        </Button.Styles>
+                        
+                        <Button.Transitions>
+                            <Transitions>
+                                <BrushTransition Property="BorderBrush" Duration="0:0:0.2"/>
+                            </Transitions>
+                        </Button.Transitions>
+                        
+                        <StackPanel Orientation="Vertical" Spacing="15">
+                            <Grid ColumnDefinitions="Auto, *">
+                                <StackPanel Orientation="Horizontal" Spacing="5" Grid.Column="0">
+                                    <Border Width="10" Height="10" CornerRadius="5" Background="#00C8FF"/>
+                                    <TextBlock Text="{Binding Name}" Foreground="White" FontWeight="SemiBold" FontSize="12"/>
+                                </StackPanel>
+                                
+                                <TextBlock HorizontalAlignment="Right" Grid.Column="1" FontSize="12" Text="Active" Foreground="#00C8FF" FontWeight="SemiBold" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                            </Grid>
+                            
+                            <Border Background="Transparent" Height="60" CornerRadius="5" Padding="5">
+                                <TextBlock TextWrapping="Wrap" Text="{Binding   Description}" Foreground="WhiteSmoke" FontSize="11" FontWeight="Normal"/>
+                            </Border>
+                        </StackPanel>
+                    </Button>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </ScrollViewer>
+    </Border>
+</UserControl>

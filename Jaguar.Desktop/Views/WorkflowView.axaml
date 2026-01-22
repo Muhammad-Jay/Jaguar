@@ -10,7 +10,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Jaguar.Desktop.Views.WorkflowView">
     
-    <Grid Background="{StaticResource MainBg}"  Margin="0,0,0, 0">
+    <Grid Background="{StaticResource JaguarMainBgGradientBrush}"  Margin="0,0,0, 0">
    
         <Grid Margin="8, 0, 8,8">
             

@@ -1,13 +1,17 @@
 using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Jaguar.Core.Abstractions;
 using Jaguar.Core.Models;
+using Jaguar.Core.Models.Graph;
 using Jaguar.Desktop.Abstractions;
 using Jaguar.Desktop.CustomViews.Templates;
 using Jaguar.Desktop.Models;
 using Jaguar.Desktop.Models.Ui;
 using Jaguar.Desktop.Services.Events.Ui;
+using Jaguar.Desktop.ViewModels;
 using Jaguar.Desktop.ViewModels.Dialog.Contents;
 using Jaguar.Desktop.ViewModels.Templates;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,9 +22,14 @@ namespace Jaguar.Desktop.Services.AppState
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly IEventAggregator _events;
+        private readonly IProjectService _projectService;
 
+        public ObservableCollection<Project> Projects { get; set; } = new();
+        public ObservableCollection<FlowNode> CurrentProjectNodes { get; set; } = new();
         [ObservableProperty] private Project? _currentProject;
-        [ObservableProperty] private AppScreen _currentScreen;
+        
+        [ObservableProperty] private object? _currentScreen;
+        [ObservableProperty] private AppScreen _currentScreenType;
         
         [ObservableProperty] private object? _currentView;
         [ObservableProperty] private object? _currentDialogView;
@@ -29,6 +38,8 @@ namespace Jaguar.Desktop.Services.AppState
         [ObservableProperty] private bool _isLeftPanelOpen = false;
         [ObservableProperty] private bool _isTopPanelOpen = false;
         
+        // Loading states
+        [ObservableProperty] private bool _isProjectsLoading = false;
 
         // Workflow Dialogs States
         private readonly double _defaultDialogWidth = 600;
@@ -38,10 +49,14 @@ namespace Jaguar.Desktop.Services.AppState
         [ObservableProperty] private double _dialogWidth;
         [ObservableProperty] private double _dialogHeight;
         
-        public AppStateService(IServiceProvider serviceProvider, IEventAggregator eventAggregator)
+        public AppStateService(IServiceProvider serviceProvider, IEventAggregator eventAggregator, IProjectService projectService)
         {
             _serviceProvider = serviceProvider;
             _events = eventAggregator;
+            _projectService = projectService;
+            
+            Projects.Clear();
+            
             InitializeServices();
             SubscribeToEvents();
         }
@@ -52,6 +67,9 @@ namespace Jaguar.Desktop.Services.AppState
             {
                 if (Program.AppHost != null)
                 {
+                    CurrentScreen = new SplashScreenViewModel(_serviceProvider, this);
+                    CurrentScreenType = AppScreen.SplashScreen;
+                    
                     CurrentView = _serviceProvider.GetRequiredService<AgentTemplatesViewModel>();
                     CurrentDialogView = new OrchestratorDialogPromptViewModel();
                     ActivePanel = new PanelRequest { ViewModel = CurrentView, Position = Position.Left};
@@ -86,7 +104,67 @@ namespace Jaguar.Desktop.Services.AppState
                 RequestPanel(e.ViewModel, e.Position, e.Size);
             });
         }
+
+        private void SeedProjects()
+        {
+            var pro1 = _projectService.CreateProject("Project1");
+            var pro2 = _projectService.CreateProject("JaguarProject2");
+            var pro3 = _projectService.CreateProject("Jaguar3");
+        }
+
+        public void LoadAllProjects()
+        {
+            // SeedProjects();
+            if(_projectService == null) return;
+            
+            Projects.Clear();
+            
+            foreach (var p in _projectService.GetAllProjects())
+            {
+                Console.WriteLine($"--> Project: {p.Id} - {p.Name} loaded.  [{p.Path}]");
+
+                Projects.Add(p);
+            }
+            
+            LoadProjectNodes(Projects[0].Name);
+        }
+
+        public void LoadProjectNodes(string projectNane)
+        {
+            var nodes = _projectService.GetProjectNodes(projectNane);
+
+            if (nodes.Any())
+            {
+                foreach (var node in nodes)
+                {
+                    CurrentProjectNodes.Add(node);
+                }
+            }
+        }
         
+        public void SetView(AppScreen screen)
+        {
+            switch (screen)
+            {
+                case AppScreen.SplashScreen:
+                   CurrentScreen = new SplashScreenViewModel(_serviceProvider, this);
+                    break;
+                case AppScreen.Projects:
+                    CurrentScreen = new ProjectsViewModel(_serviceProvider, this);
+                    break;
+                case AppScreen.ProjectDashboard:
+                    CurrentScreen = new ProjectDashboardViewModel(_serviceProvider, this);
+                    break;
+                case AppScreen.Workflow:
+                    CurrentScreen = new WorkflowViewModel(_serviceProvider, this);
+                    break;
+                default:
+                    CurrentScreen = new ProjectsViewModel(_serviceProvider, this);
+                    break;
+            }
+
+            CurrentScreenType = screen;
+        }
         
         public void RequestPanel(object vm, Position pos, double? size = 350)
         {

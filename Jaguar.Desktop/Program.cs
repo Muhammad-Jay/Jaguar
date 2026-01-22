@@ -39,6 +39,7 @@ class Program
 
                     // --- CORE SERVICES ---
                     services.AddSingleton<IAgentTemplateRepository, AgentTemplateRepository>();
+                    services.AddSingleton<IProjectService, ProjectService>();
                     services.AddSingleton<AppStateService>();
                     services.AddSingleton<IEventAggregator, EventAggregator>();
                     services.AddSingleton<IGraphService, GraphService>();
@@ -47,7 +48,9 @@ class Program
                     
                     // --- VIEW MODELS ---
                     services.AddSingleton<CanvasViewModel>();
-                    
+                    services.AddSingleton<SplashScreenViewModel>();
+                    services.AddSingleton<ProjectsViewModel>();
+                    services.AddSingleton<ProjectDashboardViewModel>();
                     services.AddSingleton<FlowNodeViewModelFactory>();
                     
                     services.AddTransient<WorkflowViewModel>();

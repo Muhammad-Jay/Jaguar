@@ -27,7 +27,7 @@ public partial class CanvasViewModel : ViewModelBase
     private readonly IServiceProvider _serviceProvider;
     [ObservableProperty] private AppStateService? _appState;
 
-    private FlowNodeViewModel? _orchetratorNode;
+    private FlowNodeViewModel? _orchestratorNode;
     public ObservableCollection<FlowNodeViewModel> Nodes { get; } = new();
     public ObservableCollection<NodeOverlayViewModel> NodeOverlays { get; } = new();
     public ObservableCollection<ConnectionViewModel> Connections { get; } = new();
@@ -60,29 +60,29 @@ public partial class CanvasViewModel : ViewModelBase
 
     private void SetupInitialNodes()
     {
-        _orchetratorNode = CreateNode(
-            "Orchestrator",
-            NodeType.Orchestrator,
-            new Point(200, 200));
-
-        var kernel = CreateNode(
-            "Kernel Agent",
-            NodeType.ProjectManager,
-            new Point(400, 300));
-
-        var from = _orchetratorNode.Outputs.FirstOrDefault();
-        var to = kernel.Inputs.FirstOrDefault();
-
-        if (from == null || to == null) return;
-
-        Connect(
-            from, to
-        );
+        // _orchestratorNode = CreateNode(
+        //     "Orchestrator",
+        //     NodeType.Orchestrator,
+        //     new Point(200, 200));
+        //
+        // var kernel = CreateNode(
+        //     "Kernel Agent",
+        //     NodeType.ProjectManager,
+        //     new Point(400, 300));
+        //
+        // var from = _orchestratorNode.Outputs.FirstOrDefault();
+        // var to = kernel.Inputs.FirstOrDefault();
+        //
+        // if (from == null || to == null) return;
+        //
+        // Connect(
+        //     from, to
+        // );
     }
 
     private void SubscribeToEvents()
     {
-        _event.Subscribe<AddNodeEvent>(e => AddAndConnectNode(_orchetratorNode!, e.Id));
+        _event.Subscribe<AddNodeEvent>(e => AddAndConnectNode(_orchestratorNode!, e.Id));
     }
 
     private void AddAndConnectNode(FlowNodeViewModel fromNode, string id)

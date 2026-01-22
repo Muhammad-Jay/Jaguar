@@ -1,0 +1,39 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!-- Add Controls for Previewer Here -->
+        </Border>
+    </Design.PreviewWith>
+
+    <!-- Base Text -->
+    <Style Selector="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource JaguarTextPrimary}"/>
+        <Setter Property="FontFamily" Value="Inter, Segoe UI, Sans-Serif"/>
+    </Style>
+    
+    <!-- Utility Text Sizes -->
+    <Style Selector="TextBlock.text-xs">
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Foreground" Value="{StaticResource  JaguarTextMuted}"/>
+    </Style>
+    <Style Selector="TextBlock.text-sm">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="{StaticResource  JaguarTextSecondary}"/>
+    </Style>
+    <Style Selector="TextBlock.text-md">
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+    <Style Selector="TextBlock.text-lg">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Foreground" Value="{StaticResource  JaguarTextMuted}"/>
+    </Style>
+    <Style Selector="TextBlock.text-xl">
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+    <Style Selector="TextBlock.text-title">
+        <Setter Property="FontSize" Value="28"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+</Styles>

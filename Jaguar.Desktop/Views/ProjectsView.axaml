@@ -2,7 +2,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
+             xmlns:templates="clr-namespace:Jaguar.Core.Models;assembly=Jaguar.Core"
+             xmlns:projects="clr-namespace:Jaguar.Desktop.CustomViews.Projects"
+             xmlns:toolPanel="clr-namespace:Jaguar.Desktop.CustomViews.ToolPanel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="viewModels:ProjectsViewModel"
              x:Class="Jaguar.Desktop.Views.ProjectsView">
-    Welcome to Avalonia!
+   <Grid>
+       <DockPanel
+           Background="{StaticResource JaguarMainBgGradientBrush}"
+           LastChildFill="True"
+           VerticalAlignment="Stretch"
+           HorizontalAlignment="Stretch">
+           
+           <!-- <toolPanel:ToolPanelView HorizontalAlignment="Stretch" DockPanel.Dock="Top" DataContext="{Binding  TopTools}"/> -->
+           <!-- <toolPanel:ToolPanelView VerticalAlignment="Stretch" DockPanel.Dock="Left" DataContext="{Binding  LeftTools}"/> -->
+           <!-- <toolPanel:ToolPanelView VerticalAlignment="Stretch" DockPanel.Dock="Right" DataContext="{Binding  RightTools}"/> -->
+           
+           <Grid ColumnSpacing="18" Margin="20">
+               <Grid.ColumnDefinitions>
+                   <ColumnDefinition Width="Auto"/>
+                   <ColumnDefinition Width="*"/>
+               </Grid.ColumnDefinitions>
+           
+               <projects:ProjectsRenderer  Grid.Column="0" />
+               
+               <Border Background="Black"
+                       Grid.Column="1"
+                       VerticalAlignment="Stretch"
+                       HorizontalAlignment="Stretch"
+                       CornerRadius="20"
+                       Margin="0,0">
+                   
+               </Border>
+           
+           </Grid>
+
+       </DockPanel>
+   </Grid>
 </UserControl>

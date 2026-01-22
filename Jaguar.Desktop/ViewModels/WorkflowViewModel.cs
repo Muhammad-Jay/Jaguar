@@ -34,15 +34,15 @@ namespace Jaguar.Desktop.ViewModels
         [ObservableProperty] private RightBarMenuViewModel _rightBarMenuVm;
         [ObservableProperty] private LeftBarMenuViewModel _leftBarMenuVm;
         
-        public WorkflowViewModel(Orchestrator orchestrator, CanvasViewModel canvas, IServiceProvider serviceProvider)
+        public WorkflowViewModel(IServiceProvider serviceProvider, AppStateService appStateService)
         {
-            AppState = serviceProvider.GetRequiredService<AppStateService>();
+            AppState = appStateService;
             DialogVm = serviceProvider.GetRequiredService<DialogViewModel>();
             WorkflowSidebarVm = serviceProvider.GetRequiredService<WorkflowSidebarPanelViewModel>();
             RightBarMenuVm = serviceProvider.GetRequiredService<RightBarMenuViewModel>();
             LeftBarMenuVm = serviceProvider.GetRequiredService<LeftBarMenuViewModel>();
-            _workFlowOrchestrator = orchestrator;
-            Content = canvas;
+            _workFlowOrchestrator = serviceProvider.GetRequiredService<Orchestrator>();
+            Content = serviceProvider.GetRequiredService<CanvasViewModel>();;
         }
         
         [RelayCommand] 
