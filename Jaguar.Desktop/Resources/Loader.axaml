@@ -1,0 +1,38 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia">
+    
+    <ControlTemplate x:Key="SimpleLoader" TargetType="ContentControl">
+        
+        <Panel
+            IsVisible="{TemplateBinding IsVisible}"
+            Name="LoaderWrapper">
+            
+            <Panel.Styles>
+                <Style Selector="Panel#LoaderWrapper">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Margin" Value="{TemplateBinding Margin}"/>
+                    
+                    <Style Selector="^ avalonia|MaterialIcon#Loader">
+                        <Style.Animations>
+                            <Animation IterationCount="INFINITE" Duration="0:0:1">
+                                <KeyFrame Cue="0%">
+                                    <Setter Property="RotateTransform.Angle" Value="0.0"/>
+                                </KeyFrame>
+                                <KeyFrame Cue="100%">
+                                    <Setter Property="RotateTransform.Angle" Value="360.0"/>
+                                </KeyFrame>
+                            </Animation>
+                        </Style.Animations>
+                    </Style>
+                </Style>
+            </Panel.Styles>
+            
+            <avalonia:MaterialIcon 
+                Name="Loader"
+                Foreground="{TemplateBinding Foreground}"
+                FontSize="{TemplateBinding FontSize}"
+                Kind="Loading"/>
+        </Panel>
+    </ControlTemplate>
+</ResourceDictionary>

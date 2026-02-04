@@ -1,0 +1,23 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <ControlTemplate x:Key="JaguarLogo" TargetType="ContentControl">
+        
+        <Panel
+            Width="29"
+            Height="24"
+            Background="Transparent">
+            <Path
+                Fill="{DynamicResource JaguarAccentPrimaryBrush}"
+                Data="M7.43987 2.30581L26.0608 0.0163472C26.4402 -0.0303008 26.8252 0.0232883 27.1775 0.171775C28.3825 0.679757 28.8756 2.12459 28.2324 3.26326L25.4399 8.20745L17.4464 21.4306C16.9408 22.267 16.0595 22.8047 15.0844 22.8716L0.613547 23.8646C0.136932 23.8973 -0.168124 23.3668 0.0999106 22.9713C0.189169 22.8396 0.329153 22.751 0.486361 22.7265L14.0104 20.6262C14.9136 20.4859 15.7036 19.9415 16.1563 19.1475L23.5483 6.18078C24.3649 4.74846 23.2724 2.9803 21.6261 3.0696L7.6661 3.82682C6.72982 3.8776 6.52934 2.52971 7.43987 2.30581Z"
+              
+                >
+                
+            </Path>
+            
+            <ContentPresenter
+                Content="{TemplateBinding Content}"
+                ContentTemplate="{TemplateBinding ContentTemplate}"/>
+        </Panel>
+    </ControlTemplate>
+</ResourceDictionary>

@@ -49,7 +49,7 @@ public partial class OrchestratorNodeView : UserControl
         // e.Pointer.Capture(this);
         e.Handled = true;
         
-        UpdatePopupPosition();
+        // UpdatePopupPosition();
     }
     
     private void OnPointerMoved(object? sender, PointerEventArgs e)
@@ -82,7 +82,7 @@ public partial class OrchestratorNodeView : UserControl
 
         // Tell the panel it needs to re-arrange its children immediately
         graphPanel.InvalidateArrange();
-        UpdatePopupPosition();
+        // UpdatePopupPosition();
     }
 
     private void OnPointerReleased(object? sender, PointerReleasedEventArgs e)
@@ -93,7 +93,7 @@ public partial class OrchestratorNodeView : UserControl
         // e.Pointer.Capture(null);
         e.Handled = true;
 
-        UpdatePopupPosition();
+        // UpdatePopupPosition();
     }
 
     // private void PointerOver(object? sender, PointerEventArgs e)

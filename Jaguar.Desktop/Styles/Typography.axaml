@@ -1,5 +1,6 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia">
     <Design.PreviewWith>
         <Border Padding="20">
             <!-- Add Controls for Previewer Here -->
@@ -35,5 +36,17 @@
     <Style Selector="TextBlock.text-title">
         <Setter Property="FontSize" Value="28"/>
         <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+    
+    <Style Selector="avalonia|MaterialIcon.ToolIcon">
+        <Setter Property="Foreground" Value="{StaticResource JaguarTextPrimaryBrush}"/>
+        
+        <Style Selector="^[IsPointerOver=True]">
+            <Setter Property="Foreground" Value="{StaticResource JaguarStateHoverBrush}"/>
+            
+            <Style Selector="^ /template/ ContentPresenter">
+                <Setter Property="Foreground" Value="{StaticResource JaguarStateHoverBrush}"/>
+            </Style>
+        </Style>
     </Style>
 </Styles>

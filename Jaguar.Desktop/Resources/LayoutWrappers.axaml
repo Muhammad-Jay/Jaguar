@@ -1,0 +1,101 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  
+  <Design.PreviewWith>
+    <Border Padding="20">
+      <ContentControl Template="{DynamicResource JaguarSurfaceWrapper}">
+        
+      </ContentControl>
+    </Border>
+  </Design.PreviewWith>
+  
+    <!-- ================= -->
+<!-- JAGUAR GEOMETRY -->
+<!-- ================= -->
+
+<CornerRadius x:Key="JaguarRadiusSmall">6</CornerRadius>
+<CornerRadius x:Key="JaguarRadiusMedium">10</CornerRadius>
+<CornerRadius x:Key="JaguarRadiusLarge">14</CornerRadius>
+
+<Thickness x:Key="JaguarBorderThin">1</Thickness>
+<Thickness x:Key="JaguarBorderHairline">0.5</Thickness>
+
+
+<ControlTemplate x:Key="JaguarVoidWrapper" TargetType="ContentControl">
+  <Border
+    Background="{StaticResource JaguarBackgroundVoidBrush}">
+    <ContentPresenter />
+  </Border>
+</ControlTemplate>
+
+
+    <ControlTemplate x:Key="JaguarSurfaceWrapper" TargetType="ContentControl">
+      <Border
+        CornerRadius="{StaticResource JaguarRadiusMedium}"
+        BorderThickness="{StaticResource JaguarBorderHairline}"
+        BorderBrush="#14FFFFFF">
+
+        <Border.Background>
+          <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#11161C" Offset="0"/>
+            <GradientStop Color="#0E1318" Offset="1"/>
+          </LinearGradientBrush>
+        </Border.Background>
+
+        <ContentPresenter Margin="12"/>
+      </Border>
+    </ControlTemplate>
+
+
+    <ControlTemplate x:Key="JaguarRaisedCardWrapper" TargetType="ContentControl">
+      <Border
+        CornerRadius="{StaticResource JaguarRadiusLarge}"
+        BorderThickness="{StaticResource JaguarBorderThin}"
+        BorderBrush="#1FFFFFFF">
+
+        <Border.Background>
+          <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#161C23" Offset="0"/>
+            <GradientStop Color="#12171D" Offset="1"/>
+          </LinearGradientBrush>
+        </Border.Background>
+
+        <!-- <Border.BoxShadow> -->
+        <!--   <BoxShadows> -->
+        <!--     <BoxShadow -->
+        <!--       Color="#80000000" -->
+        <!--       Blur="24" -->
+        <!--       Spread="2" -->
+        <!--       /> -->
+        <!--   </BoxShadows> -->
+        <!-- </Border.BoxShadow> -->
+
+        <ContentPresenter Margin="14"/>
+      </Border>
+    </ControlTemplate>
+
+
+<ControlTemplate x:Key="JaguarGlassWrapper" TargetType="ContentControl">
+  <Border
+    CornerRadius="{StaticResource JaguarRadiusLarge}"
+    BorderThickness="{StaticResource JaguarBorderThin}"
+    BorderBrush="#2AFFFFFF"
+    Background="#A612161C">
+
+    <!-- Subtle top highlight -->
+    <Border>
+      <Border.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+          <GradientStop Color="#22FFFFFF" Offset="0"/>
+          <GradientStop Color="#00FFFFFF" Offset="0.25"/>
+        </LinearGradientBrush>
+      </Border.Background>
+      
+      <ContentPresenter Margin="16"/>
+    </Border>
+  </Border>
+</ControlTemplate>
+
+    
+
+</ResourceDictionary>

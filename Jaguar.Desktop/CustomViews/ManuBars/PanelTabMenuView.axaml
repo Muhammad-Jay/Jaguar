@@ -9,7 +9,7 @@
              x:Name="Root"
              x:Class="Jaguar.Desktop.CustomViews.ManuBars.PanelTabMenuView">
     
-    <Border Background="{StaticResource MainBg}" Margin="7,0,7,0" CornerRadius="7" Padding="2.2">
+    <Border Background="{DynamicResource JaguarBackgroundVoidHard}" Margin="7,0,7,0" CornerRadius="{DynamicResource SmallCornerRadius}" Padding="2.2, 3">
        <ScrollViewer Background="Transparent" Height="28">
            <ItemsControl
                ItemsSource="{Binding   ItemList}"
@@ -25,20 +25,21 @@
                <ItemsControl.ItemTemplate>
                    <DataTemplate>
                        <Button
-                           Background="DarkCyan"
+                           Background="{DynamicResource JaguarGradiantButtonAccent}"
                            CornerRadius="3.5"
                            Padding="2"
                            Width="25"
                            Height="18"
                            Margin="2, 2, 0, 2"
+                           ClipToBounds="True"
                            VerticalContentAlignment="Center"
                            HorizontalContentAlignment="Center"
                            CommandParameter="{Binding}"
                            Command="{Binding #Root.((panel:WorkflowSidebarPanelViewModel)DataContext).SelectedMenuChangeCommand}"
                            >
                            <Button.Styles>
-                               <Style Selector="Button[IsPointerOver=True]">
-                                   <Setter Property="Background" Value="Cyan"/>
+                               <Style Selector="Button[IsPointerOver=True] /template/ ContentPresenter">
+                                   <Setter Property="Background" Value="{DynamicResource JaguarSurface}"/>
                                </Style>
                            </Button.Styles>
                          

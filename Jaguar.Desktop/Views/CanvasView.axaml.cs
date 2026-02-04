@@ -5,9 +5,11 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.PanAndZoom;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.VisualTree;
 using Jaguar.Desktop.ViewModels;
+using Material.Icons;
 
 namespace Jaguar.Desktop.Views
 {

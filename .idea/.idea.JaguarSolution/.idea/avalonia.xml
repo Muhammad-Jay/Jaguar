@@ -23,13 +23,25 @@
         <entry key="Jaguar.Desktop/CustomViews/Panels/PanelWrapper.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/CustomViews/Panels/WorkflowSidebarPanel.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/CustomViews/Projects/ProjectsRenderer.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/CustomViews/Projects/WorkflowTemplatesRenderer.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/CustomViews/Settings.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/CustomViews/Templates/AgentTemplatesView.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/CustomViews/ToolPanel/MainWindowToolbarView.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/CustomViews/ToolPanel/ToolPanelView.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/Resources/Dialog.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/Resources/Dialogs/OrchestratorDialogPromptView.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/Resources/JaguarLogo.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/Resources/LayoutWrappers.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/Resources/Loader.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/Resources/NodeResources.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/Styles/Buttons.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/Styles/CanvasStyles.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/Styles/Colors.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/Styles/GlassTheme.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/Styles/GlobalStyles.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/Styles/LayoutStyles.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/Styles/Tokens.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
+        <entry key="Jaguar.Desktop/Styles/Typography.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/ViewModels/Panels/PanelWrapper.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/Views/CanvasView.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />
         <entry key="Jaguar.Desktop/Views/MainWindow.axaml" value="Jaguar.Desktop/Jaguar.Desktop.csproj" />

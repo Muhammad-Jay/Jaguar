@@ -60,24 +60,24 @@ public partial class CanvasViewModel : ViewModelBase
 
     private void SetupInitialNodes()
     {
-        // _orchestratorNode = CreateNode(
-        //     "Orchestrator",
-        //     NodeType.Orchestrator,
-        //     new Point(200, 200));
-        //
-        // var kernel = CreateNode(
-        //     "Kernel Agent",
-        //     NodeType.ProjectManager,
-        //     new Point(400, 300));
-        //
-        // var from = _orchestratorNode.Outputs.FirstOrDefault();
-        // var to = kernel.Inputs.FirstOrDefault();
-        //
-        // if (from == null || to == null) return;
-        //
-        // Connect(
-        //     from, to
-        // );
+        _orchestratorNode = CreateNode(
+            "Orchestrator",
+            NodeType.Orchestrator,
+            new Point(200, 200));
+        
+        var kernel = CreateNode(
+            "Kernel Agent",
+            NodeType.ProjectManager,
+            new Point(400, 300));
+        
+        var from = _orchestratorNode.Outputs.FirstOrDefault();
+        var to = kernel.Inputs.FirstOrDefault();
+        
+        if (from == null || to == null) return;
+        
+        Connect(
+            from, to
+        );
     }
 
     private void SubscribeToEvents()

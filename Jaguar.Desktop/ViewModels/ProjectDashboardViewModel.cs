@@ -1,5 +1,6 @@
 using System;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Jaguar.Desktop.Services.AppState;
 
 namespace Jaguar.Desktop.ViewModels;
@@ -16,4 +17,7 @@ public partial class ProjectDashboardViewModel: ViewModelBase
         
         Console.WriteLine("--> Project Dashboard loaded.");
     }
+    
+    [RelayCommand]
+    public void ToggleDialog() => AppState.IsCreateProjectDialogOpen = !AppState.IsCreateProjectDialogOpen;
 }

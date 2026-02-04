@@ -17,12 +17,20 @@
     
     <!-- Primary -->
     <Style Selector="Button.btn-primary">
-        <Setter Property="Background" Value="{StaticResource JaguarAccentBrushPrimary}"/>
+        <Setter Property="Background" Value="{StaticResource JaguarGradiantButtonAccent}"/>
         <Setter Property="Foreground" Value="Black"/>
+        
+        <Style Selector="^ /template/ ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource JaguarGradiantButtonAccent}"/>
+        </Style>
     </Style>
     
     <Style Selector="Button.btn-primary[IsPointerOver=True]">
-        <Setter Property="Background" Value="{StaticResource JaguarAccentBrushHovered}"/>
+        <Setter Property="Background" Value="{DynamicResource JaguarAccentPrimaryBrush}"/>
+        
+        <Style Selector="^ /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource JaguarAccentPrimaryBrush}"/>
+        </Style>
     </Style>
     
     <!-- Secondary -->
@@ -36,5 +44,39 @@
     <Style Selector="Button.btn-ghost">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{StaticResource JaguarTextSecondary}"/>
+        
+        <Style Selector="^ /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        
+        <Style Selector="^[IsPointerOver=True]">
+            <Setter Property="Background" Value="{StaticResource JaguarBackgroundSurfaceRaisedBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource JaguarAccentPrimaryBrush}"/>
+        
+            <Style Selector="^ /template/ ContentPresenter">
+                <Setter Property="Background" Value="{StaticResource JaguarBackgroundSurfaceRaisedBrush}"/>
+            </Style>
+        </Style>
+        
+        <Style Selector="^.toolbar">
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="2,0,0,0"/>
+            <Setter Property="CornerRadius" Value="0,8,8,0"/>
+            
+            <Style Selector="^[IsPointerOver=True]">
+                <Setter Property="BorderBrush" Value="{StaticResource JaguarAccentPrimaryBrush}"/>
+                <Setter Property="BorderThickness" Value="2,0,0,0"/>
+                <Setter Property="CornerRadius" Value="0,8,8,0"/>
+            </Style>
+        </Style>
+        
+        <Style Selector="^:pressed">
+            <Setter Property="Background" Value="{StaticResource JaguarBackgroundSurfaceRaisedBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource JaguarAccentPrimaryBrush}"/>
+        
+            <Style Selector="^ /template/ ContentPresenter">
+                <Setter Property="Background" Value="{StaticResource JaguarBackgroundSurfaceRaisedBrush}"/>
+            </Style>
+        </Style>
     </Style>
 </Styles>

@@ -8,7 +8,6 @@
              xmlns:connector="clr-namespace:Jaguar.Desktop.CustomViews.Connector"
              xmlns:avalonia="clr-namespace:Nodify.Avalonia;assembly=Nodify.Avalonia"
              xmlns:controls="clr-namespace:Jaguar.Desktop.CustomViews.Controls"
-             UseLayoutRounding="False"
              x:DataType="vm:CanvasViewModel"
              x:Class="Jaguar.Desktop.Views.CanvasView">
     

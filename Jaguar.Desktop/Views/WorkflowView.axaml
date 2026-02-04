@@ -7,10 +7,10 @@
              xmlns:manuBars="clr-namespace:Jaguar.Desktop.CustomViews.ManuBars"
              xmlns:dialog="clr-namespace:Jaguar.Desktop.CustomViews.Dialog"
              x:DataType="viewModels:WorkflowViewModel"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="1300" d:DesignHeight="600"
              x:Class="Jaguar.Desktop.Views.WorkflowView">
     
-    <Grid Background="{StaticResource JaguarMainBgGradientBrush}"  Margin="0,0,0, 0">
+    <Grid Background="{DynamicResource JaguarBackgroundSurfaceBrush}"  Margin="0,0,0, 0">
    
         <Grid Margin="8, 0, 8,8">
             

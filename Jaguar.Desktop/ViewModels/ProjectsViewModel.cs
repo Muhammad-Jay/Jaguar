@@ -16,19 +16,67 @@ public partial class ProjectsViewModel: ViewModelBase
 {
     private readonly IServiceProvider _serviceProvider;
     [ObservableProperty] private AppStateService _appState;
+    [ObservableProperty] private ViewModelBase? _graphContent;
 
-    [ObservableProperty] private ToolPanelViewModel _leftTools;
-    [ObservableProperty] private ToolPanelViewModel _rightTools;
-    [ObservableProperty] private ToolPanelViewModel _topTools;
+    [ObservableProperty] private ToolPanelViewModel? _leftTools;
+    [ObservableProperty] private ToolPanelViewModel? _rightTools;
+    [ObservableProperty] private ToolPanelViewModel? _topTools;
+    [ObservableProperty] private SpotlightViewModel? _spotlight;
+
+    public ObservableCollection<WorkflowTemplate> Templates { get; } = new();
+    [ObservableProperty] private WorkflowTemplate? _selectedTemplate;
+
     
+    [ObservableProperty] private bool _isCreateProjectLoading;
     
+
+    [ObservableProperty] private string _name = string.Empty;
     public ProjectsViewModel(IServiceProvider serviceProvider, AppStateService appStateService)
     {
         Console.WriteLine("--> Attempting to load projects screen...");
         _serviceProvider = serviceProvider;
         AppState = appStateService;
+        AppState.IsCreateProjectDialogOpen = false;
+        InitializeTemplates();
         InitializeToolItems();
+        GraphContent = serviceProvider.GetRequiredService<CanvasViewModel>();
+        Spotlight = new SpotlightViewModel();
+        Spotlight.LoadSlides();
+        Spotlight.StartRotation();
         Console.WriteLine("--> Projects loaded.");
+    }
+
+    private void InitializeTemplates()
+    {
+        Templates.Clear();
+        
+        Templates.Add(new WorkflowTemplate
+        {
+            Title = "Blank Project",
+            Description = "Start with an empty graph",
+            Type = WorkflowTemplateType.BlankTemplate
+        });
+        Templates.Add(new WorkflowTemplate
+        {
+            Title = "Node System",
+            Description = "Logic-driven node graph",
+            Type = WorkflowTemplateType.NodeSystem
+        });Templates.Add(new WorkflowTemplate
+        {
+            Title = "State Machine",
+            Description = "Event-based flow and transition",
+            Type = WorkflowTemplateType.StateMachine
+        });Templates.Add(new WorkflowTemplate
+        {
+            Title = "Data Pipeline",
+            Description = "Transform and process data",
+            Type = WorkflowTemplateType.DataPipeline
+        });Templates.Add(new WorkflowTemplate
+        {
+            Title = "From Template",
+            Description = "Choose from predefined setups",
+            Type = WorkflowTemplateType.FromTemplate
+        });
     }
 
     private void InitializeToolItems()
@@ -108,4 +156,41 @@ public partial class ProjectsViewModel: ViewModelBase
 
     [RelayCommand]
     public void SetView() => AppState.SetView(AppScreen.Workflow);
+
+    [RelayCommand]
+    public void CloseDialog() => AppState.IsCreateProjectDialogOpen = false;
+    
+    
+    [RelayCommand]
+    public void ToggleDialog() => AppState.IsCreateProjectDialogOpen = !AppState.IsCreateProjectDialogOpen;
+
+    [RelayCommand]
+    public void CreateNewProject()
+    {
+        if (string.IsNullOrWhiteSpace(Name))
+            return;
+        
+        IsCreateProjectLoading = true;
+        AppState.CreateProject(Name);
+        Console.WriteLine($"--> Project created sucessfully.");
+        IsCreateProjectLoading = false;
+        AppState.SetView(AppScreen.ProjectDashboard);
+    }
+
+    [RelayCommand]
+    public void TemplateSelected(WorkflowTemplate template)
+    {
+        SelectedTemplate = template;
+        foreach (var t in Templates)
+        {
+            if (t.Type == template.Type)
+            {
+                t.IsSelected = true;
+            }
+            else
+            {
+                t.IsSelected = false;
+            }
+        }
+    }
 }

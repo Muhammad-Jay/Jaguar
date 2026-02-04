@@ -42,10 +42,11 @@ namespace Jaguar.Desktop.Services.AppState
         [ObservableProperty] private bool _isProjectsLoading = false;
 
         // Workflow Dialogs States
-        private readonly double _defaultDialogWidth = 600;
-        private readonly double _defaultDialogHeight = 500;
+        private readonly double _defaultDialogWidth = 500;
+        private readonly double _defaultDialogHeight = 400;
         
         [ObservableProperty] private bool _isAgentDialogOpen;
+        [ObservableProperty] private bool _isCreateProjectDialogOpen;
         [ObservableProperty] private double _dialogWidth;
         [ObservableProperty] private double _dialogHeight;
         
@@ -107,9 +108,9 @@ namespace Jaguar.Desktop.Services.AppState
 
         private void SeedProjects()
         {
-            var pro1 = _projectService.CreateProject("Project1");
-            var pro2 = _projectService.CreateProject("JaguarProject2");
-            var pro3 = _projectService.CreateProject("Jaguar3");
+            var pro1 = _projectService.CreateProject("NewProject12");
+            var pro2 = _projectService.CreateProject("JaguarNewProject2");
+            var pro3 = _projectService.CreateProject("NewJaguar3");
         }
 
         public void LoadAllProjects()
@@ -127,6 +128,17 @@ namespace Jaguar.Desktop.Services.AppState
             }
             
             LoadProjectNodes(Projects[0].Name);
+        }
+
+        public void CreateProject(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                return;
+
+            Console.WriteLine($"Creating Prokect: {name}");
+            var project = _projectService.CreateProject(name);
+            CurrentProject = project;
+            Projects.Add(project);
         }
 
         public void LoadProjectNodes(string projectNane)
@@ -153,7 +165,8 @@ namespace Jaguar.Desktop.Services.AppState
                     CurrentScreen = new ProjectsViewModel(_serviceProvider, this);
                     break;
                 case AppScreen.ProjectDashboard:
-                    CurrentScreen = new ProjectDashboardViewModel(_serviceProvider, this);
+                    // CurrentScreen = new ProjectDashboardViewModel(_serviceProvider, this);
+                    CurrentScreen = _serviceProvider.GetRequiredService<WorkflowViewModel>();
                     break;
                 case AppScreen.Workflow:
                     CurrentScreen = new WorkflowViewModel(_serviceProvider, this);

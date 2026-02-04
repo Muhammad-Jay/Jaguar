@@ -3,49 +3,54 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
-             xmlns:templates="clr-namespace:Jaguar.Core.Models;assembly=Jaguar.Core"
+             xmlns:ui="clr-namespace:Jaguar.Desktop.Models.Ui"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="viewModels:ProjectsViewModel"
-             x:Class="Jaguar.Desktop.CustomViews.Projects.ProjectsRenderer">
+             x:Class="Jaguar.Desktop.CustomViews.Projects.WorkflowTemplatesRenderer">
     
     <Border
-        CornerRadius="{DynamicResource LargeCornerRadius}"
-        Width="265"
+        CornerRadius="20"
         Background="Transparent"
-        BorderBrush="{DynamicResource JaguarBackgrounBrush}"
-        BorderThickness="1"
-        Padding="5,5,15,5"
+        Padding="15"
         ClipToBounds="True"
-        HorizontalAlignment="Stretch"
-        VerticalAlignment="Stretch">
+        Margin="0, 0,0,0"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Center"
+        Width="615">
         
         <ScrollViewer
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
-            Padding="0,0,10,0"
             ClipToBounds="True"
-            CornerRadius="{DynamicResource BaseCornerRadius}"
+            CornerRadius="15"
             Background="Transparent"
             VerticalScrollBarVisibility="Auto"
-            HorizontalScrollBarVisibility="Disabled">
+            HorizontalScrollBarVisibility="Hidden">
                
-               <ItemsControl ItemsSource="{Binding  AppState.Projects}">
+               <ItemsControl ItemsSource="{Binding  Templates}">
                    
                    <ItemsControl.ItemsPanel>
                        <ItemsPanelTemplate>
-                           <StackPanel Background="Transparent" Spacing="10"/>
+                           <WrapPanel
+                               Background="Transparent" 
+                               Orientation="Horizontal"
+                               VerticalAlignment="Stretch"
+                               Width="600"
+                               ItemWidth="260"
+                               ItemHeight="100"
+                               LineSpacing="20"
+                               ItemSpacing="20"/>
                        </ItemsPanelTemplate>
                    </ItemsControl.ItemsPanel>
             
             <ItemsControl.ItemTemplate>
-                <DataTemplate x:DataType="templates:Project">
-                   
+                <DataTemplate x:DataType="ui:WorkflowTemplate">
+                    
                     <Border Margin="0" 
-                            Height="60"
-                            Padding="7"
-                            Background="{StaticResource JaguarBackgroundVoidBrush}" 
-                            BorderThickness="1"
-                            CornerRadius="11"
+                            Tag="{Binding IsSelected}"
+                            Background="{StaticResource JaguarBackgroundSurfaceBrush}" 
+                            BorderThickness="2"
+                            CornerRadius="10"
                             ClipToBounds="True"
                             Cursor="Hand">
                         
@@ -57,52 +62,47 @@
         
                         <Border.Styles>
                             <Style Selector="Border[IsPointerOver=True]">
-                                <Setter Property="BorderBrush" Value="{DynamicResource JaguarStateHoverBrush}"/>
-                                <Setter Property="Background" Value="{DynamicResource JaguarBackgroundSurfaceBrush}"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource JaguarAccentPrimaryBrush}"/>
+                                <Setter Property="Background" Value="Transparent"/>
                             </Style>
                             <Style Selector="Border[IsPointerOver=False]">
-                                <Setter Property="BorderBrush" Value="Transparent"/>
-                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource JaguarBackgroundSurfaceBrush}"/>
+                                <Setter Property="Background" Value="{StaticResource JaguarBackgroundVoidBrush}"/>
+                            </Style>
+                            
+                            <Style Selector="Border[Tag=true]">
+                                <Setter Property="BorderBrush" Value="{StaticResource JaguarAccentPrimaryBrush}"/>
+                                <Setter Property="Background" Value="{StaticResource JaguarBackgroundVoidBrush}"/>
                             </Style>
                         </Border.Styles>
                         
                     <Button
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Stretch"
-                        Padding="6"
-                        CornerRadius="{DynamicResource BaseCornerRadius}"
+                        CornerRadius="7"
                         CommandParameter="{Binding}"
-                        Command="{Binding $parent[UserControl].((viewModels:ProjectsViewModel)DataContext).ProjectClickedCommand}"
-                        Background="{DynamicResource JaguarBackgroundVoidHard}"
+                        Command="{Binding $parent[ItemsControl].((viewModels:ProjectsViewModel)DataContext).TemplateSelectedCommand}"
+                        Background="Transparent"
                         >
-                        
-                        <!-- Command="{Binding $parent[UserControl].((viewModels:ProjectsViewModel)DataContext).ProjectClickedCommand}" -->
                         
                         <Button.Styles>
                             <Style Selector="Button[IsPointerOver=True]">
                                 <Setter Property="Background" Value="Transparent"/>
                                 <Style Selector="^ /template/ ContentPresenter">
-                                    <Setter Property="Background" Value="{DynamicResource JaguarBackgroundVoidHard}"/>
+                                    <Setter Property="Background" Value="Transparent"/>
                                 </Style>
                             </Style>
+                            
                             <Style Selector="Button:pressed">
-                                <Setter Property="Background" Value="{DynamicResource JaguarBackgroundVoidHard}"/>
+                                <Setter Property="Background" Value="Transparent"/>
                             </Style>
                         </Button.Styles>
                         
                         <Button.Transitions>
                             <Transitions>
-                                <BrushTransition Property="BorderBrush" Duration="0:0:0.1"/>
+                                <BrushTransition Property="BorderBrush" Duration="0:0:0.2"/>
                             </Transitions>
                         </Button.Transitions>
-                        
-                        <StackPanel>
-                            <TextBlock
-                                Foreground="{DynamicResource JaguarTextSecondaryBrush}"
-                                Classes="text-xs"
-                                FontWeight="SemiBold"
-                                Text="{Binding Name}"/>
-                        </StackPanel>
                     </Button>
                     </Border>
                 </DataTemplate>
@@ -110,4 +110,5 @@
         </ItemsControl>
     </ScrollViewer>
     </Border>
+    
 </UserControl>

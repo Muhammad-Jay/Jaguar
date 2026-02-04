@@ -1,0 +1,57 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="viewModels:MainWindowViewModel"
+             x:Class="Jaguar.Desktop.CustomViews.ToolPanel.MainWindowToolbarView">
+   
+    <Grid 
+        Background="Transparent" 
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch"
+        ColumnDefinitions="Auto, *">
+            
+        <StackPanel 
+            Grid.Column="0"
+            Orientation="Horizontal" 
+            VerticalAlignment="Center"
+            Margin="5,0">
+           <Button
+               Command="{Binding SetHomeViewCommand}"
+               VerticalContentAlignment="Center"
+               HorizontalContentAlignment="Center"
+               Width="29"
+               Height="24"
+               Padding="0"
+               Margin="0"
+               Classes="btn-ghost">
+               <ContentControl 
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Template="{DynamicResource JaguarLogo}"/>
+           </Button>
+        </StackPanel>
+
+        <Border 
+            Grid.Column="1" 
+            Padding="20, 1"
+            Background="Transparent">
+                    <Border
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Padding="2"
+                        Background="{DynamicResource JaguarBackgroundVoidBrush}"
+                        CornerRadius="{DynamicResource BaseCornerRadius}">
+                        
+                        <ContentControl 
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch"
+                            CornerRadius="{DynamicResource BaseCornerRadius}"
+                            Template="{DynamicResource GlassPanelTemplate}"/>
+                    </Border>
+        </Border>
+    </Grid>
+</UserControl>

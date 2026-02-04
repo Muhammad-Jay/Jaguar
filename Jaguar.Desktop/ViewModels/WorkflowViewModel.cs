@@ -42,7 +42,7 @@ namespace Jaguar.Desktop.ViewModels
             RightBarMenuVm = serviceProvider.GetRequiredService<RightBarMenuViewModel>();
             LeftBarMenuVm = serviceProvider.GetRequiredService<LeftBarMenuViewModel>();
             _workFlowOrchestrator = serviceProvider.GetRequiredService<Orchestrator>();
-            Content = serviceProvider.GetRequiredService<CanvasViewModel>();;
+            Content = serviceProvider.GetRequiredService<CanvasViewModel>();
         }
         
         [RelayCommand] 

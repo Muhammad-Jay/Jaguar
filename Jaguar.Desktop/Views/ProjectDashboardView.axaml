@@ -3,6 +3,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:projects="clr-namespace:Jaguar.Desktop.CustomViews.Projects"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="viewModels:ProjectDashboardViewModel"
              x:Class="Jaguar.Desktop.Views.ProjectDashboardView">
@@ -11,11 +13,185 @@
         <Border
             CornerRadius="15"
             ClipToBounds="True"
-            Background="{StaticResource JaguarMainBgGradientBrush}"
+            Background="{StaticResource JaguarBackgroundSurfaceBrush}"
             VerticalAlignment="Stretch"
             HorizontalAlignment="Stretch">
-           
-            <TextBlock Text="{Binding AppState.CurrentProject.Name}" Foreground="{StaticResource JaguarTextSecondary}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            
+
+             <!-- Right Section, Main Content -->
+          <Grid
+              VerticalAlignment="Stretch"
+              HorizontalAlignment="Stretch"
+              Grid.Column="1"
+              ColumnSpacing="15"
+              ColumnDefinitions="Auto, *">
+              
+              <!-- Projects Renderer -->
+              <Grid
+                  RowSpacing="5"
+                  RowDefinitions="Auto,*"
+                  Width="265"
+                  VerticalAlignment="Stretch">
+                  <Grid
+                      Grid.Row="0"
+                      ClipToBounds="True"
+                      Height="50"
+                      ColumnDefinitions="*, Auto"
+                      HorizontalAlignment="Stretch">
+                      <Border>
+                          
+                      </Border>
+                      
+                      <StackPanel
+                          VerticalAlignment="Stretch"
+                          Grid.Column="1"
+                          Orientation="Horizontal"
+                          Spacing="5">
+                          <Button
+                              VerticalAlignment="Center"
+                              Command="{Binding ToggleDialogCommand}"
+                              Classes="btn-primary">
+                              <avalonia:MaterialIcon 
+                                  Kind="Plus"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center"
+                                  FontSize="12"
+                                  Foreground="Black"/>
+                          </Button>
+                      </StackPanel>
+                  </Grid>
+                  <Border
+                      Grid.Row="1"
+                      Background="{DynamicResource JaguarBackgroundSurfaceBrush}"
+                      CornerRadius="{DynamicResource LargeCornerRadius}"
+                      VerticalAlignment="Stretch">
+                  
+                      <projects:ProjectsRenderer/>
+                  </Border>
+              </Grid>
+              
+              <!-- Right Contents -->
+              <Grid
+                  Grid.Column="1"
+                  RowSpacing="10"
+                  RowDefinitions="Auto,*"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch">
+                  <Border
+                      Grid.Row="0"
+                      Height="300"
+                      Background="{DynamicResource JaguarBackgroundSurfaceBrush}"
+                      CornerRadius="{DynamicResource LargeCornerRadius}"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch">
+                      
+                      <!-- Top main content section -->
+                      <Grid
+                          Margin="6"
+                          ColumnSpacing="10"
+                          ColumnDefinitions="*,Auto"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch">
+                          <Border
+                              Grid.Column="0"
+                              BorderThickness="2"
+                              Padding="15"
+                              BorderBrush="{DynamicResource JaguarSurface}"
+                              Background="{DynamicResource JaguarBackgroundSurfaceBrush}"
+                              CornerRadius="{DynamicResource LargeCornerRadius}"
+                              ClipToBounds="True"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch">
+                              
+                              <!-- <ContentControl  -->
+                              <!--     Content="{Binding GraphContent}" -->
+                              <!--     > -->
+                              <!-- </ContentControl> -->
+                          </Border>
+                  
+                          <Border
+                              Grid.Column="1"
+                              Background="{DynamicResource JaguarBackgroundVoidBrush}"
+                              CornerRadius="{DynamicResource LargeCornerRadius}"
+                              Width="400"
+                              Padding="15"
+                              ClipToBounds="True"
+                              VerticalAlignment="Stretch">
+                              
+                              <StackPanel>
+                                  <TextBlock
+                                      Foreground="{DynamicResource JaguarTextPrimaryBrush}"
+                                      Classes="text-md"
+                                      />
+                              </StackPanel>
+                          </Border>
+                      </Grid>
+                  </Border>
+                  
+                  <Border
+                      Grid.Row="1"
+                      Background="{DynamicResource JaguarBackgroundSurfaceBrush}"
+                      CornerRadius="{DynamicResource LargeCornerRadius}"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch">
+                  
+                      <Grid
+                          Margin="6"
+                          ColumnSpacing="10"
+                          ColumnDefinitions="*,Auto, Auto"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch">
+                          <Border
+                              Grid.Column="0"
+                              Padding="15"
+                              Background="{DynamicResource JaguarBackgroundVoidBrush}"
+                              CornerRadius="{DynamicResource LargeCornerRadius}"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch">
+                              
+                              <StackPanel>
+                                  <TextBlock
+                                      Foreground="{DynamicResource JaguarTextSecondaryBrush}"
+                                      Classes="text-md"
+                                      Text="Tasks"/>
+                              </StackPanel>
+                          </Border>
+                  
+                          <Border
+                              Grid.Column="1"
+                              Background="{DynamicResource JaguarBackgroundVoidBrush}"
+                              CornerRadius="{DynamicResource LargeCornerRadius}"
+                              Width="300"
+                              Padding="15"
+                              ClipToBounds="True"
+                              VerticalAlignment="Stretch">
+                              <StackPanel>
+                                  <TextBlock
+                                      Foreground="{DynamicResource JaguarTextSecondaryBrush}"
+                                      Classes="text-md"
+                                      Text="Agents"/>
+                              </StackPanel>
+                          </Border>
+                          
+                          <Border
+                              Grid.Column="2"
+                              Background="{DynamicResource JaguarBackgroundVoidBrush}"
+                              CornerRadius="{DynamicResource LargeCornerRadius}"
+                              Width="300"
+                              Padding="15"
+                              ClipToBounds="True"
+                              VerticalAlignment="Stretch">
+                              <StackPanel>
+                                  <TextBlock
+                                      Foreground="{DynamicResource JaguarTextSecondaryBrush}"
+                                      Classes="text-md"
+                                      Text="Logs"/>
+                              </StackPanel>
+                          </Border>
+                      </Grid>
+                  </Border>
+              </Grid>
+          </Grid>
         </Border>
     </Grid>
     

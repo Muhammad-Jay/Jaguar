@@ -29,7 +29,7 @@ public partial class SplashScreenViewModel: ViewModelBase
         
         AppState.LoadAllProjects();
         
-        await Task.Delay(2000);
+        await Task.Delay(4000);
         
         AppState.SetView(AppScreen.Projects);
     }

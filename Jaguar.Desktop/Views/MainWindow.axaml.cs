@@ -1,8 +1,10 @@
+using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Jaguar.Core.Services;
+using Avalonia.Media;
+using Jaguar.Desktop.Models;
 using Jaguar.Desktop.ViewModels;
 using Material.Icons;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +13,8 @@ namespace Jaguar.Desktop.Views;
 
 public partial class MainWindow : Window
 {
+    private MainWindowViewModel? ViewModel => DataContext as MainWindowViewModel;
+    
     public MainWindow()
     {
         InitializeComponent();
@@ -53,5 +57,29 @@ public partial class MainWindow : Window
     private void OnTitleBarDoubleTapped(object sender, TappedEventArgs e)
     {
         OnMaximizeClick(sender, e);
+    }
+
+    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnAttachedToVisualTree(e);
+
+        this.PropertyChanged += (_, _) =>
+        {
+            if (ViewModel is not null)
+            {
+                if (ViewModel.AppState.CurrentScreenType == AppScreen.SplashScreen)
+                {
+                    Console.WriteLine($"Current Screen: {ViewModel.AppState.CurrentScreenType.ToString()}");
+                    ViewModel.IsSplashScreen = true;
+                    ViewModel.Size = new Size(600, 500);
+                    ViewModel.Color = Color.Parse("Black");
+                }
+                else
+                {
+                    ViewModel.IsSplashScreen = false;
+                    Console.WriteLine($"Current Screen: {ViewModel.AppState.CurrentScreenType.ToString()}");
+                }
+            }
+        };
     }
 }

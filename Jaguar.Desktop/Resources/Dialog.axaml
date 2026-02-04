@@ -1,37 +1,36 @@
-<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
-             xmlns:dialog="clr-namespace:Jaguar.Desktop.ViewModels.Dialog"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Jaguar.Desktop.CustomViews.Dialog.DialogView"
-             x:DataType="dialog:DialogViewModel">
-   
-   <Panel
-       IsVisible="{Binding AppState.IsAgentDialogOpen}"
-       Width="{Binding AppState.DialogWidth}"
-       Height="{Binding AppState.DialogHeight}"
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia">
+    
+    <ControlTemplate x:Key="DialogWrapper" TargetType="ContentControl">
+        
+        <Panel
+       IsVisible="{TemplateBinding IsVisible}"
+       Width="{TemplateBinding Width}"
+       Height="{TemplateBinding Height}"
+       HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+       VerticalAlignment="{TemplateBinding VerticalAlignment}"
        Background="Transparent"
        ZIndex="70"
-       ClipToBounds="True">
+       ClipToBounds="False">
        
        <Border
-           Width="{Binding AppState.DialogWidth}"
-           Height="{Binding AppState.DialogHeight}"
+           Width="{TemplateBinding Width}"
+           Height="{TemplateBinding Height}"
            VerticalAlignment="Center"
            HorizontalAlignment="Center"
-           CornerRadius="15"
-           Background="{StaticResource MainBg}"
-           BorderThickness="2"
-           BorderBrush="{StaticResource JaguarSurface}"
+           CornerRadius="{DynamicResource LargeCornerRadius}"
+           Background="{DynamicResource Neutral800Brush}"
+           BorderThickness="0"
+           BoxShadow="0 10 30 0 #80000000" 
+           BorderBrush="{DynamicResource JaguarSurface}"
            ClipToBounds="True"
        >
-        <ContentControl Template="{StaticResource GlassPanelTemplate}"
+        <Border 
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch" 
                         Padding="10"
-                        BorderBrush="{StaticResource JaguarSurface}"
+                        BorderBrush="Transparent"
                         ClipToBounds="True">
             
                <Grid RowDefinitions="30, *, 30">
@@ -54,7 +53,8 @@
                         VerticalContentAlignment="Center"
                         HorizontalContentAlignment="Center"
                         Background="Transparent"
-                        Command="{Binding ToggleAgentDialogCommand}"
+                        Command="{TemplateBinding Tag}"
+                       
                     >
                         <avalonia:MaterialIcon 
                             Kind="Close" FontSize="12"
@@ -71,7 +71,10 @@
                 Background="Transparent"
                 HorizontalAlignment="Stretch">
                 
-                <TransitioningContentControl Content="{Binding AppState.CurrentDialogView}"/>
+                <ContentPresenter 
+                    Content="{TemplateBinding Content}"
+                    ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                
             </Border>
             
             <Border
@@ -92,12 +95,13 @@
                     FontSize="10"
                     Background="Transparent"
                     Content="cancel"
-                    Command="{Binding ToggleAgentDialogCommand}"
+                    Command="{TemplateBinding Tag}"
                 />
             </Border>
         </Grid>
             
-        </ContentControl>
+        </Border>
     </Border>
    </Panel>
-</UserControl>
+    </ControlTemplate>
+</ResourceDictionary>

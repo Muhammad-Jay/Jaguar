@@ -4,9 +4,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
         xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+        xmlns:toolPanel="clr-namespace:Jaguar.Desktop.CustomViews.ToolPanel"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Jaguar.Desktop.Views.MainWindow"
         x:DataType="viewModels:MainWindowViewModel"
+        Tag="{Binding IsSplashScreen}"
         UseLayoutRounding="False"
         Title="Jaguar"
         ClipToBounds="True"
@@ -20,21 +22,34 @@
         ExtendClientAreaToDecorationsHint="True"
         >
     
-    <Panel Background="{StaticResource JaguarMainBgGradientBrush}">
+    <Window.Styles>
+        <Style Selector="Window">
+            
+            <Style Selector="^[Tag=true]">
+                <Setter Property="Width" Value="{Binding Size.Width}"/>
+                <Setter Property="Height" Value="{Binding Size.Height}"/>
+            </Style>
+        </Style>
+    </Window.Styles>
+    
+    <Panel Background="{StaticResource JaguarBackgroundSurfaceBrush}">
         <!-- <Border Background="{StaticResource MainBg}" IsHitTestVisible="False" /> -->
 
         <DockPanel>
-            <Grid DockPanel.Dock="Top" Height="30" Background="Transparent" ColumnDefinitions="Auto, *, Auto">
-            
-                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="15,0">
-                    <TextBlock Text="JAGUAR" Foreground="Turquoise" FontSize="10" FontWeight="Regular" LetterSpacing="2" VerticalAlignment="Center"/>
-                </StackPanel>
+            <Grid DockPanel.Dock="Top" Height="36" Background="Transparent" ColumnDefinitions="*, Auto">
+                <toolPanel:MainWindowToolbarView
+                    Margin="10, 0"
+                    VerticalAlignment="Center"
+                    DoubleTapped="OnTitleBarDoubleTapped"
+                    PointerPressed="OnTitleBarPointerPressed"
+                    Grid.Column="0"/>
 
-                <Border Grid.Column="1" Background="Transparent" DoubleTapped="OnTitleBarDoubleTapped" PointerPressed="OnTitleBarPointerPressed">
-                    
-                </Border>
-
-                <StackPanel Grid.Column="2" Spacing="10" Orientation="Horizontal">
+                <StackPanel 
+                    Grid.Column="1" 
+                    Spacing="10" 
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    Margin="10, 0">
                     <Button Classes="WindowControl" Click="OnMinimizeClick">
                         <avalonia:MaterialIcon Kind="WindowMinimize" Width="10" Height="10" Foreground="{StaticResource  JaguarTextPrimary}"/>
                     </Button>

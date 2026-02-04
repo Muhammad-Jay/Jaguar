@@ -5,13 +5,15 @@
     <!-- BACKGROUNDS -->
     <!-- ================= -->
     
-    <Color x:Key="JaguarBackgroundVoid">#0B0E11</Color> <!-- window / app root -->
-    <Color x:Key="JaguarBackgroundSurface">#11161C</Color> <!-- pages, panels -->
-    <Color x:Key="JaguarBackgroundSurfaceRaised">#161C23</Color> <!-- cards, nodes -->
+     <Color x:Key="JaguarBackgroundVoidHard">#1F1F1F</Color>
+    <Color x:Key="JaguarBackgroundVoid">#0C0C0C</Color> <!-- window / app root -->
+    <!-- <Color x:Key="JaguarBackgroundSurface">#121212</Color> -->
+     <Color x:Key="JaguarBackgroundSurface">Black</Color> <!-- pages, panels -->
+    <Color x:Key="JaguarBackgroundSurfaceRaised">#121212</Color> <!-- cards, nodes -->
     <Color x:Key="JaguarBackgroundSurfaceHighlight">#1A2129</Color> <!-- subtle elevation -->
     <Color x:Key="JaguarBackgroundCanvas">#0D1217</Color> <!-- graph / canvas -->
     
-    
+     
     <!-- ================= -->
     <!-- GLASS / OVERLAYS -->
     <!-- ================= -->
@@ -25,7 +27,7 @@
     <!-- ACCENT (AMBER) -->
     <!-- ================= -->
     
-    <Color x:Key="JaguarAccentPrimary">#CFA45D</Color> <!-- primary actions -->
+    <Color x:Key="JaguarAccentPrimary">White</Color> <!-- primary actions -->
     <Color x:Key="JaguarAccentStrong">#E2B76A</Color> <!-- progress / active -->
     <Color x:Key="JaguarAccentMuted">#9C814E</Color> <!-- secondary accent -->
     <Color x:Key="JaguarAccentGlow">#40CFA45D</Color> <!-- shadows / glow -->
@@ -57,8 +59,8 @@
     <!-- INTERACTION STATES -->
     <!-- ================= -->
     
-    <Color x:Key="JaguarStateHover">#1EFFFFFF</Color> <!-- hover -->
-    <Color x:Key="JaguarStateActive">#2ACFA45D</Color> <!-- pressed -->
+    <Color x:Key="JaguarStateHover">White</Color> <!-- hover -->
+    <Color x:Key="JaguarStateActive">#00FF69</Color> <!-- pressed -->
     <Color x:Key="JaguarStateSelected">#33CFA45D</Color> <!-- selection -->
     <Color x:Key="JaguarStateFocus">#80CFA45D</Color> <!-- focus ring -->
     
@@ -199,5 +201,15 @@
 
      <SolidColorBrush x:Key="JaguarStatusInfoBrush"
                       Color="{StaticResource JaguarStatusInfo}" />
+     
+     <LinearGradientBrush x:Key="JaguarAccentGradientBrush" StartPoint="0%,50%" EndPoint="100%,50%">
+         <GradientStop Offset="0.2" Color="#0B170B" />
+         <GradientStop Offset="0.66" Color="#14542D" />
+     </LinearGradientBrush>
+     
+     <LinearGradientBrush x:Key="JaguarGradientSurfaceBrush" StartPoint="0%,50%" EndPoint="100%,50%">
+         <GradientStop Offset="0.0" Color="{DynamicResource JaguarBackgroundSurfaceBrush}" />
+         <GradientStop Offset="1.0" Color="{DynamicResource JaguarBackgroundVoid}" />
+     </LinearGradientBrush>
 
 </ResourceDictionary>

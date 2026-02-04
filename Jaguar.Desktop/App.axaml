@@ -17,11 +17,22 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceInclude Source="/CustomViews/ContextMenus/OrchestratorResources.axaml"/>
                 <ResourceInclude Source="/CustomViews/ContextMenus/CanvasContextMenu.axaml"/>
-               
+                
                 <ResourceInclude Source="/Resources/NodeResources.axaml"/>
+                <ResourceInclude Source="/Resources/JaguarLogo.axaml"/>
+                <ResourceInclude Source="/Resources/LayoutWrappers.axaml"/>
+                <ResourceInclude Source="/Resources/Dialog.axaml"/>
+                <ResourceInclude Source="/Resources/Loader.axaml"/>
+                
+                <ResourceInclude Source="/Styles/Tokens.axaml"/>
                 <ResourceInclude Source="/Styles/GlassTheme.axaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
+        
+        <CornerRadius x:Key="BaseCornerRadius">6</CornerRadius>
+        <CornerRadius x:Key="SmallCornerRadius">7</CornerRadius>
+        <CornerRadius x:Key="MidiumCornerRadius">10</CornerRadius>
+        <CornerRadius x:Key="LargeCornerRadius">20</CornerRadius>
         
         <Color x:Key="Neutral900">#141414</Color>
         <Color x:Key="Neutral800">#262626</Color>
@@ -41,9 +52,7 @@
         <SolidColorBrush x:Key="JaguarBrushPrimary" Color="#E3E3E3" />
         <SolidColorBrush x:Key="JaguarBrushSecondary" Color="#C4C7C5" />
         <SolidColorBrush x:Key="JaguarBrushMuted" Color="#6E768E"/>
-        <SolidColorBrush x:Key="JaguarAccentBrushPrimary" Color="{StaticResource Turquoise.700}" />
-        <SolidColorBrush x:Key="JaguarAccentBrushHovered" Color="{StaticResource Turquoise.500}" />
-        <SolidColorBrush x:Key="JaguarAccentBrushPressed" Color="{StaticResource Turquoise.300}"/>
+       
         
         <SolidColorBrush x:Key="TurquoiseAccent" Color="{StaticResource Turquoise.500}" />
         <SolidColorBrush x:Key="TurquoiseAccentHovered" Color="{StaticResource Turquoise.300}" />
@@ -64,26 +73,39 @@
             <GradientStop Offset="1.0" Color="#F4AF5F" />
         </LinearGradientBrush>
         
-        <LinearGradientBrush x:Key="JaguarMainBgGradientBrush" StartPoint="0%,50%" EndPoint="100%,50%">
-            <GradientStop Offset="0.2" Color="{StaticResource JaguarMainBg1}" />
-            <GradientStop Offset="0.66" Color="{StaticResource JaguarMainBg2}" />
+        <LinearGradientBrush x:Key="JaguarDeepGradientBrush" StartPoint="30%,50%" EndPoint="100%,50%">
+            <GradientStop Offset="0.0" Color="{StaticResource JaguarAccentPrimary}" />
+            <GradientStop Offset="0.30" Color="{StaticResource JaguarAccentPrimary}" />
+            <GradientStop Offset="0.50" Color="{StaticResource JaguarBackgroundVoid}" />
+            <GradientStop Offset="0.60" Color="{StaticResource JaguarAccentPrimary}" />
+            <GradientStop Offset="0.76" Color="{StaticResource JaguarBackgroundVoid}" />
         </LinearGradientBrush>
+        
+        
+      <LinearGradientBrush x:Key="JaguarGradiantSilver" StartPoint="0%,50%" EndPoint="100%,50%">
+        <GradientStop Color="#030303" Offset="0"/>
+        <GradientStop Color="#4F4F4F" Offset="0.7"/>
+        <GradientStop Color="#151515" Offset="1"/>
+      </LinearGradientBrush>
+        
+      <LinearGradientBrush x:Key="JaguarGradiantButtonAccent" StartPoint="0%,50%" EndPoint="100%,50%">
+        <GradientStop Color="#F2F2F2" Offset="0"/>
+        <GradientStop Color="#CCCCCC" Offset="1"/>
+      </LinearGradientBrush>
     </Application.Resources>
     
     <Application.Styles>
         <FluentTheme/>
-        
         <avalonia:MaterialIconStyles />
         
         <StyleInclude Source="Styles/GlobalStyles.axaml"/>
         <StyleInclude Source="Styles/Buttons.axaml"/>
         <StyleInclude Source="Styles/Colors.axaml"/>
         <StyleInclude Source="Styles/Typography.axaml"/>
-        <StyleInclude Source="Styles/LayoutStyles.axaml"/>
         <StyleInclude Source="Styles/CanvasStyles.axaml"/>
         
         <Style Selector="ScrollBar /template/ Thumb">
-            <Setter Property="Background" Value="{StaticResource TurquoiseAccent}"/>
+            <Setter Property="Background" Value="{DynamicResource JaguarAccentPrimaryBrush}"/>
         </Style>
         
         <Style Selector="MenuItem:pointerover /template/ ContentPresenter#PART_HeaderPresenter">
@@ -101,6 +123,19 @@
             <Setter Property="Margin" Value="0,2"/>
         </Style>
         
+        <Style Selector="TextBox.TextArea">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="Black"/>
+            <Style Selector="^:focus /template/ Border#PART_BorderElement">
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Background" Value="Black"/>
+            </Style>
+            
+            <Style Selector="^[IsPointerOver=True]">
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Background" Value="Black"/>
+            </Style>
+        </Style>
     </Application.Styles>
     
     <Application.DataTemplates>
