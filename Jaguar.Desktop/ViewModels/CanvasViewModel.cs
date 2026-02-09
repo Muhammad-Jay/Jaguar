@@ -7,6 +7,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Jaguar.Core.Abstractions;
+using Jaguar.Core.Events;
 using Jaguar.Core.Models.Graph;
 using Jaguar.Core.Models.Templates;
 using Jaguar.Desktop.Models;
@@ -22,6 +23,7 @@ public partial class CanvasViewModel : ViewModelBase
 {
     private readonly IGraphService _graph;
     private readonly IEventAggregator _event;
+    private readonly IAiProvider _llm;
     private readonly IAgentTemplateRepository _agentRepository;
     private readonly FlowNodeViewModelFactory _nodeFactory;
     private readonly IServiceProvider _serviceProvider;
@@ -39,10 +41,11 @@ public partial class CanvasViewModel : ViewModelBase
 
     public CanvasViewModel(IServiceProvider serviceProvider, IGraphService graphService,
         IEventAggregator eventAggregator, IAgentTemplateRepository agentRepository,
-        FlowNodeViewModelFactory flowNodeViewModelFactory)
+        FlowNodeViewModelFactory flowNodeViewModelFactory, IAiProvider llm)
     {
         _graph = graphService;
         _event = eventAggregator;
+        _llm = llm;
         _agentRepository = agentRepository;
         _nodeFactory = flowNodeViewModelFactory;
         _serviceProvider = serviceProvider;
@@ -63,21 +66,67 @@ public partial class CanvasViewModel : ViewModelBase
         _orchestratorNode = CreateNode(
             "Orchestrator",
             NodeType.Orchestrator,
-            new Point(200, 200));
+            new Point(200, 200),
+            new NodeBehavior()
+            );
         
-        var kernel = CreateNode(
-            "Kernel Agent",
-            NodeType.ProjectManager,
-            new Point(400, 300));
+        var intentNode = CreateNode(
+            "Intent",
+            NodeType.Intent,
+            new Point(200, 200),
+            new NodeBehavior
+            {
+                InputEventType = typeof(TaskCreatedEvent),
+                OutputEventType = typeof(IntentNodeCompleteEvent)
+            }
+            );
+        
+        var researchNode = CreateNode(
+            "Research",
+            NodeType.Agent,
+            new Point(200, 200),
+            new NodeBehavior
+            {
+                InputEventType = typeof(IntentNodeCompleteEvent),
+                OutputEventType = typeof(ResearchNodeCompleteEvent)
+            }
+        );
+        
+        var analysisNode = CreateNode(
+            "Analysis Node",
+            NodeType.Reasoning,
+            new Point(200, 200),
+            new NodeBehavior
+            {
+                InputEventType = typeof(ResearchNodeCompleteEvent),
+                OutputEventType = typeof(AnalysisNodeCompleteEvent)
+            }
+        );
+        
+        var planNode = CreateNode(
+            "Plan Node",
+            NodeType.Plan,
+            new Point(200, 200),
+            new NodeBehavior
+            {
+                InputEventType = typeof(AnalysisNodeCompleteEvent),
+                OutputEventType = typeof(PlanNodeCompletEvent)
+            }
+        );
         
         var from = _orchestratorNode.Outputs.FirstOrDefault();
-        var to = kernel.Inputs.FirstOrDefault();
+        var intentto = intentNode.Inputs.FirstOrDefault();
+        var analysisto = analysisNode.Inputs.FirstOrDefault();
+        var researchto = researchNode.Inputs.FirstOrDefault();
+        var planto = planNode.Inputs.FirstOrDefault();
         
-        if (from == null || to == null) return;
         
-        Connect(
-            from, to
-        );
+        if (from == null || intentto == null || analysisto == null || researchto == null || planto == null) return;
+        
+        Connect(from, intentto);
+        Connect(from, analysisto);
+        Connect(from, researchto);
+        Connect(from, planto);
     }
 
     private void SubscribeToEvents()
@@ -94,10 +143,13 @@ public partial class CanvasViewModel : ViewModelBase
             var pointX = fromNode.Location.X + 400;
             var pointY = fromNode.Location.Y + 550;
 
+            NodeBehavior behavior = new NodeBehavior();
+            
             var newNode = CreateNode(
                 template.Title,
                 template.Type,
-                new Point(pointX, pointY));
+                new Point(pointX, pointY),
+                behavior);
 
             newNode.UpdateAnchors();
             fromNode.UpdateAnchors();
@@ -117,11 +169,13 @@ public partial class CanvasViewModel : ViewModelBase
     private FlowNodeViewModel CreateNode(
         string title,
         NodeType type,
-        Point location)
+        Point location,
+        NodeBehavior behavior)
     {
-        var domain = _graph.CreateNode(title, type);
+        var template = _agentRepository.GetByType(type).Result;
+        var domain = _graph.CreateNode(title, type, behavior, template!.SystemInstruction);
 
-        var vm = _nodeFactory.CreateNode(domain);
+        var vm = _nodeFactory.CreateNode(domain, this._llm);
 
         Nodes.Add(vm);
         return vm;

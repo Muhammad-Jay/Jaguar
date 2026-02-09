@@ -5,7 +5,7 @@
              xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
              xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              xmlns:projects="clr-namespace:Jaguar.Desktop.CustomViews.Projects"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="1300" d:DesignHeight="600"
              x:DataType="viewModels:ProjectDashboardViewModel"
              x:Class="Jaguar.Desktop.Views.ProjectDashboardView">
     
@@ -30,43 +30,15 @@
               <Grid
                   RowSpacing="5"
                   RowDefinitions="Auto,*"
-                  Width="265"
+                  Width="0"
                   VerticalAlignment="Stretch">
-                  <Grid
-                      Grid.Row="0"
-                      ClipToBounds="True"
-                      Height="50"
-                      ColumnDefinitions="*, Auto"
-                      HorizontalAlignment="Stretch">
-                      <Border>
-                          
-                      </Border>
-                      
-                      <StackPanel
-                          VerticalAlignment="Stretch"
-                          Grid.Column="1"
-                          Orientation="Horizontal"
-                          Spacing="5">
-                          <Button
-                              VerticalAlignment="Center"
-                              Command="{Binding ToggleDialogCommand}"
-                              Classes="btn-primary">
-                              <avalonia:MaterialIcon 
-                                  Kind="Plus"
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Center"
-                                  FontSize="12"
-                                  Foreground="Black"/>
-                          </Button>
-                      </StackPanel>
-                  </Grid>
+             
                   <Border
                       Grid.Row="1"
                       Background="{DynamicResource JaguarBackgroundSurfaceBrush}"
                       CornerRadius="{DynamicResource LargeCornerRadius}"
                       VerticalAlignment="Stretch">
-                  
-                      <projects:ProjectsRenderer/>
+                      
                   </Border>
               </Grid>
               

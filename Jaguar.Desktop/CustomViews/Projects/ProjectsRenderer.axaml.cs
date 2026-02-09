@@ -19,14 +19,22 @@ public partial class ProjectsRenderer : UserControl
     {
         if (sender is not Control control)
             return;
-
-        if (control.DataContext is not Project project)
+        var menu = this.FindResource("ProjectCardContextMenu") as ContextMenu;
+        if (menu == null)
             return;
-        
-        if (e.ClickCount == 2 && DataContext is ProjectsViewModel vm)
-        {
-            Console.WriteLine($"Current Selected Project: {project.Id} - {project.Name}");
-            vm.AppState.CurrentProject = project;
-        }
+
+        menu.PlacementTarget = control;
+        menu.Placement = PlacementMode.Bottom;
+        menu.Open(control);
+        e.Handled = true;
+        //
+        // if (control.DataContext is not Project project)
+        //     return;
+        //
+        // if (e.ClickCount == 2 && DataContext is ProjectsViewModel vm)
+        // {
+        //     Console.WriteLine($"Current Selected Project: {project.Id} - {project.Name}");
+        //     vm.AppState.CurrentProject = project;
+        // }
     }
 }

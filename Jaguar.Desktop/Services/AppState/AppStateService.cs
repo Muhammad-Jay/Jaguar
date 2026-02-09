@@ -4,6 +4,7 @@ using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Jaguar.Core.Abstractions;
+using Jaguar.Core.Events;
 using Jaguar.Core.Models;
 using Jaguar.Core.Models.Graph;
 using Jaguar.Desktop.Abstractions;
@@ -42,7 +43,7 @@ namespace Jaguar.Desktop.Services.AppState
         [ObservableProperty] private bool _isProjectsLoading = false;
 
         // Workflow Dialogs States
-        private readonly double _defaultDialogWidth = 500;
+        private readonly double _defaultDialogWidth = 300;
         private readonly double _defaultDialogHeight = 400;
         
         [ObservableProperty] private bool _isAgentDialogOpen;
@@ -72,7 +73,7 @@ namespace Jaguar.Desktop.Services.AppState
                     CurrentScreenType = AppScreen.SplashScreen;
                     
                     CurrentView = _serviceProvider.GetRequiredService<AgentTemplatesViewModel>();
-                    CurrentDialogView = new OrchestratorDialogPromptViewModel();
+                    CurrentDialogView = new OrchestratorDialogPromptViewModel(this, _events);
                     ActivePanel = new PanelRequest { ViewModel = CurrentView, Position = Position.Left};
                     IsRightPanelOpen = false;
                     IsLeftPanelOpen = true;
@@ -213,6 +214,10 @@ namespace Jaguar.Desktop.Services.AppState
         
         [RelayCommand]
         public void TogglePanel () =>  IsRightPanelOpen = !IsRightPanelOpen;
-        
+
+        public void RunTask(string task)
+        {
+            _events.Publish(new TaskCreatedEvent(task, Guid.NewGuid()));
+        }
     }
 }

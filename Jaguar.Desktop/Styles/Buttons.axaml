@@ -50,11 +50,11 @@
         </Style>
         
         <Style Selector="^[IsPointerOver=True]">
-            <Setter Property="Background" Value="{StaticResource JaguarBackgroundSurfaceRaisedBrush}"/>
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="{StaticResource JaguarAccentPrimaryBrush}"/>
         
             <Style Selector="^ /template/ ContentPresenter">
-                <Setter Property="Background" Value="{StaticResource JaguarBackgroundSurfaceRaisedBrush}"/>
+                <Setter Property="Background" Value="Transparent"/>
             </Style>
         </Style>
         

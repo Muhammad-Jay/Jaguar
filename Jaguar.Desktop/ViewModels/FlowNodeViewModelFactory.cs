@@ -12,8 +12,8 @@ public partial class FlowNodeViewModelFactory : ViewModelBase
         _event = eventAggregator;
     }
 
-    public FlowNodeViewModel CreateNode(FlowNode newNode)
+    public FlowNodeViewModel CreateNode(FlowNode newNode, IAiProvider llm)
     {
-        return new FlowNodeViewModel(newNode, _event);
+        return new FlowNodeViewModel(newNode, _event, llm);
     }
 }

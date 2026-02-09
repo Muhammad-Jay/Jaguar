@@ -13,15 +13,15 @@
         PointerPressed="OnPointerPressed"
         PointerMoved="OnPointerMoved"
         PointerReleased="OnPointerReleased"
-        Tag="{Binding IsSelected}"
+        Tag="{Binding IsRunning}"
         Width="{Binding Size.Width}"
         Height="{Binding Size.Height}"
         ClipToBounds="False"
         Background="Transparent">
         
         <Grid.Styles>
-            <Style Selector="Grid[Tag=true]">
-                <Setter Property="ZIndex" Value="100"/>
+            <Style Selector="Grid[Tag=true] Border#PmNode">
+                <Setter Property="BorderBrush" Value="DodgerBlue"/>
             </Style>
         </Grid.Styles>
         
@@ -46,6 +46,7 @@
             <Style Selector="Border#PmNode[Tag=true]">
                 <Setter Property="BorderBrush" Value="Cyan"/>
             </Style>
+            
         </Border.Styles>
 
         <Border.Transitions>
@@ -129,6 +130,13 @@
                 CornerRadius="15"
                 Margin="20">
         
+                <TextBlock
+                    Classes="text-sm"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    FontWeight="SemiBold"
+                    Foreground="{DynamicResource JaguarTextPrimaryBrush}"
+                    Text="{Binding Domain.State}"/>
                 <Border.Styles>
                     <Style Selector="Border">
                         <Setter Property="BorderBrush" Value="{StaticResource MainBg}"/>

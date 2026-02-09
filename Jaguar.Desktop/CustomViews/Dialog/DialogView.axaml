@@ -10,15 +10,13 @@
    
    <Panel
        IsVisible="{Binding AppState.IsAgentDialogOpen}"
-       Width="{Binding AppState.DialogWidth}"
-       Height="{Binding AppState.DialogHeight}"
+       Width="500"
+       Height="600"
        Background="Transparent"
        ZIndex="70"
        ClipToBounds="True">
        
        <Border
-           Width="{Binding AppState.DialogWidth}"
-           Height="{Binding AppState.DialogHeight}"
            VerticalAlignment="Center"
            HorizontalAlignment="Center"
            CornerRadius="15"

@@ -17,6 +17,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceInclude Source="/CustomViews/ContextMenus/OrchestratorResources.axaml"/>
                 <ResourceInclude Source="/CustomViews/ContextMenus/CanvasContextMenu.axaml"/>
+                <ResourceInclude Source="/CustomViews/ContextMenus/ProjectContextMenu.axaml"/>
+                
                 
                 <ResourceInclude Source="/Resources/NodeResources.axaml"/>
                 <ResourceInclude Source="/Resources/JaguarLogo.axaml"/>

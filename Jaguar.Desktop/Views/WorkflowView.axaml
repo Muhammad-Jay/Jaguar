@@ -31,6 +31,8 @@
             <dialog:DialogView 
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
+                Width="500"
+                Height="600"
                 DataContext="{Binding DialogVm}"
                 ZIndex="60"/>
             

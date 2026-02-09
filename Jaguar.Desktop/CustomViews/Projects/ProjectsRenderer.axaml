@@ -4,17 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:Jaguar.Desktop.ViewModels"
              xmlns:templates="clr-namespace:Jaguar.Core.Models;assembly=Jaguar.Core"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="viewModels:ProjectsViewModel"
              x:Class="Jaguar.Desktop.CustomViews.Projects.ProjectsRenderer">
     
     <Border
         CornerRadius="{DynamicResource LargeCornerRadius}"
-        Width="265"
+        Width="275"
         Background="Transparent"
         BorderBrush="{DynamicResource JaguarBackgrounBrush}"
         BorderThickness="1"
-        Padding="5,5,15,5"
+        Padding="5"
         ClipToBounds="True"
         HorizontalAlignment="Stretch"
         VerticalAlignment="Stretch">
@@ -42,7 +43,8 @@
                    
                     <Border Margin="0" 
                             Height="60"
-                            Padding="7"
+                            Padding="5"
+                            PointerPressed="OnPointerPressed"
                             Background="{StaticResource JaguarBackgroundVoidBrush}" 
                             BorderThickness="1"
                             CornerRadius="11"
@@ -82,7 +84,7 @@
                             <Style Selector="Button[IsPointerOver=True]">
                                 <Setter Property="Background" Value="Transparent"/>
                                 <Style Selector="^ /template/ ContentPresenter">
-                                    <Setter Property="Background" Value="{DynamicResource JaguarBackgroundVoidHard}"/>
+                                    <Setter Property="Background" Value="Transparent"/>
                                 </Style>
                             </Style>
                             <Style Selector="Button:pressed">
@@ -96,13 +98,52 @@
                             </Transitions>
                         </Button.Transitions>
                         
-                        <StackPanel>
-                            <TextBlock
-                                Foreground="{DynamicResource JaguarTextSecondaryBrush}"
-                                Classes="text-xs"
-                                FontWeight="SemiBold"
-                                Text="{Binding Name}"/>
-                        </StackPanel>
+                        <Grid
+                            ColumnDefinitions="Auto, *, Auto">
+                            <Border>
+                                
+                            </Border>
+                            <StackPanel
+                                Grid.Column="1">
+                                <TextBlock
+                                    Foreground="{DynamicResource JaguarTextSecondaryBrush}"
+                                    Classes="text-xs"
+                                    FontWeight="SemiBold"
+                                    Text="{Binding Name}"/>
+                            </StackPanel>
+                            <Grid
+                                RowDefinitions="Auto, *"
+                                Grid.Column="2">
+                                <StackPanel
+                                    VerticalAlignment="Top"
+                                    Margin="1">
+                                    <Button
+                                        CornerRadius="4"
+                                        Padding="0"
+                                        Classes="btn-ghost">
+                                        <Button.ContextFlyout>
+                                            <MenuFlyout
+                                            >
+                                                <Border
+                                                    Width="100"
+                                                    Height="200"
+                                                    Background="{DynamicResource Neutral900Brush}"
+                                                    CornerRadius="{DynamicResource BaseCornerRadius}">
+                                                    
+                                                </Border>
+                                            </MenuFlyout>
+                                        </Button.ContextFlyout>
+                                        <avalonia:MaterialIcon Kind="MoreVert"
+                                                               Classes="text-xs"
+                                                               HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center"
+                                                               Foreground="{DynamicResource JaguarTextMuted}"
+                                                               FontWeight="SemiBold"/>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                        
                     </Button>
                     </Border>
                 </DataTemplate>

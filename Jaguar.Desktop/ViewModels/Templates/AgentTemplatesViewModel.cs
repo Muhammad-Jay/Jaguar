@@ -4,6 +4,7 @@ using System.Linq;
 using CommunityToolkit.Mvvm.Input;
 using Jaguar.Core.Abstractions;
 using Jaguar.Core.Constants;
+using Jaguar.Core.Events;
 using Jaguar.Core.Models.Templates;
 using Jaguar.Desktop.Services.Events.Ui;
 
